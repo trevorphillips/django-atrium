@@ -129,7 +129,8 @@ class User:
 
         Returns
         -------
-            _ : None
+            users : list
+                A list of Atrium users.
 
         Raises
         -----

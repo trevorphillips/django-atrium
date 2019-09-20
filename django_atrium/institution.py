@@ -3,18 +3,21 @@ from atrium.rest import ApiException
 
 
 class Institution:
-
     def __init__(self, client):
         self.client = client
 
     def read_institution(self, institution_code):
-        """
-        Read an institution.
+        """Read an institution.
 
         Parameters
         ----------
         institution_code : str
             A unique identifier for each institution, defined by MX.
+
+        Returns
+        -------
+        institution : atrium.models.institution.Institution
+            An Atrium institution.
 
         Raises
         -----
@@ -24,15 +27,13 @@ class Institution:
 
         try:
             response = self.client.institutions.read_institution(
-                institution_code
-            )
+                institution_code)
             return response.institution
         except ApiException as e:
-            print("ApiException")
+            print(e)
 
     def list_institutions(self, **kwargs):
-        """
-        List all the institutions.
+        """List all the institutions.
 
         Parameters
         ----------
@@ -51,6 +52,11 @@ class Institution:
             Only institutions which offer an extended transaction history will
             be returned.
 
+        Returns
+        -------
+        institutions : list
+            A list of Atrium institutions.
+
         Raises
         -----
         ApiException
@@ -61,16 +67,20 @@ class Institution:
             response = self.client.institutions.list_institutions(**kwargs)
             return response.institutions
         except ApiException as e:
-            print("ApiException")
+            print(e)
 
     def read_institution_credentials(self, institution_code):
-        """
-        Read an institution's credentials.
+        """Read an institution's credentials.
 
         Parameters
         ----------
         institution_code : str
             A unique identifier for each institution, defined by MX.
+
+        Returns
+        -------
+        institutions : list
+            A list of an Atrium Institutions's credentials.
 
         Raises
         -----
@@ -80,8 +90,7 @@ class Institution:
 
         try:
             response = self.client.institutions.read_institution_credentials(
-                institution_code
-            )
+                institution_code)
             return response.credentials
         except ApiException as e:
-            print("ApiException")
+            print(e)
