@@ -103,4 +103,6 @@ Pipfile*
 
 # mypy
 .mypy_cache/
+
+# other
 .vscode
