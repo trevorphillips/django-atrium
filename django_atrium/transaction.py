@@ -3,6 +3,7 @@ from atrium.rest import ApiException
 
 
 class Transaction:
+    """Transaction class"""
     def __init__(self, client):
         self.client = client
 

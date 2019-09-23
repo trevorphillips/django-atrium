@@ -3,6 +3,7 @@ from atrium.rest import ApiException
 
 
 class Account:
+    """"Account class"""
     def __init__(self, client):
         self.client = client
 
@@ -22,7 +23,7 @@ class Account:
             An atrium account.
 
         Raises
-        -----
+        ------
         ApiException
             If there is an error when calling the MX Atrium API.
         """
@@ -48,7 +49,7 @@ class Account:
             A list of an Atrium user's accounts.
 
         Raises
-        -----
+        ------
         ApiException
             If there is an error when calling the MX Atrium API.
         """
@@ -72,8 +73,8 @@ class Account:
         except ApiException as e:
             print(e)
 
-    def list_account_transactions(self, account_guid, user_guid, **kwargs):
-        """List all of an account's transactions.
+    def list_transactions_for_account(self, account_guid, user_guid, **kwargs):
+        """List all the transactions for an account.
 
         Parameters
         ----------
@@ -92,7 +93,7 @@ class Account:
             A list of an Atrium accounts's transactions.
 
         Raises
-        -----
+        ------
         ApiException
             If there is an error when calling the MX Atrium API.
         """

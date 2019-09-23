@@ -3,6 +3,7 @@ from atrium.rest import ApiException
 
 
 class Institution:
+    """Institution class"""
     def __init__(self, client):
         self.client = client
 
@@ -20,7 +21,7 @@ class Institution:
             An Atrium institution.
 
         Raises
-        -----
+        ------
         ApiException
             If there is an error when calling the MX Atrium API.
         """
@@ -58,7 +59,7 @@ class Institution:
             A list of Atrium institutions.
 
         Raises
-        -----
+        ------
         ApiException
             If there is an error when calling the MX Atrium API.
         """
@@ -69,7 +70,7 @@ class Institution:
         except ApiException as e:
             print(e)
 
-    def read_institution_credentials(self, institution_code):
+    def read_credentials_for_institution(self, institution_code):
         """Read an institution's credentials.
 
         Parameters
@@ -83,7 +84,7 @@ class Institution:
             A list of an Atrium Institutions's credentials.
 
         Raises
-        -----
+        ------
         ApiException
             If there is an error when calling the MX Atrium API.
         """

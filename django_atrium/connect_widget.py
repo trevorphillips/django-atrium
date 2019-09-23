@@ -3,6 +3,7 @@ from atrium.rest import ApiException
 
 
 class ConnectWidget:
+    """Connect Widget class"""
     def __init__(self, client):
         self.client = client
 
@@ -33,7 +34,7 @@ class ConnectWidget:
             An Atrium user's connect widget.
 
         Raises
-        -----
+        ------
         ApiException
             If there is an error when calling the MX Atrium API.
         """

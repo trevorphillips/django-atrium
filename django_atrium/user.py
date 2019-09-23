@@ -3,7 +3,7 @@ from atrium.rest import ApiException
 
 
 class User:
-    """User class."""
+    """User class"""
     def __init__(self, client):
         self.client = client
 

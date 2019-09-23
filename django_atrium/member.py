@@ -3,6 +3,7 @@ from atrium.rest import ApiException
 
 
 class Member:
+    """Member class"""
     def __init__(self, client):
         self.client = client
 
@@ -160,7 +161,7 @@ class Member:
         except ApiException as e:
             print(e)
 
-    def read_member_connection_status(self, member_guid, user_guid):
+    def read_connection_status_for_member(self, member_guid, user_guid):
         """Read a member's connection status.
 
         Parameters
@@ -188,7 +189,7 @@ class Member:
         except ApiException as e:
             print(e)
 
-    def list_member_mfa_challenges(self, member_guid, user_guid):
+    def list_mfa_challenges_for_member(self, member_guid, user_guid):
         """List all the MFA challenges for a member.
 
         Parameters
@@ -216,7 +217,7 @@ class Member:
         except ApiException as e:
             print(e)
 
-    def list_member_credentials(self, member_guid, user_guid):
+    def list_credentials_for_member(self, member_guid, user_guid):
         """List the member's credentials.
 
         Parameters
@@ -244,7 +245,7 @@ class Member:
         except ApiException as e:
             print(e)
 
-    def list_member_accounts(self, member_guid, user_guid):
+    def list__accounts_for_member(self, member_guid, user_guid):
         """List a member's accounts.
 
         Parameters
@@ -287,7 +288,7 @@ class Member:
         except ApiException as e:
             print(e)
 
-    def list_member_transactions(self, member_guid, user_guid, **kwargs):
+    def list_transactions_for_member(self, member_guid, user_guid, **kwargs):
         """List all of a member's transactions.
 
         Parameters
