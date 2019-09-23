@@ -3,13 +3,11 @@ from atrium.rest import ApiException
 
 
 class Account:
-
     def __init__(self, client):
         self.client = client
 
     def read_account(self, account_guid, user_guid):
-        """
-        Read an account.
+        """Read an account.
 
         Parameters
         ----------
@@ -17,6 +15,11 @@ class Account:
             Unique identifier for the account. Defined by MX.
         user_guid : str
             A unique identifier for the user. Defined by MX.
+
+        Returns
+        -------
+        account : atrium.models.account.Account
+            An atrium account.
 
         Raises
         -----
@@ -26,20 +29,23 @@ class Account:
 
         try:
             response = self.client.accounts.read_account(
-                account_guid, user_guid
-            )
+                account_guid, user_guid)
             return response.account
         except ApiException as e:
-            print("ApiException")
+            print(e)
 
     def list_accounts_for_user(self, user_guid):
-        """
-        List all the accounts for a user.
+        """List all the accounts for a user.
 
         Parameters
         ----------
         user_guid : str
             A unique identifier for the user. Defined by MX.
+
+        Returns
+        -------
+        accounts : list
+            A list of an Atrium user's accounts.
 
         Raises
         -----
@@ -54,8 +60,7 @@ class Account:
         try:
             while True:
                 response = self.client.accounts.list_user_accounts(
-                    user_guid, page=page, records_per_page=records_per_page
-                )
+                    user_guid, page=page, records_per_page=records_per_page)
                 accounts += response.accounts
 
                 if response.pagination.current_page <= response.pagination.total_pages:
@@ -65,11 +70,10 @@ class Account:
 
             return accounts
         except ApiException as e:
-            print("ApiException")
+            print(e)
 
     def list_account_transactions(self, account_guid, user_guid, **kwargs):
-        """
-        List all of an account's transactions.
+        """List all of an account's transactions.
 
         Parameters
         ----------
@@ -81,6 +85,11 @@ class Account:
             Filter transactions from this date.
         to_date : str, optional
             Filter transactions to this date.
+
+        Returns
+        -------
+        transactions : list
+            A list of an Atrium accounts's transactions.
 
         Raises
         -----
@@ -95,8 +104,11 @@ class Account:
         try:
             while True:
                 response = self.client.accounts.list_account_transactions(
-                    account_guid, user_guid, page=page, records_per_page=records_per_page, **kwargs
-                )
+                    account_guid,
+                    user_guid,
+                    page=page,
+                    records_per_page=records_per_page,
+                    **kwargs)
                 transactions += response.transactions
 
                 if response.pagination.current_page <= response.pagination.total_pages:
@@ -106,4 +118,4 @@ class Account:
 
             return transactions
         except ApiException as e:
-            print("ApiException")
+            print(e)

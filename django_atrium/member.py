@@ -16,13 +16,13 @@ class Member:
         user_guid : str
             A unique identifier for the user. Defined by MX.
 
-        Returns:
+        Returns
         -------
             member : atrium.models.member.Member
                 An Atrium member.
 
         Raises
-        -----
+        ------
         ApiException
             If there is an error when calling the MX Atrium API.
         """
@@ -48,8 +48,13 @@ class Member:
             Additional information you can store about this user.
             MX recommends using JSON-structured data.
 
+        Returns
+        -------
+            member : atrium.models.member.Member
+                An Atrium member.
+
         Raises
-        -----
+        ------
         ApiException
             If there is an error when calling the MX Atrium API.
         """
@@ -74,8 +79,12 @@ class Member:
         user_guid : str
             A unique identifier for the user. Defined by MX.
 
+        Returns
+        -------
+            _ : None
+
         Raises
-        -----
+        ------
         ApiException
             If there is an error when calling the MX Atrium API.
         """
@@ -93,8 +102,13 @@ class Member:
         user_guid : str
             A unique identifier for the user. Defined by MX.
 
+        Returns
+        -------
+            members : list
+                A list of an Atrium user's members.
+
         Raises
-        -----
+        ------
         ApiException
             If there is an error when calling the MX Atrium API.
         """
@@ -128,8 +142,13 @@ class Member:
         user_guid : str
             A unique identifier for the user. Defined by MX.
 
+        Returns
+        -------
+            member : atrium.models.member.Member
+                An Atrium member.
+
         Raises
-        -----
+        ------
         ApiException
             If there is an error when calling the MX Atrium API.
         """
@@ -151,8 +170,13 @@ class Member:
         user_guid : str
             A unique identifier for the user. Defined by MX.
 
+        Returns
+        -------
+            member_status : atrium.models.member_connection_status.MemberConnectionStatus
+                An Atrium member's connection status.
+
         Raises
-        -----
+        ------
         ApiException
             If there is an error when calling the MX Atrium API.
         """
@@ -174,8 +198,13 @@ class Member:
         user_guid : str
             A unique identifier for the user. Defined by MX.
 
+        Returns
+        -------
+            challenges : list
+                A list of an Atrium member's challenges.
+
         Raises
-        -----
+        ------
         ApiException
             If there is an error when calling the MX Atrium API.
         """
@@ -197,8 +226,13 @@ class Member:
         user_guid : str
             A unique identifier for the user. Defined by MX.
 
+        Returns
+        -------
+        credentials : list
+            A list of an Atrium member's credentials.
+
         Raises
-        -----
+        ------
         ApiException
             If there is an error when calling the MX Atrium API.
         """
@@ -220,8 +254,13 @@ class Member:
         user_guid : str
             A unique identifier for the user. Defined by MX.
 
+        Returns
+        -------
+        accounts : list
+            A list of an Atrium member's accounts.
+
         Raises
-        -----
+        ------
         ApiException
             If there is an error when calling the MX Atrium API.
         """
@@ -262,8 +301,13 @@ class Member:
         to_date : str, optional
             Filter transactions to this date.
 
+        Returns
+        -------
+        transactions : list
+            A list of an Atrium member's transaction.
+
         Raises
-        -----
+        ------
         ApiException
             If there is an error when calling the MX Atrium API.
         """

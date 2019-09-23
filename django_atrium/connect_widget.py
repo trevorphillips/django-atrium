@@ -3,13 +3,11 @@ from atrium.rest import ApiException
 
 
 class ConnectWidget:
-
     def __init__(self, client):
         self.client = client
 
     def get_connect_widget(self, user_guid, **kwargs):
-        """
-        Get MX connect widget.
+        """Get MX connect widget.
 
         Parameters
         ----------
@@ -29,6 +27,11 @@ class ConnectWidget:
             Used in conjuction with current_member_guid to load into a state
             to update the provided members credentials.
 
+        Returns
+        -------
+        widget : atrium.models.connect_widget.ConnectWidget
+            An Atrium user's connect widget.
+
         Raises
         -----
         ApiException
@@ -39,8 +42,7 @@ class ConnectWidget:
 
         try:
             response = self.client.connect_widget.get_connect_widget(
-                user_guid, body
-            )
+                user_guid, body)
             return response.user
         except ApiException as e:
-            print("ApiException")
+            print(e)

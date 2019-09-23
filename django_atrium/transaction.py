@@ -3,13 +3,11 @@ from atrium.rest import ApiException
 
 
 class Transaction:
-
     def __init__(self, client):
         self.client = client
 
     def read_transaction(self, transaction_guid, user_guid):
-        """
-        Read a transaction.
+        """Read a transaction.
 
         Parameters
         ----------
@@ -17,6 +15,11 @@ class Transaction:
             A unique identifier for the transaction. Defined by MX.
         user_guid : str
             A unique identifier for the user. Defined by MX.
+
+        Returns
+        -------
+        transaction:
+            An Atrium transaction.
 
         Raises
         -----
@@ -26,11 +29,10 @@ class Transaction:
 
         try:
             response = self.client.transactions.read_transaction(
-                transaction_guid, user_guid
-            )
+                transaction_guid, user_guid)
             return response.transaction
         except ApiException as e:
-            print("ApiException")
+            print(e)
 
     def list_transactions_for_user(self, user_guid, **kwargs):
         """
@@ -44,6 +46,11 @@ class Transaction:
             Filter transactions from this date.
         to_date : str, optional
             Filter transactions to this date.
+
+        Returns
+        -------
+        transactions : list
+            A list of an Atrium user's transactions.
 
 
         Raises
@@ -59,8 +66,10 @@ class Transaction:
         try:
             while True:
                 response = self.client.transactions.list_user_transactions(
-                    user_guid, page=page, records_per_page=records_per_page, **kwargs
-                )
+                    user_guid,
+                    page=page,
+                    records_per_page=records_per_page,
+                    **kwargs)
                 transactions += response.transactions
 
                 if response.pagination.current_page <= response.pagination.total_pages:
@@ -70,25 +79,4 @@ class Transaction:
 
             return transactions
         except ApiException as e:
-            print("ApiException")
-
-    def read_merchant(self, merchant_guid):
-        """
-        Read a merchant.
-
-        Parameters
-        ----------
-        merchant_guid : str
-            The unique identifier for the merchant. Defined by MX.
-
-        Raises
-        -----
-        ApiException
-            If there is an error when calling the MX Atrium API.
-        """
-
-        try:
-            response = self.client.merchants.read_merchant(merchant_guid)
-            return response.merchant
-        except ApiException as e:
-            print("ApiException")
+            print(e)
