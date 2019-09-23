@@ -3,13 +3,11 @@ from atrium.rest import ApiException
 
 
 class Member:
-
     def __init__(self, client):
         self.client = client
 
     def read_member(self, member_guid, user_guid):
-        """
-        Read a member.
+        """Read a member.
 
         Parameters
         ----------
@@ -17,6 +15,11 @@ class Member:
             A unique identifier for the member. Defined by MX.
         user_guid : str
             A unique identifier for the user. Defined by MX.
+
+        Returns:
+        -------
+            member : atrium.models.member.Member
+                An Atrium member.
 
         Raises
         -----
@@ -28,11 +31,10 @@ class Member:
             response = self.client.members.read_member(member_guid, user_guid)
             return response.member
         except ApiException as e:
-            print("ApiException")
+            print(e)
 
     def update_member(self, member_guid, user_guid, **kwargs):
-        """
-        Update a member.
+        """Update a member.
 
         Parameters
         ----------
@@ -55,16 +57,15 @@ class Member:
         body = atrium.MemberUpdateRequestBody(member={**kwargs})
 
         try:
-            response = self.client.members.update_member(
-                member_guid, user_guid, body=body
-            )
+            response = self.client.members.update_member(member_guid,
+                                                         user_guid,
+                                                         body=body)
             return response.member
         except ApiException as e:
-            print("ApiException")
+            print(e)
 
     def delete_member(self, member_guid, user_guid):
-        """
-        Delete a member.
+        """Delete a member.
 
         Parameters
         ----------
@@ -82,11 +83,10 @@ class Member:
         try:
             self.client.members.delete_member(member_guid, user_guid)
         except ApiException as e:
-            print("ApiException")
+            print(e)
 
     def list_members(self, user_guid):
-        """
-        List all the members for a user.
+        """List all the members for a user.
 
         Parameters
         ----------
@@ -106,8 +106,7 @@ class Member:
         try:
             while True:
                 response = self.client.members.list_members(
-                    user_guid, page=page, records_per_page=records_per_page
-                )
+                    user_guid, page=page, records_per_page=records_per_page)
                 members += response.members
 
                 if response.pagination.current_page <= response.pagination.total_pages:
@@ -117,11 +116,10 @@ class Member:
 
             return members
         except ApiException as e:
-            print("ApiException")
+            print(e)
 
     def aggregate_member(self, member_guid, user_guid):
-        """
-        Aggregate a member.
+        """Aggregate a member.
 
         Parameters
         ----------
@@ -138,15 +136,13 @@ class Member:
 
         try:
             response = self.client.members.aggregate_member(
-                member_guid, user_guid
-            )
+                member_guid, user_guid)
             return response.member
         except ApiException as e:
-            print("ApiException")
+            print(e)
 
     def read_member_connection_status(self, member_guid, user_guid):
-        """
-        Read a member's connection status.
+        """Read a member's connection status.
 
         Parameters
         ----------
@@ -163,15 +159,13 @@ class Member:
 
         try:
             response = self.client.members.read_member_status(
-                member_guid, user_guid
-            )
+                member_guid, user_guid)
             return response.member
         except ApiException as e:
-            print("ApiException")
+            print(e)
 
     def list_member_mfa_challenges(self, member_guid, user_guid):
-        """
-        List all the MFA challenges for a member.
+        """List all the MFA challenges for a member.
 
         Parameters
         ----------
@@ -188,15 +182,13 @@ class Member:
 
         try:
             response = self.client.members.list_member_mfa_challenges(
-                member_guid, user_guid
-            )
+                member_guid, user_guid)
             return response.challenges
         except ApiException as e:
-            print("ApiException")
+            print(e)
 
     def list_member_credentials(self, member_guid, user_guid):
-        """
-        List the member's credentials.
+        """List the member's credentials.
 
         Parameters
         ----------
@@ -213,15 +205,13 @@ class Member:
 
         try:
             response = self.client.members.list_member_credentials(
-                member_guid, user_guid
-            )
+                member_guid, user_guid)
             return response.credentials
         except ApiException as e:
-            print("ApiException")
+            print(e)
 
     def list_member_accounts(self, member_guid, user_guid):
-        """
-        List a member's accounts.
+        """List a member's accounts.
 
         Parameters
         ----------
@@ -243,8 +233,10 @@ class Member:
         try:
             while True:
                 response = self.client.members.list_member_accounts(
-                    member_guid, user_guid, page=page, records_per_page=records_per_page
-                )
+                    member_guid,
+                    user_guid,
+                    page=page,
+                    records_per_page=records_per_page)
                 accounts += response.accounts
 
                 if response.pagination.current_page <= response.pagination.total_pages:
@@ -254,11 +246,10 @@ class Member:
 
             return accounts
         except ApiException as e:
-            print("ApiException")
+            print(e)
 
     def list_member_transactions(self, member_guid, user_guid, **kwargs):
-        """
-        List all of a member's transactions.
+        """List all of a member's transactions.
 
         Parameters
         ----------
@@ -284,8 +275,11 @@ class Member:
         try:
             while True:
                 response = self.client.members.list_member_transactions(
-                    member_guid, user_guid, page=page, records_per_page=records_per_page, **kwargs
-                )
+                    member_guid,
+                    user_guid,
+                    page=page,
+                    records_per_page=records_per_page,
+                    **kwargs)
                 transactions += response.transactions
 
                 if response.pagination.current_page <= response.pagination.total_pages:
@@ -295,4 +289,4 @@ class Member:
 
             return transactions
         except ApiException as e:
-            print("ApiException")
+            print(e)
