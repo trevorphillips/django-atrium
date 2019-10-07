@@ -12,6 +12,8 @@ try:
 except ImportError:
     raise Exception('Django has to be installed to use this module.')
 
+settings.configure()
+
 
 class AtriumClient(Account, ConnectWidget, Institution, Member, Transaction,
                    User):
