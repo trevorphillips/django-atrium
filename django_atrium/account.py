@@ -1,14 +1,14 @@
 """account file."""
 from typing import List
 
-from atrium import AtriumClient
+import atrium
 from atrium.models.account import Account as AtriumAccount
 from atrium.models.transaction import Transaction as AtriumTransaction
 
 
 class Account:
     """Account class."""
-    def __init__(self, client: AtriumClient):
+    def __init__(self, client: atrium.AtriumClient):
         """Init for Account."""
         self.client = client
 
@@ -57,24 +57,28 @@ class Account:
 
         return accounts
 
-    def list_transactions_for_account(self, account_guid: str, user_guid: str,
+    def list_transactions_for_account(self,
+                                      account_guid: str,
+                                      user_guid: str,
+                                      page: int = 1,
+                                      records_per_page: int = 25,
                                       **kwargs) -> List[AtriumTransaction]:
         """List all the transactions for an account.
 
         Args:
             account_guid: A unique identifier for the account. Defined by MX.
             user_guid: A unique identifier for the user. Defined by MX.
-            **kwargs:
-                from_date: A date string that specifies the start date.
-                to_date : A date string that specifies the end date.
+            page: The page number to start the search.
+            records_per_page: The number of records to retrieve with
+                each request. Max is 1000.
+            **from_date: A date string that specifies the start date.
+            **to_date: A date string that specifies the end date.
 
         Returns:
             A list of an Atrium accounts's transactions.
 
         """
         transactions = []
-        page = 1
-        records_per_page = 100
 
         while True:
             res = self.client.accounts.list_account_transactions(
