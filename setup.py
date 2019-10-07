@@ -21,8 +21,7 @@ classifiers = [
 ]
 
 install_requires = [
-    'requests',
-    'atrium',
+    'atrium==2.8.0',
 ]
 
 setup(name='django-atrium',

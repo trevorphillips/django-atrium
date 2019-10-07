@@ -1,122 +1,93 @@
-import atrium
-from atrium.rest import ApiException
+"""account file."""
+from typing import List
+
+from atrium import AtriumClient
+from atrium.models.account import Account as AtriumAccount
+from atrium.models.transaction import Transaction as AtriumTransaction
 
 
 class Account:
-    """"Account class"""
-    def __init__(self, client):
+    """Account class."""
+    def __init__(self, client: AtriumClient):
+        """Init for Account."""
         self.client = client
 
-    def read_account(self, account_guid, user_guid):
+    def read_account(self, account_guid: str, user_guid: str) -> AtriumAccount:
         """Read an account.
 
-        Parameters
-        ----------
-        account_guid : str
-            Unique identifier for the account. Defined by MX.
-        user_guid : str
-            A unique identifier for the user. Defined by MX.
+        Args:
+            account_guid: A unique identifier for the account. Defined by MX.
+            user_guid: A unique identifier for the user. Defined by MX.
 
-        Returns
-        -------
-        account : atrium.models.account.Account
+        Returns:
             An atrium account.
 
-        Raises
-        ------
-        ApiException
-            If there is an error when calling the MX Atrium API.
         """
+        res = self.client.accounts.read_account(account_guid, user_guid)
+        return res.account
 
-        try:
-            response = self.client.accounts.read_account(
-                account_guid, user_guid)
-            return response.account
-        except ApiException as e:
-            print(e)
-
-    def list_accounts_for_user(self, user_guid):
+    def list_accounts_for_user(self,
+                               user_guid: str,
+                               page: int = 1,
+                               records_per_page: int = 25
+                               ) -> List[AtriumAccount]:
         """List all the accounts for a user.
 
-        Parameters
-        ----------
-        user_guid : str
-            A unique identifier for the user. Defined by MX.
+        Args:
+            user_guid: A unique identifier for the user. Defined by MX.
+            page: The page number to start the search.
+            records_per_page: The number of records to retrieve with
+                each request. Max is 1000.
 
-        Returns
-        -------
-        accounts : list
-            A list of an Atrium user's accounts.
+        Returns:
+            A list of atrium accounts.
 
-        Raises
-        ------
-        ApiException
-            If there is an error when calling the MX Atrium API.
         """
-
         accounts = []
-        page = 1
-        records_per_page = 100
 
-        try:
-            while True:
-                response = self.client.accounts.list_user_accounts(
-                    user_guid, page=page, records_per_page=records_per_page)
-                accounts += response.accounts
+        while True:
+            res = self.client.accounts.list_user_accounts(
+                user_guid, page=page, records_per_page=records_per_page)
+            accounts += res.accounts
 
-                if response.pagination.current_page <= response.pagination.total_pages:
-                    break
+            if res.pagination.current_page <= res.pagination.total_pages:
+                break
 
-                page += 1
+            page += 1
 
-            return accounts
-        except ApiException as e:
-            print(e)
+        return accounts
 
-    def list_transactions_for_account(self, account_guid, user_guid, **kwargs):
+    def list_transactions_for_account(self, account_guid: str, user_guid: str,
+                                      **kwargs) -> List[AtriumTransaction]:
         """List all the transactions for an account.
 
-        Parameters
-        ----------
-        account_guid : str
-            Unique identifier for the account. Defined by MX.
-        user_guid : str
-            A unique identifier for the user. Defined by MX.
-        from_date : str, optional
-            Filter transactions from this date.
-        to_date : str, optional
-            Filter transactions to this date.
+        Args:
+            account_guid: A unique identifier for the account. Defined by MX.
+            user_guid: A unique identifier for the user. Defined by MX.
+            **kwargs:
+                from_date: A date string that specifies the start date.
+                to_date : A date string that specifies the end date.
 
-        Returns
-        -------
-        transactions : list
+        Returns:
             A list of an Atrium accounts's transactions.
 
-        Raises
-        ------
-        ApiException
-            If there is an error when calling the MX Atrium API.
         """
-
         transactions = []
         page = 1
         records_per_page = 100
 
-        try:
-            while True:
-                response = self.client.accounts.list_account_transactions(
-                    account_guid,
-                    user_guid,
-                    page=page,
-                    records_per_page=records_per_page,
-                    **kwargs)
-                transactions += response.transactions
+        while True:
+            res = self.client.accounts.list_account_transactions(
+                account_guid,
+                user_guid,
+                page=page,
+                records_per_page=records_per_page,
+                **kwargs)
+            transactions += res.transactions
 
-                if response.pagination.current_page <= response.pagination.total_pages:
-                    break
+            if res.pagination.current_page <= res.pagination.total_pages:
+                break
 
-                page += 1
+            page += 1
 
-            return transactions
-        except ApiException as e:
-            print(e)
+        return transactions
