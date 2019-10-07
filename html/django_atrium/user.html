@@ -36,8 +36,7 @@ class User:
     def create_user(self, identifier, **kwargs):
         &#34;&#34;&#34;Create a user.
 
-        Parameters
-        ----------
+        Args:
         identifier : str
             A unique, enforced identifier for the user, defined by you.
         is_disabled : bool, optional
@@ -46,8 +45,7 @@ class User:
             Additional information you can store about this user.
             MX recommends using JSON-structured data.
 
-        Returns
-        -------
+        Returns:
         user : atrium.models.user.User
             An Atrium user.
 
@@ -71,13 +69,11 @@ class User:
     def read_user(self, user_guid):
         &#34;&#34;&#34;Read a user.
 
-        Parameters
-        ----------
+        Args:
         user_guid : str
             A unique identifier for the user. Defined by MX.
 
-        Returns
-        -------
+        Returns:
         user : atrium.models.user.User
             An Atrium user.
 
@@ -96,8 +92,7 @@ class User:
     def update_user(self, user_guid, **kwargs):
         &#34;&#34;&#34;Update a user.
 
-        Parameters
-        ----------
+        Args:
         user_guid : str
             A unique identifier for the user. Defined by MX.
         identifier : str, optional
@@ -108,8 +103,7 @@ class User:
             Additional information you can store about this user.
             MX recommends using JSON-structured data.
 
-        Returns
-        -------
+        Returns:
         user : atrium.models.user.User
             An Atrium user.
 
@@ -130,13 +124,11 @@ class User:
     def delete_user(self, user_guid):
         &#34;&#34;&#34;Delete a user.
 
-        Parameters
-        ----------
+        Args:
         user_guid : str
             A unique identifier for the user. Defined by MX.
 
-        Returns
-        -------
+        Returns:
             _ : None
 
         Raises
@@ -153,8 +145,7 @@ class User:
     def list_users(self):
         &#34;&#34;&#34;List all the users.
 
-        Returns
-        -------
+        Returns:
             users : list
                 A list of Atrium users.
 
@@ -211,8 +202,7 @@ class User:
     def create_user(self, identifier, **kwargs):
         &#34;&#34;&#34;Create a user.
 
-        Parameters
-        ----------
+        Args:
         identifier : str
             A unique, enforced identifier for the user, defined by you.
         is_disabled : bool, optional
@@ -221,8 +211,7 @@ class User:
             Additional information you can store about this user.
             MX recommends using JSON-structured data.
 
-        Returns
-        -------
+        Returns:
         user : atrium.models.user.User
             An Atrium user.
 
@@ -246,13 +235,11 @@ class User:
     def read_user(self, user_guid):
         &#34;&#34;&#34;Read a user.
 
-        Parameters
-        ----------
+        Args:
         user_guid : str
             A unique identifier for the user. Defined by MX.
 
-        Returns
-        -------
+        Returns:
         user : atrium.models.user.User
             An Atrium user.
 
@@ -271,8 +258,7 @@ class User:
     def update_user(self, user_guid, **kwargs):
         &#34;&#34;&#34;Update a user.
 
-        Parameters
-        ----------
+        Args:
         user_guid : str
             A unique identifier for the user. Defined by MX.
         identifier : str, optional
@@ -283,8 +269,7 @@ class User:
             Additional information you can store about this user.
             MX recommends using JSON-structured data.
 
-        Returns
-        -------
+        Returns:
         user : atrium.models.user.User
             An Atrium user.
 
@@ -305,13 +290,11 @@ class User:
     def delete_user(self, user_guid):
         &#34;&#34;&#34;Delete a user.
 
-        Parameters
-        ----------
+        Args:
         user_guid : str
             A unique identifier for the user. Defined by MX.
 
-        Returns
-        -------
+        Returns:
             _ : None
 
         Raises
@@ -328,8 +311,7 @@ class User:
     def list_users(self):
         &#34;&#34;&#34;List all the users.
 
-        Returns
-        -------
+        Returns:
             users : list
                 A list of Atrium users.
 
@@ -369,21 +351,17 @@ class User:
 </code></dt>
 <dd>
 <section class="desc"><p>Create a user.</p>
-<h2 id="parameters">Parameters</h2>
-<dl>
-<dt><strong><code>identifier</code></strong> :&ensp;<code>str</code></dt>
-<dd>A unique, enforced identifier for the user, defined by you.</dd>
-<dt><strong><code>is_disabled</code></strong> :&ensp;<code>bool</code>, optional</dt>
-<dd>True if you want the user disabled, false otherwise.</dd>
-<dt><strong><code>metadata</code></strong> :&ensp;<code>str</code>, optional</dt>
-<dd>Additional information you can store about this user.
-MX recommends using JSON-structured data.</dd>
-</dl>
-<h2 id="returns">Returns</h2>
-<dl>
-<dt><strong><code>user</code></strong> :&ensp;<code>atrium.models.user.User</code></dt>
-<dd>An Atrium user.</dd>
-</dl>
+<p>Args:
+identifier : str
+A unique, enforced identifier for the user, defined by you.
+is_disabled : bool, optional
+True if you want the user disabled, false otherwise.
+metadata : str, optional
+Additional information you can store about this user.
+MX recommends using JSON-structured data.</p>
+<p>Returns:
+user : atrium.models.user.User
+An Atrium user.</p>
 <h2 id="raises">Raises</h2>
 <dl>
 <dt><code>ApiException</code></dt>
@@ -396,8 +374,7 @@ MX recommends using JSON-structured data.</dd>
 <pre><code class="python">def create_user(self, identifier, **kwargs):
     &#34;&#34;&#34;Create a user.
 
-    Parameters
-    ----------
+    Args:
     identifier : str
         A unique, enforced identifier for the user, defined by you.
     is_disabled : bool, optional
@@ -406,8 +383,7 @@ MX recommends using JSON-structured data.</dd>
         Additional information you can store about this user.
         MX recommends using JSON-structured data.
 
-    Returns
-    -------
+    Returns:
     user : atrium.models.user.User
         An Atrium user.
 
@@ -434,14 +410,14 @@ MX recommends using JSON-structured data.</dd>
 </code></dt>
 <dd>
 <section class="desc"><p>Delete a user.</p>
-<h2 id="parameters">Parameters</h2>
-<dl>
-<dt><strong><code>user_guid</code></strong> :&ensp;<code>str</code></dt>
-<dd>A unique identifier for the user. Defined by MX.</dd>
-</dl>
+<p>Args:
+user_guid : str
+A unique identifier for the user. Defined by MX.</p>
 <h2 id="returns">Returns</h2>
-<pre><code>_ : None
-</code></pre>
+<dl>
+<dt><strong><code>_</code></strong> :&ensp;<code>None</code></dt>
+<dd>&nbsp;</dd>
+</dl>
 <h2 id="raises">Raises</h2>
 <dl>
 <dt><code>ApiException</code></dt>
@@ -454,13 +430,11 @@ MX recommends using JSON-structured data.</dd>
 <pre><code class="python">def delete_user(self, user_guid):
     &#34;&#34;&#34;Delete a user.
 
-    Parameters
-    ----------
+    Args:
     user_guid : str
         A unique identifier for the user. Defined by MX.
 
-    Returns
-    -------
+    Returns:
         _ : None
 
     Raises
@@ -481,9 +455,10 @@ MX recommends using JSON-structured data.</dd>
 <dd>
 <section class="desc"><p>List all the users.</p>
 <h2 id="returns">Returns</h2>
-<pre><code>users : list
-    A list of Atrium users.
-</code></pre>
+<dl>
+<dt><strong><code>users</code></strong> :&ensp;<code>list</code></dt>
+<dd>A list of Atrium users.</dd>
+</dl>
 <h2 id="raises">Raises</h2>
 <dl>
 <dt><code>ApiException</code></dt>
@@ -496,8 +471,7 @@ MX recommends using JSON-structured data.</dd>
 <pre><code class="python">def list_users(self):
     &#34;&#34;&#34;List all the users.
 
-    Returns
-    -------
+    Returns:
         users : list
             A list of Atrium users.
 
@@ -532,16 +506,12 @@ MX recommends using JSON-structured data.</dd>
 </code></dt>
 <dd>
 <section class="desc"><p>Read a user.</p>
-<h2 id="parameters">Parameters</h2>
-<dl>
-<dt><strong><code>user_guid</code></strong> :&ensp;<code>str</code></dt>
-<dd>A unique identifier for the user. Defined by MX.</dd>
-</dl>
-<h2 id="returns">Returns</h2>
-<dl>
-<dt><strong><code>user</code></strong> :&ensp;<code>atrium.models.user.User</code></dt>
-<dd>An Atrium user.</dd>
-</dl>
+<p>Args:
+user_guid : str
+A unique identifier for the user. Defined by MX.</p>
+<p>Returns:
+user : atrium.models.user.User
+An Atrium user.</p>
 <h2 id="raises">Raises</h2>
 <dl>
 <dt><code>ApiException</code></dt>
@@ -554,13 +524,11 @@ MX recommends using JSON-structured data.</dd>
 <pre><code class="python">def read_user(self, user_guid):
     &#34;&#34;&#34;Read a user.
 
-    Parameters
-    ----------
+    Args:
     user_guid : str
         A unique identifier for the user. Defined by MX.
 
-    Returns
-    -------
+    Returns:
     user : atrium.models.user.User
         An Atrium user.
 
@@ -582,23 +550,19 @@ MX recommends using JSON-structured data.</dd>
 </code></dt>
 <dd>
 <section class="desc"><p>Update a user.</p>
-<h2 id="parameters">Parameters</h2>
-<dl>
-<dt><strong><code>user_guid</code></strong> :&ensp;<code>str</code></dt>
-<dd>A unique identifier for the user. Defined by MX.</dd>
-<dt><strong><code>identifier</code></strong> :&ensp;<code>str</code>, optional</dt>
-<dd>A unique, enforced identifier for the user, defined by you.</dd>
-<dt><strong><code>is_disabled</code></strong> :&ensp;<code>bool</code>, optional</dt>
-<dd>True if you want the user disabled, false otherwise.</dd>
-<dt><strong><code>metadata</code></strong> :&ensp;<code>str</code>, optional</dt>
-<dd>Additional information you can store about this user.
-MX recommends using JSON-structured data.</dd>
-</dl>
-<h2 id="returns">Returns</h2>
-<dl>
-<dt><strong><code>user</code></strong> :&ensp;<code>atrium.models.user.User</code></dt>
-<dd>An Atrium user.</dd>
-</dl>
+<p>Args:
+user_guid : str
+A unique identifier for the user. Defined by MX.
+identifier : str, optional
+A unique, enforced identifier for the user, defined by you.
+is_disabled : bool, optional
+True if you want the user disabled, false otherwise.
+metadata : str, optional
+Additional information you can store about this user.
+MX recommends using JSON-structured data.</p>
+<p>Returns:
+user : atrium.models.user.User
+An Atrium user.</p>
 <h2 id="raises">Raises</h2>
 <dl>
 <dt><code>ApiException</code></dt>
@@ -611,8 +575,7 @@ MX recommends using JSON-structured data.</dd>
 <pre><code class="python">def update_user(self, user_guid, **kwargs):
     &#34;&#34;&#34;Update a user.
 
-    Parameters
-    ----------
+    Args:
     user_guid : str
         A unique identifier for the user. Defined by MX.
     identifier : str, optional
@@ -623,8 +586,7 @@ MX recommends using JSON-structured data.</dd>
         Additional information you can store about this user.
         MX recommends using JSON-structured data.
 
-    Returns
-    -------
+    Returns:
     user : atrium.models.user.User
         An Atrium user.
 

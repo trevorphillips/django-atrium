@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.7.1" />
 <title>django_atrium.institution API documentation</title>
-<meta name="description" content="" />
+<meta name="description" content="institution file." />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
@@ -20,107 +20,72 @@
 <h1 class="title">Module <code>django_atrium.institution</code></h1>
 </header>
 <section id="section-intro">
+<p>institution file.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">import atrium
-from atrium.rest import ApiException
+<pre><code class="python">&#34;&#34;&#34;institution file.&#34;&#34;&#34;
+from typing import List
+
+import atrium
+from atrium.models.institution import Institution as AtriumInstitution
 
 
 class Institution:
-    &#34;&#34;&#34;Institution class&#34;&#34;&#34;
-    def __init__(self, client):
+    &#34;&#34;&#34;Institution class.&#34;&#34;&#34;
+    def __init__(self, client: atrium.AtriumClient):
+        &#34;&#34;&#34;Init for Institution.&#34;&#34;&#34;
         self.client = client
 
-    def read_institution(self, institution_code):
+    def read_institution(self, institution_code: str) -&gt; AtriumInstitution:
         &#34;&#34;&#34;Read an institution.
 
-        Parameters
-        ----------
-        institution_code : str
-            A unique identifier for each institution, defined by MX.
+        Args:
+            institution_code: A unique identifier for each institution, defined by MX.
 
-        Returns
-        -------
-        institution : atrium.models.institution.Institution
+        Returns:
             An Atrium institution.
 
-        Raises
-        ------
-        ApiException
-            If there is an error when calling the MX Atrium API.
         &#34;&#34;&#34;
+        res = self.client.institutions.read_institution(institution_code)
+        return res.institution
 
-        try:
-            response = self.client.institutions.read_institution(
-                institution_code)
-            return response.institution
-        except ApiException as e:
-            print(e)
-
-    def list_institutions(self, **kwargs):
+    def list_institutions(self, **kwargs) -&gt; List[AtriumInstitution]:
         &#34;&#34;&#34;List all the institutions.
 
-        Parameters
-        ----------
-        name : str, optional
-            Only institutions whose name contains the appended string will
-            be returned.
-        supports_account_identification : bool, optional
-            Only institutions which support identity will be returned.
-        supports_account_statement : bool, optional
-            Only institutions which offer access to account statements will
-            be returned.
-        supports_account_verification : bool, optional
-            Only institutions which support account verification will
-            be returned.
-        supports_transaction_history : bool, optional
-            Only institutions which offer an extended transaction history will
-            be returned.
+        Args:
+            **name: Only institutions whose name contains the appended string will
+                be returned.
+            **supports_account_identification: A boolean to only show institutions
+                which support identity will be returned.
+            **supports_account_statement: A boolean to only show institutions
+                which offer access to account statements will be returned.
+            supports_account_verification: A boolean to only show institutions
+                which support account verification will be returned.
+            supports_transaction_history: A boolean to only show institutions
+                which offer an extended transaction history will be returned.
 
-        Returns
-        -------
-        institutions : list
+        Returns:
             A list of Atrium institutions.
 
-        Raises
-        ------
-        ApiException
-            If there is an error when calling the MX Atrium API.
         &#34;&#34;&#34;
+        res = self.client.institutions.list_institutions(**kwargs)
+        return res.institutions
 
-        try:
-            response = self.client.institutions.list_institutions(**kwargs)
-            return response.institutions
-        except ApiException as e:
-            print(e)
-
-    def read_credentials_for_institution(self, institution_code):
+    def read_credentials_for_institution(self, institution_code: str):
         &#34;&#34;&#34;Read an institution&#39;s credentials.
 
-        Parameters
-        ----------
-        institution_code : str
-            A unique identifier for each institution, defined by MX.
+        Args:
+            institution_code: A unique identifier for each institution, defined by MX.
 
-        Returns
-        -------
-        institutions : list
+        Returns:
             A list of an Atrium Institutions&#39;s credentials.
 
-        Raises
-        ------
-        ApiException
-            If there is an error when calling the MX Atrium API.
         &#34;&#34;&#34;
-
-        try:
-            response = self.client.institutions.read_institution_credentials(
-                institution_code)
-            return response.credentials
-        except ApiException as e:
-            print(e)</code></pre>
+        res = self.client.institutions.read_institution_credentials(
+            institution_code)
+        return res.credentials</code></pre>
 </details>
 </section>
 <section>
@@ -137,104 +102,66 @@ class Institution:
 <span>(</span><span>client)</span>
 </code></dt>
 <dd>
-<section class="desc"><p>Institution class</p></section>
+<section class="desc"><p>Institution class.</p>
+<p>Init for Institution.</p></section>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class Institution:
-    &#34;&#34;&#34;Institution class&#34;&#34;&#34;
-    def __init__(self, client):
+    &#34;&#34;&#34;Institution class.&#34;&#34;&#34;
+    def __init__(self, client: atrium.AtriumClient):
+        &#34;&#34;&#34;Init for Institution.&#34;&#34;&#34;
         self.client = client
 
-    def read_institution(self, institution_code):
+    def read_institution(self, institution_code: str) -&gt; AtriumInstitution:
         &#34;&#34;&#34;Read an institution.
 
-        Parameters
-        ----------
-        institution_code : str
-            A unique identifier for each institution, defined by MX.
+        Args:
+            institution_code: A unique identifier for each institution, defined by MX.
 
-        Returns
-        -------
-        institution : atrium.models.institution.Institution
+        Returns:
             An Atrium institution.
 
-        Raises
-        ------
-        ApiException
-            If there is an error when calling the MX Atrium API.
         &#34;&#34;&#34;
+        res = self.client.institutions.read_institution(institution_code)
+        return res.institution
 
-        try:
-            response = self.client.institutions.read_institution(
-                institution_code)
-            return response.institution
-        except ApiException as e:
-            print(e)
-
-    def list_institutions(self, **kwargs):
+    def list_institutions(self, **kwargs) -&gt; List[AtriumInstitution]:
         &#34;&#34;&#34;List all the institutions.
 
-        Parameters
-        ----------
-        name : str, optional
-            Only institutions whose name contains the appended string will
-            be returned.
-        supports_account_identification : bool, optional
-            Only institutions which support identity will be returned.
-        supports_account_statement : bool, optional
-            Only institutions which offer access to account statements will
-            be returned.
-        supports_account_verification : bool, optional
-            Only institutions which support account verification will
-            be returned.
-        supports_transaction_history : bool, optional
-            Only institutions which offer an extended transaction history will
-            be returned.
+        Args:
+            **name: Only institutions whose name contains the appended string will
+                be returned.
+            **supports_account_identification: A boolean to only show institutions
+                which support identity will be returned.
+            **supports_account_statement: A boolean to only show institutions
+                which offer access to account statements will be returned.
+            supports_account_verification: A boolean to only show institutions
+                which support account verification will be returned.
+            supports_transaction_history: A boolean to only show institutions
+                which offer an extended transaction history will be returned.
 
-        Returns
-        -------
-        institutions : list
+        Returns:
             A list of Atrium institutions.
 
-        Raises
-        ------
-        ApiException
-            If there is an error when calling the MX Atrium API.
         &#34;&#34;&#34;
+        res = self.client.institutions.list_institutions(**kwargs)
+        return res.institutions
 
-        try:
-            response = self.client.institutions.list_institutions(**kwargs)
-            return response.institutions
-        except ApiException as e:
-            print(e)
-
-    def read_credentials_for_institution(self, institution_code):
+    def read_credentials_for_institution(self, institution_code: str):
         &#34;&#34;&#34;Read an institution&#39;s credentials.
 
-        Parameters
-        ----------
-        institution_code : str
-            A unique identifier for each institution, defined by MX.
+        Args:
+            institution_code: A unique identifier for each institution, defined by MX.
 
-        Returns
-        -------
-        institutions : list
+        Returns:
             A list of an Atrium Institutions&#39;s credentials.
 
-        Raises
-        ------
-        ApiException
-            If there is an error when calling the MX Atrium API.
         &#34;&#34;&#34;
-
-        try:
-            response = self.client.institutions.read_institution_credentials(
-                institution_code)
-            return response.credentials
-        except ApiException as e:
-            print(e)</code></pre>
+        res = self.client.institutions.read_institution_credentials(
+            institution_code)
+        return res.credentials</code></pre>
 </details>
 <h3>Subclasses</h3>
 <ul class="hlist">
@@ -247,73 +174,51 @@ class Institution:
 </code></dt>
 <dd>
 <section class="desc"><p>List all the institutions.</p>
-<h2 id="parameters">Parameters</h2>
+<h2 id="args">Args</h2>
 <dl>
-<dt><strong><code>name</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dt><strong><code>**name</code></strong></dt>
 <dd>Only institutions whose name contains the appended string will
 be returned.</dd>
-<dt><strong><code>supports_account_identification</code></strong> :&ensp;<code>bool</code>, optional</dt>
-<dd>Only institutions which support identity will be returned.</dd>
-<dt><strong><code>supports_account_statement</code></strong> :&ensp;<code>bool</code>, optional</dt>
-<dd>Only institutions which offer access to account statements will
-be returned.</dd>
-<dt><strong><code>supports_account_verification</code></strong> :&ensp;<code>bool</code>, optional</dt>
-<dd>Only institutions which support account verification will
-be returned.</dd>
-<dt><strong><code>supports_transaction_history</code></strong> :&ensp;<code>bool</code>, optional</dt>
-<dd>Only institutions which offer an extended transaction history will
-be returned.</dd>
+<dt><strong><code>**supports_account_identification</code></strong></dt>
+<dd>A boolean to only show institutions
+which support identity will be returned.</dd>
+<dt><strong><code>**supports_account_statement</code></strong></dt>
+<dd>A boolean to only show institutions
+which offer access to account statements will be returned.</dd>
+<dt><strong><code>supports_account_verification</code></strong></dt>
+<dd>A boolean to only show institutions
+which support account verification will be returned.</dd>
+<dt><strong><code>supports_transaction_history</code></strong></dt>
+<dd>A boolean to only show institutions
+which offer an extended transaction history will be returned.</dd>
 </dl>
 <h2 id="returns">Returns</h2>
-<dl>
-<dt><strong><code>institutions</code></strong> :&ensp;<code>list</code></dt>
-<dd>A list of Atrium institutions.</dd>
-</dl>
-<h2 id="raises">Raises</h2>
-<dl>
-<dt><code>ApiException</code></dt>
-<dd>If there is an error when calling the MX Atrium API.</dd>
-</dl></section>
+<p>A list of Atrium institutions.</p></section>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def list_institutions(self, **kwargs):
+<pre><code class="python">def list_institutions(self, **kwargs) -&gt; List[AtriumInstitution]:
     &#34;&#34;&#34;List all the institutions.
 
-    Parameters
-    ----------
-    name : str, optional
-        Only institutions whose name contains the appended string will
-        be returned.
-    supports_account_identification : bool, optional
-        Only institutions which support identity will be returned.
-    supports_account_statement : bool, optional
-        Only institutions which offer access to account statements will
-        be returned.
-    supports_account_verification : bool, optional
-        Only institutions which support account verification will
-        be returned.
-    supports_transaction_history : bool, optional
-        Only institutions which offer an extended transaction history will
-        be returned.
+    Args:
+        **name: Only institutions whose name contains the appended string will
+            be returned.
+        **supports_account_identification: A boolean to only show institutions
+            which support identity will be returned.
+        **supports_account_statement: A boolean to only show institutions
+            which offer access to account statements will be returned.
+        supports_account_verification: A boolean to only show institutions
+            which support account verification will be returned.
+        supports_transaction_history: A boolean to only show institutions
+            which offer an extended transaction history will be returned.
 
-    Returns
-    -------
-    institutions : list
+    Returns:
         A list of Atrium institutions.
 
-    Raises
-    ------
-    ApiException
-        If there is an error when calling the MX Atrium API.
     &#34;&#34;&#34;
-
-    try:
-        response = self.client.institutions.list_institutions(**kwargs)
-        return response.institutions
-    except ApiException as e:
-        print(e)</code></pre>
+    res = self.client.institutions.list_institutions(**kwargs)
+    return res.institutions</code></pre>
 </details>
 </dd>
 <dt id="django_atrium.institution.Institution.read_credentials_for_institution"><code class="name flex">
@@ -321,50 +226,30 @@ be returned.</dd>
 </code></dt>
 <dd>
 <section class="desc"><p>Read an institution's credentials.</p>
-<h2 id="parameters">Parameters</h2>
+<h2 id="args">Args</h2>
 <dl>
-<dt><strong><code>institution_code</code></strong> :&ensp;<code>str</code></dt>
+<dt><strong><code>institution_code</code></strong></dt>
 <dd>A unique identifier for each institution, defined by MX.</dd>
 </dl>
 <h2 id="returns">Returns</h2>
-<dl>
-<dt><strong><code>institutions</code></strong> :&ensp;<code>list</code></dt>
-<dd>A list of an Atrium Institutions's credentials.</dd>
-</dl>
-<h2 id="raises">Raises</h2>
-<dl>
-<dt><code>ApiException</code></dt>
-<dd>If there is an error when calling the MX Atrium API.</dd>
-</dl></section>
+<p>A list of an Atrium Institutions's credentials.</p></section>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def read_credentials_for_institution(self, institution_code):
+<pre><code class="python">def read_credentials_for_institution(self, institution_code: str):
     &#34;&#34;&#34;Read an institution&#39;s credentials.
 
-    Parameters
-    ----------
-    institution_code : str
-        A unique identifier for each institution, defined by MX.
+    Args:
+        institution_code: A unique identifier for each institution, defined by MX.
 
-    Returns
-    -------
-    institutions : list
+    Returns:
         A list of an Atrium Institutions&#39;s credentials.
 
-    Raises
-    ------
-    ApiException
-        If there is an error when calling the MX Atrium API.
     &#34;&#34;&#34;
-
-    try:
-        response = self.client.institutions.read_institution_credentials(
-            institution_code)
-        return response.credentials
-    except ApiException as e:
-        print(e)</code></pre>
+    res = self.client.institutions.read_institution_credentials(
+        institution_code)
+    return res.credentials</code></pre>
 </details>
 </dd>
 <dt id="django_atrium.institution.Institution.read_institution"><code class="name flex">
@@ -372,50 +257,29 @@ be returned.</dd>
 </code></dt>
 <dd>
 <section class="desc"><p>Read an institution.</p>
-<h2 id="parameters">Parameters</h2>
+<h2 id="args">Args</h2>
 <dl>
-<dt><strong><code>institution_code</code></strong> :&ensp;<code>str</code></dt>
+<dt><strong><code>institution_code</code></strong></dt>
 <dd>A unique identifier for each institution, defined by MX.</dd>
 </dl>
 <h2 id="returns">Returns</h2>
-<dl>
-<dt><strong><code>institution</code></strong> :&ensp;<code>atrium.models.institution.Institution</code></dt>
-<dd>An Atrium institution.</dd>
-</dl>
-<h2 id="raises">Raises</h2>
-<dl>
-<dt><code>ApiException</code></dt>
-<dd>If there is an error when calling the MX Atrium API.</dd>
-</dl></section>
+<p>An Atrium institution.</p></section>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def read_institution(self, institution_code):
+<pre><code class="python">def read_institution(self, institution_code: str) -&gt; AtriumInstitution:
     &#34;&#34;&#34;Read an institution.
 
-    Parameters
-    ----------
-    institution_code : str
-        A unique identifier for each institution, defined by MX.
+    Args:
+        institution_code: A unique identifier for each institution, defined by MX.
 
-    Returns
-    -------
-    institution : atrium.models.institution.Institution
+    Returns:
         An Atrium institution.
 
-    Raises
-    ------
-    ApiException
-        If there is an error when calling the MX Atrium API.
     &#34;&#34;&#34;
-
-    try:
-        response = self.client.institutions.read_institution(
-            institution_code)
-        return response.institution
-    except ApiException as e:
-        print(e)</code></pre>
+    res = self.client.institutions.read_institution(institution_code)
+    return res.institution</code></pre>
 </details>
 </dd>
 </dl>

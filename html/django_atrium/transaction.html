@@ -36,15 +36,13 @@ class Transaction:
     def read_transaction(self, transaction_guid, user_guid):
         &#34;&#34;&#34;Read a transaction.
 
-        Parameters
-        ----------
+        Args:
         transaction_guid : str
             A unique identifier for the transaction. Defined by MX.
         user_guid : str
             A unique identifier for the user. Defined by MX.
 
-        Returns
-        -------
+        Returns:
         transaction:
             An Atrium transaction.
 
@@ -65,8 +63,7 @@ class Transaction:
         &#34;&#34;&#34;
         List all of the transactions for a user.
 
-        Parameters
-        ----------
+        Args:
         user_guid : str
             A unique identifier for the user. Defined by MX.
         from_date : str, optional
@@ -74,8 +71,7 @@ class Transaction:
         to_date : str, optional
             Filter transactions to this date.
 
-        Returns
-        -------
+        Returns:
         transactions : list
             A list of an Atrium user&#39;s transactions.
 
@@ -136,15 +132,13 @@ class Transaction:
     def read_transaction(self, transaction_guid, user_guid):
         &#34;&#34;&#34;Read a transaction.
 
-        Parameters
-        ----------
+        Args:
         transaction_guid : str
             A unique identifier for the transaction. Defined by MX.
         user_guid : str
             A unique identifier for the user. Defined by MX.
 
-        Returns
-        -------
+        Returns:
         transaction:
             An Atrium transaction.
 
@@ -165,8 +159,7 @@ class Transaction:
         &#34;&#34;&#34;
         List all of the transactions for a user.
 
-        Parameters
-        ----------
+        Args:
         user_guid : str
             A unique identifier for the user. Defined by MX.
         from_date : str, optional
@@ -174,8 +167,7 @@ class Transaction:
         to_date : str, optional
             Filter transactions to this date.
 
-        Returns
-        -------
+        Returns:
         transactions : list
             A list of an Atrium user&#39;s transactions.
 
@@ -219,20 +211,16 @@ class Transaction:
 </code></dt>
 <dd>
 <section class="desc"><p>List all of the transactions for a user.</p>
-<h2 id="parameters">Parameters</h2>
-<dl>
-<dt><strong><code>user_guid</code></strong> :&ensp;<code>str</code></dt>
-<dd>A unique identifier for the user. Defined by MX.</dd>
-<dt><strong><code>from_date</code></strong> :&ensp;<code>str</code>, optional</dt>
-<dd>Filter transactions from this date.</dd>
-<dt><strong><code>to_date</code></strong> :&ensp;<code>str</code>, optional</dt>
-<dd>Filter transactions to this date.</dd>
-</dl>
-<h2 id="returns">Returns</h2>
-<dl>
-<dt><strong><code>transactions</code></strong> :&ensp;<code>list</code></dt>
-<dd>A list of an Atrium user's transactions.</dd>
-</dl>
+<p>Args:
+user_guid : str
+A unique identifier for the user. Defined by MX.
+from_date : str, optional
+Filter transactions from this date.
+to_date : str, optional
+Filter transactions to this date.</p>
+<p>Returns:
+transactions : list
+A list of an Atrium user's transactions.</p>
 <h2 id="raises">Raises</h2>
 <dl>
 <dt><code>ApiException</code></dt>
@@ -246,8 +234,7 @@ class Transaction:
     &#34;&#34;&#34;
     List all of the transactions for a user.
 
-    Parameters
-    ----------
+    Args:
     user_guid : str
         A unique identifier for the user. Defined by MX.
     from_date : str, optional
@@ -255,8 +242,7 @@ class Transaction:
     to_date : str, optional
         Filter transactions to this date.
 
-    Returns
-    -------
+    Returns:
     transactions : list
         A list of an Atrium user&#39;s transactions.
 
@@ -295,18 +281,14 @@ class Transaction:
 </code></dt>
 <dd>
 <section class="desc"><p>Read a transaction.</p>
-<h2 id="parameters">Parameters</h2>
-<dl>
-<dt><strong><code>transaction_guid</code></strong> :&ensp;<code>str</code></dt>
-<dd>A unique identifier for the transaction. Defined by MX.</dd>
-<dt><strong><code>user_guid</code></strong> :&ensp;<code>str</code></dt>
-<dd>A unique identifier for the user. Defined by MX.</dd>
-</dl>
-<h2 id="returns">Returns</h2>
-<dl>
-<dt><code>transaction</code>:</dt>
-<dd>An Atrium transaction.</dd>
-</dl>
+<p>Args:
+transaction_guid : str
+A unique identifier for the transaction. Defined by MX.
+user_guid : str
+A unique identifier for the user. Defined by MX.</p>
+<p>Returns:
+transaction:
+An Atrium transaction.</p>
 <h2 id="raises">Raises</h2>
 <dl>
 <dt><code>ApiException</code></dt>
@@ -319,15 +301,13 @@ class Transaction:
 <pre><code class="python">def read_transaction(self, transaction_guid, user_guid):
     &#34;&#34;&#34;Read a transaction.
 
-    Parameters
-    ----------
+    Args:
     transaction_guid : str
         A unique identifier for the transaction. Defined by MX.
     user_guid : str
         A unique identifier for the user. Defined by MX.
 
-    Returns
-    -------
+    Returns:
     transaction:
         An Atrium transaction.
 
