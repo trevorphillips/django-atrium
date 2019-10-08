@@ -25,7 +25,7 @@ install_requires = [
 ]
 
 setup(name='django-atrium',
-      version='0.1',
+      version='0.2',
       description='An MX Atrium wrapper to be used with Django.',
       url='https://github.com/trevorphillips/django-atrium',
       author='Trevor Phillips',
