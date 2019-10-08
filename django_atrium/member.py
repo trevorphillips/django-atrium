@@ -10,15 +10,13 @@ class Member:
     def read_member(self, member_guid, user_guid):
         """Read a member.
 
-        Parameters
-        ----------
+        Args:
         member_guid : str
             A unique identifier for the member. Defined by MX.
         user_guid : str
             A unique identifier for the user. Defined by MX.
 
-        Returns
-        -------
+        Returns:
             member : atrium.models.member.Member
                 An Atrium member.
 
@@ -37,8 +35,7 @@ class Member:
     def update_member(self, member_guid, user_guid, **kwargs):
         """Update a member.
 
-        Parameters
-        ----------
+        Args:
         member_guid : str
             A unique identifier for the member. Defined by MX.
         user_guid : str
@@ -49,8 +46,7 @@ class Member:
             Additional information you can store about this user.
             MX recommends using JSON-structured data.
 
-        Returns
-        -------
+        Returns:
             member : atrium.models.member.Member
                 An Atrium member.
 
@@ -73,15 +69,13 @@ class Member:
     def delete_member(self, member_guid, user_guid):
         """Delete a member.
 
-        Parameters
-        ----------
+        Args:
         member_guid : str
             A unique identifier for the member. Defined by MX.
         user_guid : str
             A unique identifier for the user. Defined by MX.
 
-        Returns
-        -------
+        Returns:
             _ : None
 
         Raises
@@ -98,13 +92,11 @@ class Member:
     def list_members(self, user_guid):
         """List all the members for a user.
 
-        Parameters
-        ----------
+        Args:
         user_guid : str
             A unique identifier for the user. Defined by MX.
 
-        Returns
-        -------
+        Returns:
             members : list
                 A list of an Atrium user's members.
 
@@ -136,15 +128,13 @@ class Member:
     def aggregate_member(self, member_guid, user_guid):
         """Aggregate a member.
 
-        Parameters
-        ----------
+        Args:
         member_guid : str
             A unique identifier for the member. Defined by MX.
         user_guid : str
             A unique identifier for the user. Defined by MX.
 
-        Returns
-        -------
+        Returns:
             member : atrium.models.member.Member
                 An Atrium member.
 
@@ -164,15 +154,13 @@ class Member:
     def read_connection_status_for_member(self, member_guid, user_guid):
         """Read a member's connection status.
 
-        Parameters
-        ----------
+        Args:
         member_guid : str
             A unique identifier for the member. Defined by MX.
         user_guid : str
             A unique identifier for the user. Defined by MX.
 
-        Returns
-        -------
+        Returns:
             member_status : atrium.models.member_connection_status.MemberConnectionStatus
                 An Atrium member's connection status.
 
@@ -192,15 +180,13 @@ class Member:
     def list_mfa_challenges_for_member(self, member_guid, user_guid):
         """List all the MFA challenges for a member.
 
-        Parameters
-        ----------
+        Args:
         member_guid : str
             A unique identifier for the member. Defined by MX.
         user_guid : str
             A unique identifier for the user. Defined by MX.
 
-        Returns
-        -------
+        Returns:
             challenges : list
                 A list of an Atrium member's challenges.
 
@@ -220,15 +206,13 @@ class Member:
     def list_credentials_for_member(self, member_guid, user_guid):
         """List the member's credentials.
 
-        Parameters
-        ----------
+        Args:
         member_guid : str
             A unique identifier for the member. Defined by MX.
         user_guid : str
             A unique identifier for the user. Defined by MX.
 
-        Returns
-        -------
+        Returns:
         credentials : list
             A list of an Atrium member's credentials.
 
@@ -248,15 +232,13 @@ class Member:
     def list__accounts_for_member(self, member_guid, user_guid):
         """List a member's accounts.
 
-        Parameters
-        ----------
+        Args:
         member_guid : str
             A unique identifier for the member. Defined by MX.
         user_guid : str
             A unique identifier for the user. Defined by MX.
 
-        Returns
-        -------
+        Returns:
         accounts : list
             A list of an Atrium member's accounts.
 
@@ -291,8 +273,7 @@ class Member:
     def list_transactions_for_member(self, member_guid, user_guid, **kwargs):
         """List all of a member's transactions.
 
-        Parameters
-        ----------
+        Args:
         member_guid : str
             A unique identifier for the member. Defined by MX.
         user_guid : str
@@ -302,8 +283,7 @@ class Member:
         to_date : str, optional
             Filter transactions to this date.
 
-        Returns
-        -------
+        Returns:
         transactions : list
             A list of an Atrium member's transaction.
 

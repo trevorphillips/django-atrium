@@ -10,15 +10,13 @@ class Transaction:
     def read_transaction(self, transaction_guid, user_guid):
         """Read a transaction.
 
-        Parameters
-        ----------
+        Args:
         transaction_guid : str
             A unique identifier for the transaction. Defined by MX.
         user_guid : str
             A unique identifier for the user. Defined by MX.
 
-        Returns
-        -------
+        Returns:
         transaction:
             An Atrium transaction.
 
@@ -39,8 +37,7 @@ class Transaction:
         """
         List all of the transactions for a user.
 
-        Parameters
-        ----------
+        Args:
         user_guid : str
             A unique identifier for the user. Defined by MX.
         from_date : str, optional
@@ -48,8 +45,7 @@ class Transaction:
         to_date : str, optional
             Filter transactions to this date.
 
-        Returns
-        -------
+        Returns:
         transactions : list
             A list of an Atrium user's transactions.
 
