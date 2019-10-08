@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.7.1" />
 <title>django_atrium.transaction API documentation</title>
-<meta name="description" content="" />
+<meta name="description" content="transaction file." />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
@@ -20,89 +20,38 @@
 <h1 class="title">Module <code>django_atrium.transaction</code></h1>
 </header>
 <section id="section-intro">
+<p>transaction file.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">import atrium
-from atrium.rest import ApiException
+<pre><code class="python">&#34;&#34;&#34;transaction file.&#34;&#34;&#34;
+import atrium
+from atrium.models.transaction import Transaction as AtriumTransaction
 
 
 class Transaction:
-    &#34;&#34;&#34;Transaction class&#34;&#34;&#34;
-    def __init__(self, client):
+    &#34;&#34;&#34;Transaction class.&#34;&#34;&#34;
+    def __init__(self, client: atrium.AtriumClient):
+        &#34;&#34;&#34;Init for Transaction.&#34;&#34;&#34;
         self.client = client
 
-    def read_transaction(self, transaction_guid, user_guid):
+    def read_transaction(self, transaction_guid: str,
+                         user_guid: str) -&gt; AtriumTransaction:
         &#34;&#34;&#34;Read a transaction.
 
         Args:
-        transaction_guid : str
-            A unique identifier for the transaction. Defined by MX.
-        user_guid : str
-            A unique identifier for the user. Defined by MX.
+            transaction_guid: A unique identifier for the transaction. Defined
+                by MX.
+            user_guid: A unique identifier for the user. Defined by MX.
 
         Returns:
-        transaction:
             An Atrium transaction.
 
-        Raises
-        -----
-        ApiException
-            If there is an error when calling the MX Atrium API.
         &#34;&#34;&#34;
-
-        try:
-            response = self.client.transactions.read_transaction(
-                transaction_guid, user_guid)
-            return response.transaction
-        except ApiException as e:
-            print(e)
-
-    def list_transactions_for_user(self, user_guid, **kwargs):
-        &#34;&#34;&#34;
-        List all of the transactions for a user.
-
-        Args:
-        user_guid : str
-            A unique identifier for the user. Defined by MX.
-        from_date : str, optional
-            Filter transactions from this date.
-        to_date : str, optional
-            Filter transactions to this date.
-
-        Returns:
-        transactions : list
-            A list of an Atrium user&#39;s transactions.
-
-
-        Raises
-        -----
-        ApiException
-            If there is an error when calling the MX Atrium API.
-        &#34;&#34;&#34;
-
-        transactions = []
-        page = 1
-        records_per_page = 100
-
-        try:
-            while True:
-                response = self.client.transactions.list_user_transactions(
-                    user_guid,
-                    page=page,
-                    records_per_page=records_per_page,
-                    **kwargs)
-                transactions += response.transactions
-
-                if response.pagination.current_page &lt;= response.pagination.total_pages:
-                    break
-
-                page += 1
-
-            return transactions
-        except ApiException as e:
-            print(e)</code></pre>
+        res = self.client.transactions.read_transaction(
+            transaction_guid, user_guid)
+        return res.transaction</code></pre>
 </details>
 </section>
 <section>
@@ -119,86 +68,34 @@ class Transaction:
 <span>(</span><span>client)</span>
 </code></dt>
 <dd>
-<section class="desc"><p>Transaction class</p></section>
+<section class="desc"><p>Transaction class.</p>
+<p>Init for Transaction.</p></section>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class Transaction:
-    &#34;&#34;&#34;Transaction class&#34;&#34;&#34;
-    def __init__(self, client):
+    &#34;&#34;&#34;Transaction class.&#34;&#34;&#34;
+    def __init__(self, client: atrium.AtriumClient):
+        &#34;&#34;&#34;Init for Transaction.&#34;&#34;&#34;
         self.client = client
 
-    def read_transaction(self, transaction_guid, user_guid):
+    def read_transaction(self, transaction_guid: str,
+                         user_guid: str) -&gt; AtriumTransaction:
         &#34;&#34;&#34;Read a transaction.
 
         Args:
-        transaction_guid : str
-            A unique identifier for the transaction. Defined by MX.
-        user_guid : str
-            A unique identifier for the user. Defined by MX.
+            transaction_guid: A unique identifier for the transaction. Defined
+                by MX.
+            user_guid: A unique identifier for the user. Defined by MX.
 
         Returns:
-        transaction:
             An Atrium transaction.
 
-        Raises
-        -----
-        ApiException
-            If there is an error when calling the MX Atrium API.
         &#34;&#34;&#34;
-
-        try:
-            response = self.client.transactions.read_transaction(
-                transaction_guid, user_guid)
-            return response.transaction
-        except ApiException as e:
-            print(e)
-
-    def list_transactions_for_user(self, user_guid, **kwargs):
-        &#34;&#34;&#34;
-        List all of the transactions for a user.
-
-        Args:
-        user_guid : str
-            A unique identifier for the user. Defined by MX.
-        from_date : str, optional
-            Filter transactions from this date.
-        to_date : str, optional
-            Filter transactions to this date.
-
-        Returns:
-        transactions : list
-            A list of an Atrium user&#39;s transactions.
-
-
-        Raises
-        -----
-        ApiException
-            If there is an error when calling the MX Atrium API.
-        &#34;&#34;&#34;
-
-        transactions = []
-        page = 1
-        records_per_page = 100
-
-        try:
-            while True:
-                response = self.client.transactions.list_user_transactions(
-                    user_guid,
-                    page=page,
-                    records_per_page=records_per_page,
-                    **kwargs)
-                transactions += response.transactions
-
-                if response.pagination.current_page &lt;= response.pagination.total_pages:
-                    break
-
-                page += 1
-
-            return transactions
-        except ApiException as e:
-            print(e)</code></pre>
+        res = self.client.transactions.read_transaction(
+            transaction_guid, user_guid)
+        return res.transaction</code></pre>
 </details>
 <h3>Subclasses</h3>
 <ul class="hlist">
@@ -206,123 +103,41 @@ class Transaction:
 </ul>
 <h3>Methods</h3>
 <dl>
-<dt id="django_atrium.transaction.Transaction.list_transactions_for_user"><code class="name flex">
-<span>def <span class="ident">list_transactions_for_user</span></span>(<span>self, user_guid, **kwargs)</span>
-</code></dt>
-<dd>
-<section class="desc"><p>List all of the transactions for a user.</p>
-<p>Args:
-user_guid : str
-A unique identifier for the user. Defined by MX.
-from_date : str, optional
-Filter transactions from this date.
-to_date : str, optional
-Filter transactions to this date.</p>
-<p>Returns:
-transactions : list
-A list of an Atrium user's transactions.</p>
-<h2 id="raises">Raises</h2>
-<dl>
-<dt><code>ApiException</code></dt>
-<dd>If there is an error when calling the MX Atrium API.</dd>
-</dl></section>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def list_transactions_for_user(self, user_guid, **kwargs):
-    &#34;&#34;&#34;
-    List all of the transactions for a user.
-
-    Args:
-    user_guid : str
-        A unique identifier for the user. Defined by MX.
-    from_date : str, optional
-        Filter transactions from this date.
-    to_date : str, optional
-        Filter transactions to this date.
-
-    Returns:
-    transactions : list
-        A list of an Atrium user&#39;s transactions.
-
-
-    Raises
-    -----
-    ApiException
-        If there is an error when calling the MX Atrium API.
-    &#34;&#34;&#34;
-
-    transactions = []
-    page = 1
-    records_per_page = 100
-
-    try:
-        while True:
-            response = self.client.transactions.list_user_transactions(
-                user_guid,
-                page=page,
-                records_per_page=records_per_page,
-                **kwargs)
-            transactions += response.transactions
-
-            if response.pagination.current_page &lt;= response.pagination.total_pages:
-                break
-
-            page += 1
-
-        return transactions
-    except ApiException as e:
-        print(e)</code></pre>
-</details>
-</dd>
 <dt id="django_atrium.transaction.Transaction.read_transaction"><code class="name flex">
 <span>def <span class="ident">read_transaction</span></span>(<span>self, transaction_guid, user_guid)</span>
 </code></dt>
 <dd>
 <section class="desc"><p>Read a transaction.</p>
-<p>Args:
-transaction_guid : str
-A unique identifier for the transaction. Defined by MX.
-user_guid : str
-A unique identifier for the user. Defined by MX.</p>
-<p>Returns:
-transaction:
-An Atrium transaction.</p>
-<h2 id="raises">Raises</h2>
+<h2 id="args">Args</h2>
 <dl>
-<dt><code>ApiException</code></dt>
-<dd>If there is an error when calling the MX Atrium API.</dd>
-</dl></section>
+<dt><strong><code>transaction_guid</code></strong></dt>
+<dd>A unique identifier for the transaction. Defined
+by MX.</dd>
+<dt><strong><code>user_guid</code></strong></dt>
+<dd>A unique identifier for the user. Defined by MX.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>An Atrium transaction.</p></section>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def read_transaction(self, transaction_guid, user_guid):
+<pre><code class="python">def read_transaction(self, transaction_guid: str,
+                     user_guid: str) -&gt; AtriumTransaction:
     &#34;&#34;&#34;Read a transaction.
 
     Args:
-    transaction_guid : str
-        A unique identifier for the transaction. Defined by MX.
-    user_guid : str
-        A unique identifier for the user. Defined by MX.
+        transaction_guid: A unique identifier for the transaction. Defined
+            by MX.
+        user_guid: A unique identifier for the user. Defined by MX.
 
     Returns:
-    transaction:
         An Atrium transaction.
 
-    Raises
-    -----
-    ApiException
-        If there is an error when calling the MX Atrium API.
     &#34;&#34;&#34;
-
-    try:
-        response = self.client.transactions.read_transaction(
-            transaction_guid, user_guid)
-        return response.transaction
-    except ApiException as e:
-        print(e)</code></pre>
+    res = self.client.transactions.read_transaction(
+        transaction_guid, user_guid)
+    return res.transaction</code></pre>
 </details>
 </dd>
 </dl>
@@ -346,7 +161,6 @@ An Atrium transaction.</p>
 <li>
 <h4><code><a title="django_atrium.transaction.Transaction" href="#django_atrium.transaction.Transaction">Transaction</a></code></h4>
 <ul class="">
-<li><code><a title="django_atrium.transaction.Transaction.list_transactions_for_user" href="#django_atrium.transaction.Transaction.list_transactions_for_user">list_transactions_for_user</a></code></li>
 <li><code><a title="django_atrium.transaction.Transaction.read_transaction" href="#django_atrium.transaction.Transaction.read_transaction">read_transaction</a></code></li>
 </ul>
 </li>

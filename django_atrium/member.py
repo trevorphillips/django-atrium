@@ -1,317 +1,230 @@
+"""member file."""
+from typing import List
+
 import atrium
-from atrium.rest import ApiException
+from atrium.models.account import Account as AtriumAccount
+from atrium.models.challenge import Challenge as AtriumChallenge
+from atrium.models.member import Member as AtriumMember
+from atrium.models.member_connection_status import \
+    MemberConnectionStatus as AtriumMemberConnectionStatus
+from atrium.models.transaction import Transaction as AtriumTransaction
 
 
 class Member:
-    """Member class"""
-    def __init__(self, client):
+    """Member class."""
+    def __init__(self, client: atrium.AtriumClient):
+        """Init for Member."""
         self.client = client
 
-    def read_member(self, member_guid, user_guid):
+    def read_member(self, member_guid: str, user_guid: str) -> AtriumMember:
         """Read a member.
 
         Args:
-        member_guid : str
-            A unique identifier for the member. Defined by MX.
-        user_guid : str
-            A unique identifier for the user. Defined by MX.
+            member_guid: A unique identifier for the member. Defined by MX.
+            user_guid: A unique identifier for the user. Defined by MX.
 
         Returns:
-            member : atrium.models.member.Member
-                An Atrium member.
+            An Atrium member.
 
-        Raises
-        ------
-        ApiException
-            If there is an error when calling the MX Atrium API.
         """
+        res = self.client.members.read_member(member_guid, user_guid)
+        return res.member
 
-        try:
-            response = self.client.members.read_member(member_guid, user_guid)
-            return response.member
-        except ApiException as e:
-            print(e)
-
-    def update_member(self, member_guid, user_guid, **kwargs):
+    def update_member(self, member_guid: str, user_guid: str,
+                      **kwargs) -> AtriumMember:
         """Update a member.
 
         Args:
-        member_guid : str
-            A unique identifier for the member. Defined by MX.
-        user_guid : str
-            A unique identifier for the user. Defined by MX.
-        identifier : str, optional
-            A unique, enforced identifier for the user, defined by you.
-        metadata : str, optional
-            Additional information you can store about this user.
-            MX recommends using JSON-structured data.
+            member_guid: A unique identifier for the member. Defined by MX.
+            user_guid: A unique identifier for the user. Defined by MX.
+            **identifier: A unique, enforced identifier for the user, defined
+                by you.
+            **metadata: Additional information you can store about this user.
 
         Returns:
-            member : atrium.models.member.Member
-                An Atrium member.
+            An Atrium member.
 
-        Raises
-        ------
-        ApiException
-            If there is an error when calling the MX Atrium API.
         """
-
         body = atrium.MemberUpdateRequestBody(member={**kwargs})
 
-        try:
-            response = self.client.members.update_member(member_guid,
-                                                         user_guid,
-                                                         body=body)
-            return response.member
-        except ApiException as e:
-            print(e)
+        res = self.client.members.update_member(member_guid,
+                                                user_guid,
+                                                body=body)
+        return res.member
 
-    def delete_member(self, member_guid, user_guid):
+    def delete_member(self, member_guid: str, user_guid: str):
         """Delete a member.
 
         Args:
-        member_guid : str
-            A unique identifier for the member. Defined by MX.
-        user_guid : str
-            A unique identifier for the user. Defined by MX.
+            member_guid: A unique identifier for the member. Defined by MX.
+            user_guid: A unique identifier for the user. Defined by MX.
 
-        Returns:
-            _ : None
-
-        Raises
-        ------
-        ApiException
-            If there is an error when calling the MX Atrium API.
         """
+        self.client.members.delete_member(member_guid, user_guid)
 
-        try:
-            self.client.members.delete_member(member_guid, user_guid)
-        except ApiException as e:
-            print(e)
-
-    def list_members(self, user_guid):
+    def list_members(self,
+                     user_guid: str,
+                     page: int = 1,
+                     records_per_page: int = 25) -> List[AtriumMember]:
         """List all the members for a user.
 
         Args:
-        user_guid : str
-            A unique identifier for the user. Defined by MX.
+            user_guid: A unique identifier for the user. Defined by MX.
+            page: The page number to start the search.
+            records_per_page: The number of records to retrieve with
+                each request. Max is 1000.
 
         Returns:
-            members : list
-                A list of an Atrium user's members.
+            A list of an Atrium user's members.
 
-        Raises
-        ------
-        ApiException
-            If there is an error when calling the MX Atrium API.
         """
-
         members = []
-        page = 1
-        records_per_page = 100
 
-        try:
-            while True:
-                response = self.client.members.list_members(
-                    user_guid, page=page, records_per_page=records_per_page)
-                members += response.members
+        while True:
+            res = self.client.members.list_members(
+                user_guid, page=page, records_per_page=records_per_page)
+            members += res.members
 
-                if response.pagination.current_page <= response.pagination.total_pages:
-                    break
+            if res.pagination.current_page <= res.pagination.total_pages:
+                break
 
-                page += 1
+            page += 1
 
-            return members
-        except ApiException as e:
-            print(e)
+        return members
 
-    def aggregate_member(self, member_guid, user_guid):
+    def aggregate_member(self, member_guid: str,
+                         user_guid: str) -> AtriumMember:
         """Aggregate a member.
 
         Args:
-        member_guid : str
-            A unique identifier for the member. Defined by MX.
-        user_guid : str
-            A unique identifier for the user. Defined by MX.
+            member_guid: A unique identifier for the member. Defined by MX.
+            user_guid: A unique identifier for the user. Defined by MX.
 
         Returns:
-            member : atrium.models.member.Member
-                An Atrium member.
+            An Atrium member.
 
-        Raises
-        ------
-        ApiException
-            If there is an error when calling the MX Atrium API.
         """
+        res = self.client.members.aggregate_member(member_guid, user_guid)
+        return res.member
 
-        try:
-            response = self.client.members.aggregate_member(
-                member_guid, user_guid)
-            return response.member
-        except ApiException as e:
-            print(e)
-
-    def read_connection_status_for_member(self, member_guid, user_guid):
+    def read_connection_status_for_member(self, member_guid: str,
+                                          user_guid: str
+                                          ) -> AtriumMemberConnectionStatus:
         """Read a member's connection status.
 
         Args:
-        member_guid : str
-            A unique identifier for the member. Defined by MX.
-        user_guid : str
-            A unique identifier for the user. Defined by MX.
+            member_guid: A unique identifier for the member. Defined by MX.
+            user_guid: A unique identifier for the user. Defined by MX.
 
         Returns:
-            member_status : atrium.models.member_connection_status.MemberConnectionStatus
-                An Atrium member's connection status.
+            An Atrium member's connection status.
 
-        Raises
-        ------
-        ApiException
-            If there is an error when calling the MX Atrium API.
         """
+        res = self.client.members.read_member_status(member_guid, user_guid)
+        return res.member
 
-        try:
-            response = self.client.members.read_member_status(
-                member_guid, user_guid)
-            return response.member
-        except ApiException as e:
-            print(e)
-
-    def list_mfa_challenges_for_member(self, member_guid, user_guid):
+    def list_mfa_challenges_for_member(self, member_guid: str,
+                                       user_guid: str) -> AtriumChallenge:
         """List all the MFA challenges for a member.
 
         Args:
-        member_guid : str
-            A unique identifier for the member. Defined by MX.
-        user_guid : str
-            A unique identifier for the user. Defined by MX.
+            member_guid: A unique identifier for the member. Defined by MX.
+            user_guid: A unique identifier for the user. Defined by MX.
 
         Returns:
-            challenges : list
-                A list of an Atrium member's challenges.
+            A list of an Atrium member's challenges.
 
-        Raises
-        ------
-        ApiException
-            If there is an error when calling the MX Atrium API.
         """
+        res = self.client.members.list_member_mfa_challenges(
+            member_guid, user_guid)
+        return res.challenges
 
-        try:
-            response = self.client.members.list_member_mfa_challenges(
-                member_guid, user_guid)
-            return response.challenges
-        except ApiException as e:
-            print(e)
-
-    def list_credentials_for_member(self, member_guid, user_guid):
+    def list_credentials_for_member(self, member_guid: str, user_guid: str):
         """List the member's credentials.
 
         Args:
-        member_guid : str
-            A unique identifier for the member. Defined by MX.
-        user_guid : str
-            A unique identifier for the user. Defined by MX.
+            member_guid: A unique identifier for the member. Defined by MX.
+            user_guid: A unique identifier for the user. Defined by MX.
 
         Returns:
-        credentials : list
             A list of an Atrium member's credentials.
 
-        Raises
-        ------
-        ApiException
-            If there is an error when calling the MX Atrium API.
         """
+        res = self.client.members.list_member_credentials(
+            member_guid, user_guid)
+        return res.credentials
 
-        try:
-            response = self.client.members.list_member_credentials(
-                member_guid, user_guid)
-            return response.credentials
-        except ApiException as e:
-            print(e)
-
-    def list__accounts_for_member(self, member_guid, user_guid):
+    def list_accounts_for_member(self,
+                                 member_guid: str,
+                                 user_guid: str,
+                                 page: int = 1,
+                                 records_per_page: int = 25
+                                 ) -> List[AtriumAccount]:
         """List a member's accounts.
 
         Args:
-        member_guid : str
-            A unique identifier for the member. Defined by MX.
-        user_guid : str
-            A unique identifier for the user. Defined by MX.
+            member_guid: A unique identifier for the member. Defined by MX.
+            user_guid: A unique identifier for the user. Defined by MX.
+            page: The page number to start the search.
+            records_per_page: The number of records to retrieve with
+                each request. Max is 1000.
 
         Returns:
-        accounts : list
             A list of an Atrium member's accounts.
 
-        Raises
-        ------
-        ApiException
-            If there is an error when calling the MX Atrium API.
         """
-
         accounts = []
-        page = 1
-        records_per_page = 100
 
-        try:
-            while True:
-                response = self.client.members.list_member_accounts(
-                    member_guid,
-                    user_guid,
-                    page=page,
-                    records_per_page=records_per_page)
-                accounts += response.accounts
+        while True:
+            res = self.client.members.list_member_accounts(
+                member_guid,
+                user_guid,
+                page=page,
+                records_per_page=records_per_page)
+            accounts += res.accounts
 
-                if response.pagination.current_page <= response.pagination.total_pages:
-                    break
+            if res.pagination.current_page <= res.pagination.total_pages:
+                break
 
-                page += 1
+            page += 1
 
-            return accounts
-        except ApiException as e:
-            print(e)
+        return accounts
 
-    def list_transactions_for_member(self, member_guid, user_guid, **kwargs):
+    def list_transactions_for_member(self,
+                                     member_guid: str,
+                                     user_guid: str,
+                                     page: int = 1,
+                                     records_per_page: int = 25,
+                                     **kwargs) -> List[AtriumTransaction]:
         """List all of a member's transactions.
 
         Args:
-        member_guid : str
-            A unique identifier for the member. Defined by MX.
-        user_guid : str
-            A unique identifier for the user. Defined by MX.
-        from_date : str, optional
-            Filter transactions from this date.
-        to_date : str, optional
-            Filter transactions to this date.
+            member_guid: A unique identifier for the member. Defined by MX.
+            user_guid: A unique identifier for the user. Defined by MX.
+            page: The page number to start the search.
+            records_per_page: The number of records to retrieve with
+                each request. Max is 1000.
+            **from_date: A date string that specifies the start date.
+            **to_date: A date string that specifies the end date.
 
         Returns:
-        transactions : list
             A list of an Atrium member's transaction.
 
-        Raises
-        ------
-        ApiException
-            If there is an error when calling the MX Atrium API.
         """
-
         transactions = []
-        page = 1
-        records_per_page = 100
 
-        try:
-            while True:
-                response = self.client.members.list_member_transactions(
-                    member_guid,
-                    user_guid,
-                    page=page,
-                    records_per_page=records_per_page,
-                    **kwargs)
-                transactions += response.transactions
+        while True:
+            res = self.client.members.list_member_transactions(
+                member_guid,
+                user_guid,
+                page=page,
+                records_per_page=records_per_page,
+                **kwargs)
+            transactions += res.transactions
 
-                if response.pagination.current_page <= response.pagination.total_pages:
-                    break
+            if res.pagination.current_page <= res.pagination.total_pages:
+                break
 
-                page += 1
+            page += 1
 
-            return transactions
-        except ApiException as e:
-            print(e)
+        return transactions

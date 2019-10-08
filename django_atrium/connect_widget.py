@@ -29,7 +29,7 @@ class ConnectWidget:
                 provided members credentials.
 
         Returns:
-            user: An Atrium user's connect widget.
+            An Atrium user's connect widget.
 
         """
         body = atrium.ConnectWidgetRequestBody(**kwargs)

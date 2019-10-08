@@ -1,3 +1,4 @@
+"""atrium file."""
 import atrium
 
 from .account import Account
@@ -17,7 +18,9 @@ settings.configure()
 
 class AtriumClient(Account, ConnectWidget, Institution, Member, Transaction,
                    User):
+    """AtriumClient class."""
     def __init__(self):
+        """Init for AtriumClient."""
         self.client = atrium.AtriumClient(settings.MX_API_KEY,
                                           settings.MX_CLIENT_ID,
                                           settings.MX_ATRIUM_URL)
