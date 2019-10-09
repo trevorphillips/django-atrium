@@ -1,4 +1,4 @@
-# django-atrium
+# django-atrium [![Build Status](https://travis-ci.com/trevorphillips/django-atrium.svg?branch=master)](https://travis-ci.com/trevorphillips/django-atrium)
 An MX Atrium wrapper to be used with Django.
 
 Documentation can be found [here](https://github.com/trevorphillips/django-atrium/tree/master/docs/django_atrium).
