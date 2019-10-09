@@ -1,0 +1,21 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+pylint = "*"
+yapf = "*"
+flake8 = "*"
+pytype = "*"
+pydocstyle = "*"
+pdoc3 = "*"
+pytest = "*"
+django = "*"
+python-dotenv = "*"
+
+[packages]
+django-atrium = {editable = true,path = "."}
+
+[requires]
+python_version = "3.7"
