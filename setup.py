@@ -22,7 +22,7 @@ classifiers = [
 
 packages = ['django_atrium']
 
-requires = ['atrium==2.8.0']
+requires = ['atrium==2.8.0', 'python-dotenv==0.10.3']
 
 setup(name='django-atrium',
       version='0.2',
