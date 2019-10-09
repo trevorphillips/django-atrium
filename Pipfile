@@ -13,6 +13,7 @@ pdoc3 = "*"
 pytest = "*"
 django = "*"
 python-dotenv = "*"
+twine = "*"
 
 [packages]
 django-atrium = {editable = true,path = "."}
