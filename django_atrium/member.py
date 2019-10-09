@@ -4,6 +4,7 @@ from typing import List
 import atrium
 from atrium.models.account import Account as AtriumAccount
 from atrium.models.challenge import Challenge as AtriumChallenge
+from atrium.models.credential_response import CredentialResponse
 from atrium.models.member import Member as AtriumMember
 from atrium.models.member_connection_status import \
     MemberConnectionStatus as AtriumMemberConnectionStatus
@@ -15,6 +16,42 @@ class Member:
     def __init__(self, client: atrium.AtriumClient):
         """Init for Member."""
         self.client = client
+
+    def create_member(self, user_guid: str, username: str, password: str,
+                      institution_creds: List[CredentialResponse],
+                      institution_code: str, **kwargs) -> AtriumMember:
+        """Create a member.
+
+        Args:
+            user_guid: A unique identifier for the user. Defined by MX.
+            username: The username/email of the bank.
+            password: The password of the bank.
+            institution_code: A unique identifier for each institution,
+                defined by MX.
+            **identifier: A unique, enforced identifier for the user, defined
+                by you.
+            **metadata: Additional information you can store about this user.
+
+        Returns:
+            An Atrium member.
+
+        """
+        body = atrium.MemberCreateRequestBody(
+            member={
+                'credentials': [{
+                    "guid": institution_creds[0].guid,
+                    "value": username
+                }, {
+                    "guid": institution_creds[1].guid,
+                    "value": password
+                }],
+                'institution_code':
+                institution_code,
+                **kwargs
+            })
+
+        res = self.client.members.create_member(user_guid, body)
+        return res.member
 
     def read_member(self, member_guid: str, user_guid: str) -> AtriumMember:
         """Read a member.

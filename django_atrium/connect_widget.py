@@ -19,11 +19,10 @@ class ConnectWidget:
                 execute URL updates in place of the JavaScript event messages.
             **current_institution_code: A string to load the widget with
                 desired institution credential view by the institutions code.
-            **current_member_guid: A string that is a unique identifier for
-                the member. Defined by MX.
-            **disable_institution_search: A boolean to indicate if the
-                institution search feature will be disabled and end users will
-                not be able to navigate to it.
+            **current_member_guid: Load to a specific member that contains an
+                error or requires MFA from the most recent job. Members with
+                no errors will return to search. `current_member_guid` takes
+                precedence over `current_institution_code`.
             **update_credentials: A boolean to be used in conjunction with
                 current_member_guid to load into a state to update the
                 provided members credentials.

@@ -20,9 +20,9 @@ classifiers = [
     "Topic :: Utilities",
 ]
 
-install_requires = [
-    'atrium==2.8.0',
-]
+packages = ['django_atrium']
+
+requires = ['atrium==2.8.0']
 
 setup(name='django-atrium',
       version='0.2',
@@ -32,6 +32,6 @@ setup(name='django-atrium',
       author_email='trevorcoreyphillips@gmail.com',
       license='GNU',
       classifiers=classifiers,
-      packages=['django_atrium'],
-      install_requires=install_requires,
+      packages=packages,
+      install_requires=requires,
       zip_safe=False)
