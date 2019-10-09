@@ -37,10 +37,19 @@ from .user import User
 
 try:
     from django.conf import settings
-except ImportError:
-    raise Exception(&#39;Django has to be installed to use this module.&#39;)
 
-settings.configure()
+    if not settings.configured:
+        try:
+            import os
+            from dotenv import load_dotenv
+            load_dotenv()
+            settings.configure(MX_API_KEY=os.getenv(&#39;MX_API_KEY&#39;),
+                               MX_CLIENT_ID=os.getenv(&#39;MX_CLIENT_ID&#39;),
+                               MX_ATRIUM_URL=os.getenv(&#39;MX_ATRIUM_URL&#39;))
+        except Exception:
+            raise (&#39;Unable to load Django settings.&#39;)
+except ImportError:
+    raise (&#39;Django must be installed to use this module.&#39;)
 
 
 class AtriumClient(Account, ConnectWidget, Institution, Member, Transaction,
@@ -118,6 +127,7 @@ class AtriumClient(Account, ConnectWidget, Institution, Member, Transaction,
 <li><code><b><a title="django_atrium.member.Member" href="member.html#django_atrium.member.Member">Member</a></b></code>:
 <ul class="hlist">
 <li><code><a title="django_atrium.member.Member.aggregate_member" href="member.html#django_atrium.member.Member.aggregate_member">aggregate_member</a></code></li>
+<li><code><a title="django_atrium.member.Member.create_member" href="member.html#django_atrium.member.Member.create_member">create_member</a></code></li>
 <li><code><a title="django_atrium.member.Member.delete_member" href="member.html#django_atrium.member.Member.delete_member">delete_member</a></code></li>
 <li><code><a title="django_atrium.member.Member.list_accounts_for_member" href="member.html#django_atrium.member.Member.list_accounts_for_member">list_accounts_for_member</a></code></li>
 <li><code><a title="django_atrium.member.Member.list_credentials_for_member" href="member.html#django_atrium.member.Member.list_credentials_for_member">list_credentials_for_member</a></code></li>

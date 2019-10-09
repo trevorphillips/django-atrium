@@ -35,11 +35,6 @@ class TestUser(unittest.TestCase):
 
     def test_read_user(self):
         created_user = self._client.create_user('test_identifier3')
-        self.assertIsInstance(created_user, AtriumUser)
-        self.assertEqual(created_user.identifier, 'test_identifier3')
-        self.assertFalse(created_user.is_disabled)
-        self.assertIsNone(created_user.metadata)
-
         user = self._client.read_user(created_user.guid)
         self.assertIsInstance(user, AtriumUser)
         self.assertEqual(user.identifier, 'test_identifier3')

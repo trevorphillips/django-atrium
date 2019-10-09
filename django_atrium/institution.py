@@ -2,6 +2,8 @@
 from typing import List
 
 import atrium
+from atrium.models.credential_response import \
+    CredentialResponse as AtriumCredentialResponse
 from atrium.models.institution import Institution as AtriumInstitution
 
 
@@ -47,7 +49,8 @@ class Institution:
         res = self.client.institutions.list_institutions(**kwargs)
         return res.institutions
 
-    def read_credentials_for_institution(self, institution_code: str):
+    def read_credentials_for_institution(self, institution_code: str
+                                         ) -> List[AtriumCredentialResponse]:
         """Read an institution's credentials.
 
         Args:
