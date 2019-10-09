@@ -4,7 +4,8 @@ from typing import List
 import atrium
 from atrium.models.account import Account as AtriumAccount
 from atrium.models.challenge import Challenge as AtriumChallenge
-from atrium.models.credential_response import CredentialResponse
+from atrium.models.credential_response import \
+    CredentialResponse as AtriumCredentialResponse
 from atrium.models.member import Member as AtriumMember
 from atrium.models.member_connection_status import \
     MemberConnectionStatus as AtriumMemberConnectionStatus
@@ -18,7 +19,7 @@ class Member:
         self.client = client
 
     def create_member(self, user_guid: str, username: str, password: str,
-                      institution_creds: List[CredentialResponse],
+                      institution_creds: List[AtriumCredentialResponse],
                       institution_code: str, **kwargs) -> AtriumMember:
         """Create a member.
 
@@ -169,14 +170,15 @@ class Member:
             user_guid: A unique identifier for the user. Defined by MX.
 
         Returns:
-            A list of an Atrium member's challenges.
+            An Atrium member's challenges.
 
         """
         res = self.client.members.list_member_mfa_challenges(
             member_guid, user_guid)
         return res.challenges
 
-    def list_credentials_for_member(self, member_guid: str, user_guid: str):
+    def list_credentials_for_member(self, member_guid: str, user_guid: str
+                                    ) -> List[AtriumCredentialResponse]:
         """List the member's credentials.
 
         Args:

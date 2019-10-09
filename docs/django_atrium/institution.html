@@ -29,6 +29,8 @@
 from typing import List
 
 import atrium
+from atrium.models.credential_response import \
+    CredentialResponse as AtriumCredentialResponse
 from atrium.models.institution import Institution as AtriumInstitution
 
 
@@ -74,7 +76,8 @@ class Institution:
         res = self.client.institutions.list_institutions(**kwargs)
         return res.institutions
 
-    def read_credentials_for_institution(self, institution_code: str):
+    def read_credentials_for_institution(self, institution_code: str
+                                         ) -&gt; List[AtriumCredentialResponse]:
         &#34;&#34;&#34;Read an institution&#39;s credentials.
 
         Args:
@@ -152,7 +155,8 @@ class Institution:
         res = self.client.institutions.list_institutions(**kwargs)
         return res.institutions
 
-    def read_credentials_for_institution(self, institution_code: str):
+    def read_credentials_for_institution(self, institution_code: str
+                                         ) -&gt; List[AtriumCredentialResponse]:
         &#34;&#34;&#34;Read an institution&#39;s credentials.
 
         Args:
@@ -242,7 +246,8 @@ defined by MX.</dd>
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def read_credentials_for_institution(self, institution_code: str):
+<pre><code class="python">def read_credentials_for_institution(self, institution_code: str
+                                     ) -&gt; List[AtriumCredentialResponse]:
     &#34;&#34;&#34;Read an institution&#39;s credentials.
 
     Args:
