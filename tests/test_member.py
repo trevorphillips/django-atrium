@@ -7,7 +7,7 @@ from atrium.models.member import Member as AtriumMember
 from django_atrium import AtriumClient
 
 
-class TestUser(unittest.TestCase):
+class TestMember(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls._client = AtriumClient()

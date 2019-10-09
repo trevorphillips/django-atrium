@@ -78,7 +78,3 @@ class TestUser(unittest.TestCase):
         user = self._client.create_user('test_identifier9')
         transactions = self._client.list_transactions_for_user(user.guid)
         self.assertIsInstance(transactions, list)
-
-
-if __name__ == '__main__':
-    unittest.main()

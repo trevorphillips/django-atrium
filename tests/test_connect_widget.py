@@ -53,7 +53,3 @@ class TestConnectWidget(unittest.TestCase):
             current_member_guid=member.guid,
             update_credentials=True)
         self.assertIsInstance(connect_widget, AtriumConnectWidget)
-
-
-if __name__ == '__main__':
-    unittest.main()
