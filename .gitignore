@@ -106,3 +106,5 @@ Pipfile*
 
 # other
 .vscode
+.DS_Store
+.pytype

@@ -1,158 +1,141 @@
+"""user file."""
+from typing import List
+
 import atrium
-from atrium.rest import ApiException
+from atrium.models.transaction import Transaction as AtriumTransaction
+from atrium.models.user import User as AtriumUser
 
 
 class User:
-    """User class"""
-    def __init__(self, client):
+    """User class."""
+    def __init__(self, client: atrium.AtriumClient):
+        """Init for User."""
         self.client = client
 
-    def create_user(self, identifier, **kwargs):
+    def create_user(self, identifier: str, **kwargs) -> AtriumUser:
         """Create a user.
 
-        Parameters
-        ----------
-        identifier : str
-            A unique, enforced identifier for the user, defined by you.
-        is_disabled : bool, optional
-            True if you want the user disabled, false otherwise.
-        metadata : str, optional
-            Additional information you can store about this user.
-            MX recommends using JSON-structured data.
+        Args:
+            identifier: A unique, enforced identifier for the user, defined by
+                you.
+            **is_disabled: A boolean indicating if a user is active. True if
+                you want the user disabled, false otherwise.
+            **metadata: Additional information you can store about this user.
 
-        Returns
-        -------
-        user : atrium.models.user.User
+        Returns:
             An Atrium user.
 
-        Raises
-        -----
-        ApiException
-            If there is an error when calling the MX Atrium API.
         """
-
         body = atrium.UserCreateRequestBody(user={
             'identifier': identifier,
             **kwargs
         })
 
-        try:
-            response = self.client.users.create_user(body)
-            return response.user
-        except ApiException as e:
-            print(e)
+        res = self.client.users.create_user(body)
+        return res.user
 
-    def read_user(self, user_guid):
+    def read_user(self, user_guid: str) -> AtriumUser:
         """Read a user.
 
-        Parameters
-        ----------
-        user_guid : str
-            A unique identifier for the user. Defined by MX.
+        Args:
+            user_guid: A unique identifier for the user. Defined by MX.
 
-        Returns
-        -------
-        user : atrium.models.user.User
+        Returns:
             An Atrium user.
 
-        Raises
-        -----
-        ApiException
-            If there is an error when calling the MX Atrium API.
         """
+        res = self.client.users.read_user(user_guid)
+        return res.user
 
-        try:
-            response = self.client.users.read_user(user_guid)
-            return response.user
-        except ApiException as e:
-            print(e)
-
-    def update_user(self, user_guid, **kwargs):
+    def update_user(self, user_guid: str, **kwargs) -> AtriumUser:
         """Update a user.
 
-        Parameters
-        ----------
-        user_guid : str
-            A unique identifier for the user. Defined by MX.
-        identifier : str, optional
-            A unique, enforced identifier for the user, defined by you.
-        is_disabled : bool, optional
-            True if you want the user disabled, false otherwise.
-        metadata : str, optional
-            Additional information you can store about this user.
-            MX recommends using JSON-structured data.
+        Args:
+            user_guid: A unique identifier for the user. Defined by MX.
+            **identifier: A unique, enforced identifier for the user, defined
+                by you.
+            **is_disabled: A boolean indicating if a user is active. True if
+                    you want the user disabled, false otherwise.
+            **metadata: Additional information you can store about this user.
 
-        Returns
-        -------
-        user : atrium.models.user.User
+        Returns:
             An Atrium user.
 
-        Raises
-        -----
-        ApiException
-            If there is an error when calling the MX Atrium API.
         """
-
         body = atrium.UserCreateRequestBody(user={**kwargs})
 
-        try:
-            response = self.client.users.update_user(user_guid, body=body)
-            return response.user
-        except ApiException as e:
-            print(e)
+        res = self.client.users.update_user(user_guid, body=body)
+        return res.user
 
-    def delete_user(self, user_guid):
+    def delete_user(self, user_guid: str):
         """Delete a user.
 
-        Parameters
-        ----------
-        user_guid : str
-            A unique identifier for the user. Defined by MX.
+        Args:
+            user_guid: A unique identifier for the user. Defined by MX.
 
-        Returns
-        -------
-            _ : None
-
-        Raises
-        -----
-        ApiException
-            If there is an error when calling the MX Atrium API.
         """
+        self.client.users.delete_user(user_guid)
 
-        try:
-            self.client.users.delete_user(user_guid)
-        except ApiException as e:
-            print(e)
-
-    def list_users(self):
+    def list_users(self, page: int = 1,
+                   records_per_page: int = 25) -> List[AtriumUser]:
         """List all the users.
 
-        Returns
-        -------
-            users : list
-                A list of Atrium users.
+        Args:
+            page: The page number to start the search.
+            records_per_page: The number of records to retrieve with
+                each request. Max is 1000.
 
-        Raises
-        -----
-        ApiException
-            If there is an error when calling the MX Atrium API.
+        Returns:
+            A list of Atrium users.
+
         """
-
         users = []
-        page = 1
-        records_per_page = 100
 
-        try:
-            while True:
-                response = self.client.users.list_users(
-                    page=page, records_per_page=records_per_page)
-                users += response.users
+        while True:
+            res = self.client.users.list_users(
+                page=page, records_per_page=records_per_page)
+            users += res.users
 
-                if response.pagination.current_page <= response.pagination.total_pages:
-                    break
+            if res.pagination.current_page <= res.pagination.total_pages:
+                break
 
-                page += 1
+            page += 1
 
-            return users
-        except ApiException as e:
-            print(e)
+        return users
+
+    def list_transactions_for_user(self,
+                                   user_guid,
+                                   page: int = 1,
+                                   records_per_page: int = 25,
+                                   **kwargs) -> List[AtriumTransaction]:
+        """
+        List all of the transactions for a user.
+
+        Args:
+            user_guid: A unique identifier for the user. Defined by MX.
+            page: The page number to start the search.
+            records_per_page: The number of records to retrieve with
+                each request. Max is 1000.
+            **from_date: A date string that specifies the start date.
+            **to_date: A date string that specifies the end date.
+
+        Returns:
+            A list of an Atrium user's transactions.
+
+        """
+        transactions = []
+
+        while True:
+            res = self.client.transactions.list_user_transactions(
+                user_guid,
+                page=page,
+                records_per_page=records_per_page,
+                **kwargs)
+            transactions += res.transactions
+
+            if res.pagination.current_page <= res.pagination.total_pages:
+                break
+
+            page += 1
+
+        return transactions
