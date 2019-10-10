@@ -1,7 +1,7 @@
 # django-atrium [![Build Status](https://travis-ci.com/trevorphillips/django-atrium.svg?branch=master)](https://travis-ci.com/trevorphillips/django-atrium)
 An MX Atrium wrapper to be used with Django.
 
-Documentation can be found [here](https://github.com/trevorphillips/django-atrium/tree/master/docs/django_atrium).
+Documentation can be found [here](https://trevorphillips.github.io/django-atrium/index.html).
 
 1. In your settings file for your Django project, set these three variables:
 - **MX_API_KEY**
