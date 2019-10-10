@@ -1,0 +1,1115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.7.1" />
+<title>django_atrium.member API documentation</title>
+<meta name="description" content="member file." />
+<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+<style>.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{font-weight:bold}#index h4 + ul{margin-bottom:.6em}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>django_atrium.member</code></h1>
+</header>
+<section id="section-intro">
+<p>member file.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;member file.&#34;&#34;&#34;
+from typing import List
+
+import atrium
+from atrium.models.account import Account as AtriumAccount
+from atrium.models.challenge import Challenge as AtriumChallenge
+from atrium.models.credential_response import \
+    CredentialResponse as AtriumCredentialResponse
+from atrium.models.member import Member as AtriumMember
+from atrium.models.member_connection_status import \
+    MemberConnectionStatus as AtriumMemberConnectionStatus
+from atrium.models.transaction import Transaction as AtriumTransaction
+
+
+class Member:
+    &#34;&#34;&#34;Member class.&#34;&#34;&#34;
+    def __init__(self, client: atrium.AtriumClient):
+        &#34;&#34;&#34;Init for Member.&#34;&#34;&#34;
+        self.client = client
+
+    def create_member(self, user_guid: str, username: str, password: str,
+                      institution_creds: List[AtriumCredentialResponse],
+                      institution_code: str, **kwargs) -&gt; AtriumMember:
+        &#34;&#34;&#34;Create a member.
+
+        Args:
+            user_guid: A unique identifier for the user. Defined by MX.
+            username: The username/email of the bank.
+            password: The password of the bank.
+            institution_code: A unique identifier for each institution,
+                defined by MX.
+            **identifier: A unique, enforced identifier for the user, defined
+                by you.
+            **metadata: Additional information you can store about this user.
+
+        Returns:
+            An Atrium member.
+
+        &#34;&#34;&#34;
+        body = atrium.MemberCreateRequestBody(
+            member={
+                &#39;credentials&#39;: [{
+                    &#34;guid&#34;: institution_creds[0].guid,
+                    &#34;value&#34;: username
+                }, {
+                    &#34;guid&#34;: institution_creds[1].guid,
+                    &#34;value&#34;: password
+                }],
+                &#39;institution_code&#39;:
+                institution_code,
+                **kwargs
+            })
+
+        res = self.client.members.create_member(user_guid, body)
+        return res.member
+
+    def read_member(self, member_guid: str, user_guid: str) -&gt; AtriumMember:
+        &#34;&#34;&#34;Read a member.
+
+        Args:
+            member_guid: A unique identifier for the member. Defined by MX.
+            user_guid: A unique identifier for the user. Defined by MX.
+
+        Returns:
+            An Atrium member.
+
+        &#34;&#34;&#34;
+        res = self.client.members.read_member(member_guid, user_guid)
+        return res.member
+
+    def update_member(self, member_guid: str, user_guid: str,
+                      **kwargs) -&gt; AtriumMember:
+        &#34;&#34;&#34;Update a member.
+
+        Args:
+            member_guid: A unique identifier for the member. Defined by MX.
+            user_guid: A unique identifier for the user. Defined by MX.
+            **identifier: A unique, enforced identifier for the user, defined
+                by you.
+            **metadata: Additional information you can store about this user.
+
+        Returns:
+            An Atrium member.
+
+        &#34;&#34;&#34;
+        body = atrium.MemberUpdateRequestBody(member={**kwargs})
+
+        res = self.client.members.update_member(member_guid,
+                                                user_guid,
+                                                body=body)
+        return res.member
+
+    def delete_member(self, member_guid: str, user_guid: str):
+        &#34;&#34;&#34;Delete a member.
+
+        Args:
+            member_guid: A unique identifier for the member. Defined by MX.
+            user_guid: A unique identifier for the user. Defined by MX.
+
+        &#34;&#34;&#34;
+        self.client.members.delete_member(member_guid, user_guid)
+
+    def list_members(self,
+                     user_guid: str,
+                     page: int = 1,
+                     records_per_page: int = 25) -&gt; List[AtriumMember]:
+        &#34;&#34;&#34;List all the members for a user.
+
+        Args:
+            user_guid: A unique identifier for the user. Defined by MX.
+            page: The page number to start the search.
+            records_per_page: The number of records to retrieve with
+                each request. Max is 1000.
+
+        Returns:
+            A list of an Atrium user&#39;s members.
+
+        &#34;&#34;&#34;
+        members = []
+
+        while True:
+            res = self.client.members.list_members(
+                user_guid, page=page, records_per_page=records_per_page)
+            members += res.members
+
+            if res.pagination.current_page &lt;= res.pagination.total_pages:
+                break
+
+            page += 1
+
+        return members
+
+    def aggregate_member(self, member_guid: str,
+                         user_guid: str) -&gt; AtriumMember:
+        &#34;&#34;&#34;Aggregate a member.
+
+        Args:
+            member_guid: A unique identifier for the member. Defined by MX.
+            user_guid: A unique identifier for the user. Defined by MX.
+
+        Returns:
+            An Atrium member.
+
+        &#34;&#34;&#34;
+        res = self.client.members.aggregate_member(member_guid, user_guid)
+        return res.member
+
+    def read_connection_status_for_member(self, member_guid: str,
+                                          user_guid: str
+                                          ) -&gt; AtriumMemberConnectionStatus:
+        &#34;&#34;&#34;Read a member&#39;s connection status.
+
+        Args:
+            member_guid: A unique identifier for the member. Defined by MX.
+            user_guid: A unique identifier for the user. Defined by MX.
+
+        Returns:
+            An Atrium member&#39;s connection status.
+
+        &#34;&#34;&#34;
+        res = self.client.members.read_member_status(member_guid, user_guid)
+        return res.member
+
+    def list_mfa_challenges_for_member(self, member_guid: str,
+                                       user_guid: str) -&gt; AtriumChallenge:
+        &#34;&#34;&#34;List all the MFA challenges for a member.
+
+        Args:
+            member_guid: A unique identifier for the member. Defined by MX.
+            user_guid: A unique identifier for the user. Defined by MX.
+
+        Returns:
+            An Atrium member&#39;s challenges.
+
+        &#34;&#34;&#34;
+        res = self.client.members.list_member_mfa_challenges(
+            member_guid, user_guid)
+        return res.challenges
+
+    def list_credentials_for_member(self, member_guid: str, user_guid: str
+                                    ) -&gt; List[AtriumCredentialResponse]:
+        &#34;&#34;&#34;List the member&#39;s credentials.
+
+        Args:
+            member_guid: A unique identifier for the member. Defined by MX.
+            user_guid: A unique identifier for the user. Defined by MX.
+
+        Returns:
+            A list of an Atrium member&#39;s credentials.
+
+        &#34;&#34;&#34;
+        res = self.client.members.list_member_credentials(
+            member_guid, user_guid)
+        return res.credentials
+
+    def list_accounts_for_member(self,
+                                 member_guid: str,
+                                 user_guid: str,
+                                 page: int = 1,
+                                 records_per_page: int = 25
+                                 ) -&gt; List[AtriumAccount]:
+        &#34;&#34;&#34;List a member&#39;s accounts.
+
+        Args:
+            member_guid: A unique identifier for the member. Defined by MX.
+            user_guid: A unique identifier for the user. Defined by MX.
+            page: The page number to start the search.
+            records_per_page: The number of records to retrieve with
+                each request. Max is 1000.
+
+        Returns:
+            A list of an Atrium member&#39;s accounts.
+
+        &#34;&#34;&#34;
+        accounts = []
+
+        while True:
+            res = self.client.members.list_member_accounts(
+                member_guid,
+                user_guid,
+                page=page,
+                records_per_page=records_per_page)
+            accounts += res.accounts
+
+            if res.pagination.current_page &lt;= res.pagination.total_pages:
+                break
+
+            page += 1
+
+        return accounts
+
+    def list_transactions_for_member(self,
+                                     member_guid: str,
+                                     user_guid: str,
+                                     page: int = 1,
+                                     records_per_page: int = 25,
+                                     **kwargs) -&gt; List[AtriumTransaction]:
+        &#34;&#34;&#34;List all of a member&#39;s transactions.
+
+        Args:
+            member_guid: A unique identifier for the member. Defined by MX.
+            user_guid: A unique identifier for the user. Defined by MX.
+            page: The page number to start the search.
+            records_per_page: The number of records to retrieve with
+                each request. Max is 1000.
+            **from_date: A date string that specifies the start date.
+            **to_date: A date string that specifies the end date.
+
+        Returns:
+            A list of an Atrium member&#39;s transaction.
+
+        &#34;&#34;&#34;
+        transactions = []
+
+        while True:
+            res = self.client.members.list_member_transactions(
+                member_guid,
+                user_guid,
+                page=page,
+                records_per_page=records_per_page,
+                **kwargs)
+            transactions += res.transactions
+
+            if res.pagination.current_page &lt;= res.pagination.total_pages:
+                break
+
+            page += 1
+
+        return transactions</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="django_atrium.member.Member"><code class="flex name class">
+<span>class <span class="ident">Member</span></span>
+<span>(</span><span>client)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Member class.</p>
+<p>Init for Member.</p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Member:
+    &#34;&#34;&#34;Member class.&#34;&#34;&#34;
+    def __init__(self, client: atrium.AtriumClient):
+        &#34;&#34;&#34;Init for Member.&#34;&#34;&#34;
+        self.client = client
+
+    def create_member(self, user_guid: str, username: str, password: str,
+                      institution_creds: List[AtriumCredentialResponse],
+                      institution_code: str, **kwargs) -&gt; AtriumMember:
+        &#34;&#34;&#34;Create a member.
+
+        Args:
+            user_guid: A unique identifier for the user. Defined by MX.
+            username: The username/email of the bank.
+            password: The password of the bank.
+            institution_code: A unique identifier for each institution,
+                defined by MX.
+            **identifier: A unique, enforced identifier for the user, defined
+                by you.
+            **metadata: Additional information you can store about this user.
+
+        Returns:
+            An Atrium member.
+
+        &#34;&#34;&#34;
+        body = atrium.MemberCreateRequestBody(
+            member={
+                &#39;credentials&#39;: [{
+                    &#34;guid&#34;: institution_creds[0].guid,
+                    &#34;value&#34;: username
+                }, {
+                    &#34;guid&#34;: institution_creds[1].guid,
+                    &#34;value&#34;: password
+                }],
+                &#39;institution_code&#39;:
+                institution_code,
+                **kwargs
+            })
+
+        res = self.client.members.create_member(user_guid, body)
+        return res.member
+
+    def read_member(self, member_guid: str, user_guid: str) -&gt; AtriumMember:
+        &#34;&#34;&#34;Read a member.
+
+        Args:
+            member_guid: A unique identifier for the member. Defined by MX.
+            user_guid: A unique identifier for the user. Defined by MX.
+
+        Returns:
+            An Atrium member.
+
+        &#34;&#34;&#34;
+        res = self.client.members.read_member(member_guid, user_guid)
+        return res.member
+
+    def update_member(self, member_guid: str, user_guid: str,
+                      **kwargs) -&gt; AtriumMember:
+        &#34;&#34;&#34;Update a member.
+
+        Args:
+            member_guid: A unique identifier for the member. Defined by MX.
+            user_guid: A unique identifier for the user. Defined by MX.
+            **identifier: A unique, enforced identifier for the user, defined
+                by you.
+            **metadata: Additional information you can store about this user.
+
+        Returns:
+            An Atrium member.
+
+        &#34;&#34;&#34;
+        body = atrium.MemberUpdateRequestBody(member={**kwargs})
+
+        res = self.client.members.update_member(member_guid,
+                                                user_guid,
+                                                body=body)
+        return res.member
+
+    def delete_member(self, member_guid: str, user_guid: str):
+        &#34;&#34;&#34;Delete a member.
+
+        Args:
+            member_guid: A unique identifier for the member. Defined by MX.
+            user_guid: A unique identifier for the user. Defined by MX.
+
+        &#34;&#34;&#34;
+        self.client.members.delete_member(member_guid, user_guid)
+
+    def list_members(self,
+                     user_guid: str,
+                     page: int = 1,
+                     records_per_page: int = 25) -&gt; List[AtriumMember]:
+        &#34;&#34;&#34;List all the members for a user.
+
+        Args:
+            user_guid: A unique identifier for the user. Defined by MX.
+            page: The page number to start the search.
+            records_per_page: The number of records to retrieve with
+                each request. Max is 1000.
+
+        Returns:
+            A list of an Atrium user&#39;s members.
+
+        &#34;&#34;&#34;
+        members = []
+
+        while True:
+            res = self.client.members.list_members(
+                user_guid, page=page, records_per_page=records_per_page)
+            members += res.members
+
+            if res.pagination.current_page &lt;= res.pagination.total_pages:
+                break
+
+            page += 1
+
+        return members
+
+    def aggregate_member(self, member_guid: str,
+                         user_guid: str) -&gt; AtriumMember:
+        &#34;&#34;&#34;Aggregate a member.
+
+        Args:
+            member_guid: A unique identifier for the member. Defined by MX.
+            user_guid: A unique identifier for the user. Defined by MX.
+
+        Returns:
+            An Atrium member.
+
+        &#34;&#34;&#34;
+        res = self.client.members.aggregate_member(member_guid, user_guid)
+        return res.member
+
+    def read_connection_status_for_member(self, member_guid: str,
+                                          user_guid: str
+                                          ) -&gt; AtriumMemberConnectionStatus:
+        &#34;&#34;&#34;Read a member&#39;s connection status.
+
+        Args:
+            member_guid: A unique identifier for the member. Defined by MX.
+            user_guid: A unique identifier for the user. Defined by MX.
+
+        Returns:
+            An Atrium member&#39;s connection status.
+
+        &#34;&#34;&#34;
+        res = self.client.members.read_member_status(member_guid, user_guid)
+        return res.member
+
+    def list_mfa_challenges_for_member(self, member_guid: str,
+                                       user_guid: str) -&gt; AtriumChallenge:
+        &#34;&#34;&#34;List all the MFA challenges for a member.
+
+        Args:
+            member_guid: A unique identifier for the member. Defined by MX.
+            user_guid: A unique identifier for the user. Defined by MX.
+
+        Returns:
+            An Atrium member&#39;s challenges.
+
+        &#34;&#34;&#34;
+        res = self.client.members.list_member_mfa_challenges(
+            member_guid, user_guid)
+        return res.challenges
+
+    def list_credentials_for_member(self, member_guid: str, user_guid: str
+                                    ) -&gt; List[AtriumCredentialResponse]:
+        &#34;&#34;&#34;List the member&#39;s credentials.
+
+        Args:
+            member_guid: A unique identifier for the member. Defined by MX.
+            user_guid: A unique identifier for the user. Defined by MX.
+
+        Returns:
+            A list of an Atrium member&#39;s credentials.
+
+        &#34;&#34;&#34;
+        res = self.client.members.list_member_credentials(
+            member_guid, user_guid)
+        return res.credentials
+
+    def list_accounts_for_member(self,
+                                 member_guid: str,
+                                 user_guid: str,
+                                 page: int = 1,
+                                 records_per_page: int = 25
+                                 ) -&gt; List[AtriumAccount]:
+        &#34;&#34;&#34;List a member&#39;s accounts.
+
+        Args:
+            member_guid: A unique identifier for the member. Defined by MX.
+            user_guid: A unique identifier for the user. Defined by MX.
+            page: The page number to start the search.
+            records_per_page: The number of records to retrieve with
+                each request. Max is 1000.
+
+        Returns:
+            A list of an Atrium member&#39;s accounts.
+
+        &#34;&#34;&#34;
+        accounts = []
+
+        while True:
+            res = self.client.members.list_member_accounts(
+                member_guid,
+                user_guid,
+                page=page,
+                records_per_page=records_per_page)
+            accounts += res.accounts
+
+            if res.pagination.current_page &lt;= res.pagination.total_pages:
+                break
+
+            page += 1
+
+        return accounts
+
+    def list_transactions_for_member(self,
+                                     member_guid: str,
+                                     user_guid: str,
+                                     page: int = 1,
+                                     records_per_page: int = 25,
+                                     **kwargs) -&gt; List[AtriumTransaction]:
+        &#34;&#34;&#34;List all of a member&#39;s transactions.
+
+        Args:
+            member_guid: A unique identifier for the member. Defined by MX.
+            user_guid: A unique identifier for the user. Defined by MX.
+            page: The page number to start the search.
+            records_per_page: The number of records to retrieve with
+                each request. Max is 1000.
+            **from_date: A date string that specifies the start date.
+            **to_date: A date string that specifies the end date.
+
+        Returns:
+            A list of an Atrium member&#39;s transaction.
+
+        &#34;&#34;&#34;
+        transactions = []
+
+        while True:
+            res = self.client.members.list_member_transactions(
+                member_guid,
+                user_guid,
+                page=page,
+                records_per_page=records_per_page,
+                **kwargs)
+            transactions += res.transactions
+
+            if res.pagination.current_page &lt;= res.pagination.total_pages:
+                break
+
+            page += 1
+
+        return transactions</code></pre>
+</details>
+<h3>Subclasses</h3>
+<ul class="hlist">
+<li><a title="django_atrium.atrium.AtriumClient" href="atrium.html#django_atrium.atrium.AtriumClient">AtriumClient</a></li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="django_atrium.member.Member.aggregate_member"><code class="name flex">
+<span>def <span class="ident">aggregate_member</span></span>(<span>self, member_guid, user_guid)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Aggregate a member.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>member_guid</code></strong></dt>
+<dd>A unique identifier for the member. Defined by MX.</dd>
+<dt><strong><code>user_guid</code></strong></dt>
+<dd>A unique identifier for the user. Defined by MX.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>An Atrium member.</p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def aggregate_member(self, member_guid: str,
+                     user_guid: str) -&gt; AtriumMember:
+    &#34;&#34;&#34;Aggregate a member.
+
+    Args:
+        member_guid: A unique identifier for the member. Defined by MX.
+        user_guid: A unique identifier for the user. Defined by MX.
+
+    Returns:
+        An Atrium member.
+
+    &#34;&#34;&#34;
+    res = self.client.members.aggregate_member(member_guid, user_guid)
+    return res.member</code></pre>
+</details>
+</dd>
+<dt id="django_atrium.member.Member.create_member"><code class="name flex">
+<span>def <span class="ident">create_member</span></span>(<span>self, user_guid, username, password, institution_creds, institution_code, **kwargs)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Create a member.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>user_guid</code></strong></dt>
+<dd>A unique identifier for the user. Defined by MX.</dd>
+<dt><strong><code>username</code></strong></dt>
+<dd>The username/email of the bank.</dd>
+<dt><strong><code>password</code></strong></dt>
+<dd>The password of the bank.</dd>
+<dt><strong><code>institution_code</code></strong></dt>
+<dd>A unique identifier for each institution,
+defined by MX.</dd>
+<dt><strong><code>**identifier</code></strong></dt>
+<dd>A unique, enforced identifier for the user, defined
+by you.</dd>
+<dt><strong><code>**metadata</code></strong></dt>
+<dd>Additional information you can store about this user.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>An Atrium member.</p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def create_member(self, user_guid: str, username: str, password: str,
+                  institution_creds: List[AtriumCredentialResponse],
+                  institution_code: str, **kwargs) -&gt; AtriumMember:
+    &#34;&#34;&#34;Create a member.
+
+    Args:
+        user_guid: A unique identifier for the user. Defined by MX.
+        username: The username/email of the bank.
+        password: The password of the bank.
+        institution_code: A unique identifier for each institution,
+            defined by MX.
+        **identifier: A unique, enforced identifier for the user, defined
+            by you.
+        **metadata: Additional information you can store about this user.
+
+    Returns:
+        An Atrium member.
+
+    &#34;&#34;&#34;
+    body = atrium.MemberCreateRequestBody(
+        member={
+            &#39;credentials&#39;: [{
+                &#34;guid&#34;: institution_creds[0].guid,
+                &#34;value&#34;: username
+            }, {
+                &#34;guid&#34;: institution_creds[1].guid,
+                &#34;value&#34;: password
+            }],
+            &#39;institution_code&#39;:
+            institution_code,
+            **kwargs
+        })
+
+    res = self.client.members.create_member(user_guid, body)
+    return res.member</code></pre>
+</details>
+</dd>
+<dt id="django_atrium.member.Member.delete_member"><code class="name flex">
+<span>def <span class="ident">delete_member</span></span>(<span>self, member_guid, user_guid)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Delete a member.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>member_guid</code></strong></dt>
+<dd>A unique identifier for the member. Defined by MX.</dd>
+<dt><strong><code>user_guid</code></strong></dt>
+<dd>A unique identifier for the user. Defined by MX.</dd>
+</dl></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def delete_member(self, member_guid: str, user_guid: str):
+    &#34;&#34;&#34;Delete a member.
+
+    Args:
+        member_guid: A unique identifier for the member. Defined by MX.
+        user_guid: A unique identifier for the user. Defined by MX.
+
+    &#34;&#34;&#34;
+    self.client.members.delete_member(member_guid, user_guid)</code></pre>
+</details>
+</dd>
+<dt id="django_atrium.member.Member.list_accounts_for_member"><code class="name flex">
+<span>def <span class="ident">list_accounts_for_member</span></span>(<span>self, member_guid, user_guid, page=1, records_per_page=25)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>List a member's accounts.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>member_guid</code></strong></dt>
+<dd>A unique identifier for the member. Defined by MX.</dd>
+<dt><strong><code>user_guid</code></strong></dt>
+<dd>A unique identifier for the user. Defined by MX.</dd>
+<dt><strong><code>page</code></strong></dt>
+<dd>The page number to start the search.</dd>
+<dt><strong><code>records_per_page</code></strong></dt>
+<dd>The number of records to retrieve with
+each request. Max is 1000.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>A list of an Atrium member's accounts.</p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def list_accounts_for_member(self,
+                             member_guid: str,
+                             user_guid: str,
+                             page: int = 1,
+                             records_per_page: int = 25
+                             ) -&gt; List[AtriumAccount]:
+    &#34;&#34;&#34;List a member&#39;s accounts.
+
+    Args:
+        member_guid: A unique identifier for the member. Defined by MX.
+        user_guid: A unique identifier for the user. Defined by MX.
+        page: The page number to start the search.
+        records_per_page: The number of records to retrieve with
+            each request. Max is 1000.
+
+    Returns:
+        A list of an Atrium member&#39;s accounts.
+
+    &#34;&#34;&#34;
+    accounts = []
+
+    while True:
+        res = self.client.members.list_member_accounts(
+            member_guid,
+            user_guid,
+            page=page,
+            records_per_page=records_per_page)
+        accounts += res.accounts
+
+        if res.pagination.current_page &lt;= res.pagination.total_pages:
+            break
+
+        page += 1
+
+    return accounts</code></pre>
+</details>
+</dd>
+<dt id="django_atrium.member.Member.list_credentials_for_member"><code class="name flex">
+<span>def <span class="ident">list_credentials_for_member</span></span>(<span>self, member_guid, user_guid)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>List the member's credentials.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>member_guid</code></strong></dt>
+<dd>A unique identifier for the member. Defined by MX.</dd>
+<dt><strong><code>user_guid</code></strong></dt>
+<dd>A unique identifier for the user. Defined by MX.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>A list of an Atrium member's credentials.</p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def list_credentials_for_member(self, member_guid: str, user_guid: str
+                                ) -&gt; List[AtriumCredentialResponse]:
+    &#34;&#34;&#34;List the member&#39;s credentials.
+
+    Args:
+        member_guid: A unique identifier for the member. Defined by MX.
+        user_guid: A unique identifier for the user. Defined by MX.
+
+    Returns:
+        A list of an Atrium member&#39;s credentials.
+
+    &#34;&#34;&#34;
+    res = self.client.members.list_member_credentials(
+        member_guid, user_guid)
+    return res.credentials</code></pre>
+</details>
+</dd>
+<dt id="django_atrium.member.Member.list_members"><code class="name flex">
+<span>def <span class="ident">list_members</span></span>(<span>self, user_guid, page=1, records_per_page=25)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>List all the members for a user.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>user_guid</code></strong></dt>
+<dd>A unique identifier for the user. Defined by MX.</dd>
+<dt><strong><code>page</code></strong></dt>
+<dd>The page number to start the search.</dd>
+<dt><strong><code>records_per_page</code></strong></dt>
+<dd>The number of records to retrieve with
+each request. Max is 1000.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>A list of an Atrium user's members.</p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def list_members(self,
+                 user_guid: str,
+                 page: int = 1,
+                 records_per_page: int = 25) -&gt; List[AtriumMember]:
+    &#34;&#34;&#34;List all the members for a user.
+
+    Args:
+        user_guid: A unique identifier for the user. Defined by MX.
+        page: The page number to start the search.
+        records_per_page: The number of records to retrieve with
+            each request. Max is 1000.
+
+    Returns:
+        A list of an Atrium user&#39;s members.
+
+    &#34;&#34;&#34;
+    members = []
+
+    while True:
+        res = self.client.members.list_members(
+            user_guid, page=page, records_per_page=records_per_page)
+        members += res.members
+
+        if res.pagination.current_page &lt;= res.pagination.total_pages:
+            break
+
+        page += 1
+
+    return members</code></pre>
+</details>
+</dd>
+<dt id="django_atrium.member.Member.list_mfa_challenges_for_member"><code class="name flex">
+<span>def <span class="ident">list_mfa_challenges_for_member</span></span>(<span>self, member_guid, user_guid)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>List all the MFA challenges for a member.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>member_guid</code></strong></dt>
+<dd>A unique identifier for the member. Defined by MX.</dd>
+<dt><strong><code>user_guid</code></strong></dt>
+<dd>A unique identifier for the user. Defined by MX.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>An Atrium member's challenges.</p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def list_mfa_challenges_for_member(self, member_guid: str,
+                                   user_guid: str) -&gt; AtriumChallenge:
+    &#34;&#34;&#34;List all the MFA challenges for a member.
+
+    Args:
+        member_guid: A unique identifier for the member. Defined by MX.
+        user_guid: A unique identifier for the user. Defined by MX.
+
+    Returns:
+        An Atrium member&#39;s challenges.
+
+    &#34;&#34;&#34;
+    res = self.client.members.list_member_mfa_challenges(
+        member_guid, user_guid)
+    return res.challenges</code></pre>
+</details>
+</dd>
+<dt id="django_atrium.member.Member.list_transactions_for_member"><code class="name flex">
+<span>def <span class="ident">list_transactions_for_member</span></span>(<span>self, member_guid, user_guid, page=1, records_per_page=25, **kwargs)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>List all of a member's transactions.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>member_guid</code></strong></dt>
+<dd>A unique identifier for the member. Defined by MX.</dd>
+<dt><strong><code>user_guid</code></strong></dt>
+<dd>A unique identifier for the user. Defined by MX.</dd>
+<dt><strong><code>page</code></strong></dt>
+<dd>The page number to start the search.</dd>
+<dt><strong><code>records_per_page</code></strong></dt>
+<dd>The number of records to retrieve with
+each request. Max is 1000.</dd>
+<dt><strong><code>**from_date</code></strong></dt>
+<dd>A date string that specifies the start date.</dd>
+<dt><strong><code>**to_date</code></strong></dt>
+<dd>A date string that specifies the end date.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>A list of an Atrium member's transaction.</p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def list_transactions_for_member(self,
+                                 member_guid: str,
+                                 user_guid: str,
+                                 page: int = 1,
+                                 records_per_page: int = 25,
+                                 **kwargs) -&gt; List[AtriumTransaction]:
+    &#34;&#34;&#34;List all of a member&#39;s transactions.
+
+    Args:
+        member_guid: A unique identifier for the member. Defined by MX.
+        user_guid: A unique identifier for the user. Defined by MX.
+        page: The page number to start the search.
+        records_per_page: The number of records to retrieve with
+            each request. Max is 1000.
+        **from_date: A date string that specifies the start date.
+        **to_date: A date string that specifies the end date.
+
+    Returns:
+        A list of an Atrium member&#39;s transaction.
+
+    &#34;&#34;&#34;
+    transactions = []
+
+    while True:
+        res = self.client.members.list_member_transactions(
+            member_guid,
+            user_guid,
+            page=page,
+            records_per_page=records_per_page,
+            **kwargs)
+        transactions += res.transactions
+
+        if res.pagination.current_page &lt;= res.pagination.total_pages:
+            break
+
+        page += 1
+
+    return transactions</code></pre>
+</details>
+</dd>
+<dt id="django_atrium.member.Member.read_connection_status_for_member"><code class="name flex">
+<span>def <span class="ident">read_connection_status_for_member</span></span>(<span>self, member_guid, user_guid)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Read a member's connection status.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>member_guid</code></strong></dt>
+<dd>A unique identifier for the member. Defined by MX.</dd>
+<dt><strong><code>user_guid</code></strong></dt>
+<dd>A unique identifier for the user. Defined by MX.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>An Atrium member's connection status.</p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def read_connection_status_for_member(self, member_guid: str,
+                                      user_guid: str
+                                      ) -&gt; AtriumMemberConnectionStatus:
+    &#34;&#34;&#34;Read a member&#39;s connection status.
+
+    Args:
+        member_guid: A unique identifier for the member. Defined by MX.
+        user_guid: A unique identifier for the user. Defined by MX.
+
+    Returns:
+        An Atrium member&#39;s connection status.
+
+    &#34;&#34;&#34;
+    res = self.client.members.read_member_status(member_guid, user_guid)
+    return res.member</code></pre>
+</details>
+</dd>
+<dt id="django_atrium.member.Member.read_member"><code class="name flex">
+<span>def <span class="ident">read_member</span></span>(<span>self, member_guid, user_guid)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Read a member.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>member_guid</code></strong></dt>
+<dd>A unique identifier for the member. Defined by MX.</dd>
+<dt><strong><code>user_guid</code></strong></dt>
+<dd>A unique identifier for the user. Defined by MX.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>An Atrium member.</p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def read_member(self, member_guid: str, user_guid: str) -&gt; AtriumMember:
+    &#34;&#34;&#34;Read a member.
+
+    Args:
+        member_guid: A unique identifier for the member. Defined by MX.
+        user_guid: A unique identifier for the user. Defined by MX.
+
+    Returns:
+        An Atrium member.
+
+    &#34;&#34;&#34;
+    res = self.client.members.read_member(member_guid, user_guid)
+    return res.member</code></pre>
+</details>
+</dd>
+<dt id="django_atrium.member.Member.update_member"><code class="name flex">
+<span>def <span class="ident">update_member</span></span>(<span>self, member_guid, user_guid, **kwargs)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Update a member.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>member_guid</code></strong></dt>
+<dd>A unique identifier for the member. Defined by MX.</dd>
+<dt><strong><code>user_guid</code></strong></dt>
+<dd>A unique identifier for the user. Defined by MX.</dd>
+<dt><strong><code>**identifier</code></strong></dt>
+<dd>A unique, enforced identifier for the user, defined
+by you.</dd>
+<dt><strong><code>**metadata</code></strong></dt>
+<dd>Additional information you can store about this user.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>An Atrium member.</p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def update_member(self, member_guid: str, user_guid: str,
+                  **kwargs) -&gt; AtriumMember:
+    &#34;&#34;&#34;Update a member.
+
+    Args:
+        member_guid: A unique identifier for the member. Defined by MX.
+        user_guid: A unique identifier for the user. Defined by MX.
+        **identifier: A unique, enforced identifier for the user, defined
+            by you.
+        **metadata: Additional information you can store about this user.
+
+    Returns:
+        An Atrium member.
+
+    &#34;&#34;&#34;
+    body = atrium.MemberUpdateRequestBody(member={**kwargs})
+
+    res = self.client.members.update_member(member_guid,
+                                            user_guid,
+                                            body=body)
+    return res.member</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="django_atrium" href="index.html">django_atrium</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="django_atrium.member.Member" href="#django_atrium.member.Member">Member</a></code></h4>
+<ul class="">
+<li><code><a title="django_atrium.member.Member.aggregate_member" href="#django_atrium.member.Member.aggregate_member">aggregate_member</a></code></li>
+<li><code><a title="django_atrium.member.Member.create_member" href="#django_atrium.member.Member.create_member">create_member</a></code></li>
+<li><code><a title="django_atrium.member.Member.delete_member" href="#django_atrium.member.Member.delete_member">delete_member</a></code></li>
+<li><code><a title="django_atrium.member.Member.list_accounts_for_member" href="#django_atrium.member.Member.list_accounts_for_member">list_accounts_for_member</a></code></li>
+<li><code><a title="django_atrium.member.Member.list_credentials_for_member" href="#django_atrium.member.Member.list_credentials_for_member">list_credentials_for_member</a></code></li>
+<li><code><a title="django_atrium.member.Member.list_members" href="#django_atrium.member.Member.list_members">list_members</a></code></li>
+<li><code><a title="django_atrium.member.Member.list_mfa_challenges_for_member" href="#django_atrium.member.Member.list_mfa_challenges_for_member">list_mfa_challenges_for_member</a></code></li>
+<li><code><a title="django_atrium.member.Member.list_transactions_for_member" href="#django_atrium.member.Member.list_transactions_for_member">list_transactions_for_member</a></code></li>
+<li><code><a title="django_atrium.member.Member.read_connection_status_for_member" href="#django_atrium.member.Member.read_connection_status_for_member">read_connection_status_for_member</a></code></li>
+<li><code><a title="django_atrium.member.Member.read_member" href="#django_atrium.member.Member.read_member">read_member</a></code></li>
+<li><code><a title="django_atrium.member.Member.update_member" href="#django_atrium.member.Member.update_member">update_member</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.7.1</a>.</p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>
