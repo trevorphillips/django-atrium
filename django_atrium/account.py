@@ -50,7 +50,7 @@ class Account:
                 user_guid, page=page, records_per_page=records_per_page)
             accounts += res.accounts
 
-            if res.pagination.current_page <= res.pagination.total_pages:
+            if res.pagination.current_page == res.pagination.total_pages:
                 break
 
             page += 1
@@ -89,7 +89,7 @@ class Account:
                 **kwargs)
             transactions += res.transactions
 
-            if res.pagination.current_page <= res.pagination.total_pages:
+            if res.pagination.current_page == res.pagination.total_pages:
                 break
 
             page += 1
