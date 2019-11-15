@@ -35,5 +35,5 @@ setup(name='django-atrium',
       packages=packages,
       install_requires=requires,
       download_url=
-      'https://github.com/trevorphillips/django-atrium/archive/v1.0.tar.gz',
+      'https://github.com/trevorphillips/django-atrium/archive/v1.1.tar.gz',
       zip_safe=False)
