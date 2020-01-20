@@ -24,6 +24,10 @@ jobs:
         pipenv run flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         pipenv run flake8 . --count --exit-zero --max-complexity=10 --statistics
     - name: Test with pytest
+      env:
+        MX_API_KEY: ${{ secrets.MX_API_KEY }}
+        MX_CLIENT_ID: ${{ secrets.MX_CLIENT_ID }}
+        MX_ATRIUM_URL: ${{ secrets.MX_ATRIUM_URL }}
       run: |
         pipenv install pytest
         pipenv run pytest
