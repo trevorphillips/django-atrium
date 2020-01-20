@@ -4,16 +4,13 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-pylint = "*"
-yapf = "*"
-flake8 = "*"
-pytype = "*"
-pydocstyle = "*"
-pdoc3 = "*"
-pytest = "*"
-django = "*"
-python-dotenv = "*"
-twine = "*"
+pylint = "==2.4.4"
+yapf = "==0.29.0"
+pytype = "==2020.1.8"
+pydocstyle = "==5.0.2"
+pdoc3 = "==0.7.4"
+django = "==2.2.9"
+python-dotenv = "==0.10.3"
 
 [packages]
 django-atrium = {editable = true,path = "."}

@@ -11,12 +11,8 @@ classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Environment :: Web Environment",
     "Framework :: Django",
-    "Framework :: Django :: 1.11",
-    "Framework :: Django :: 2.0",
-    "Framework :: Django :: 2.1",
     "Intended Audience :: Developers",
     "Programming Language :: Python",
-    "Programming Language :: Python :: 3",
     "Topic :: Utilities",
 ]
 
@@ -25,7 +21,7 @@ packages = ['django_atrium']
 requires = ['atrium==2.8.0', 'python-dotenv==0.10.3']
 
 setup(name='django-atrium',
-      version='1.1',
+      version='1.2',
       description='An MX Atrium wrapper to be used with Django.',
       url='https://github.com/trevorphillips/django-atrium',
       author='Trevor Phillips',
@@ -35,5 +31,5 @@ setup(name='django-atrium',
       packages=packages,
       install_requires=requires,
       download_url=
-      'https://github.com/trevorphillips/django-atrium/archive/v1.1.tar.gz',
+      'https://github.com/trevorphillips/django-atrium/archive/v1.2.tar.gz',
       zip_safe=False)
