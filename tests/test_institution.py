@@ -3,6 +3,7 @@ import unittest
 from atrium.models.credential_response import \
     CredentialResponse as AtriumCredentialResponse
 from atrium.models.institution import Institution as AtriumInstitution
+
 from django_atrium import AtriumClient
 
 
@@ -32,7 +33,7 @@ class TestInstitution(unittest.TestCase):
         institutions = self._client.list_institutions(
             supports_account_identification=True)
         self.assertIsInstance(institutions, list)
-        self.assertEqual(len(institutions), 4)
+        self.assertEqual(len(institutions), 5)
 
     def test_list_institutions_with_acc_statements(self):
         institutions = self._client.list_institutions(
@@ -50,7 +51,7 @@ class TestInstitution(unittest.TestCase):
         institutions = self._client.list_institutions(
             supports_transaction_history=True)
         self.assertIsInstance(institutions, list)
-        self.assertEqual(len(institutions), 4)
+        self.assertEqual(len(institutions), 5)
 
     def test_read_credentials_for_institution(self):
         institution = self._client.read_credentials_for_institution('mxbank')

@@ -1,4 +1,4 @@
-name: djangoatrium
+name: django-atrium tests
 
 on: [push]
 
