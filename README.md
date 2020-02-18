@@ -1,5 +1,7 @@
 # django-atrium
 
+![django-atrium tests](https://github.com/trevorphillips/django-atrium/workflows/django-atrium%20tests/badge.svg)
+
 An MX Atrium wrapper to be used with Django.
 
 Documentation can be found [here](https://trevorphillips.github.io/django-atrium/index.html).
