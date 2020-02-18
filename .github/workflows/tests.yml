@@ -24,9 +24,9 @@ jobs:
           pipenv run flake8 . --count --exit-zero --max-complexity=10 --statistics
       - name: Test with pytest
         env:
-          MX_API_KEY: ${{ secrets.ATRIUM_API_KEY }}
-          MX_CLIENT_ID: ${{ secrets.ATRIUM_CLIENT_ID }}
-          MX_ATRIUM_URL: ${{ secrets.ATRIUM_URL }}
+          ATRIUM_API_KEY: ${{ secrets.ATRIUM_API_KEY }}
+          ATRIUM_CLIENT_ID: ${{ secrets.ATRIUM_CLIENT_ID }}
+          ATRIUM_URL: ${{ secrets.ATRIUM_URL }}
         run: |
           pipenv install pytest
           pipenv run pytest
