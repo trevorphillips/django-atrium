@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-<meta name="generator" content="pdoc 0.7.1" />
+<meta name="generator" content="pdoc 0.7.4" />
 <title>django_atrium.user API documentation</title>
 <meta name="description" content="user file." />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
@@ -35,6 +35,7 @@ from atrium.models.user import User as AtriumUser
 
 class User:
     &#34;&#34;&#34;User class.&#34;&#34;&#34;
+
     def __init__(self, client: atrium.AtriumClient):
         &#34;&#34;&#34;Init for User.&#34;&#34;&#34;
         self.client = client
@@ -53,10 +54,7 @@ class User:
             An Atrium user.
 
         &#34;&#34;&#34;
-        body = atrium.UserCreateRequestBody(user={
-            &#39;identifier&#39;: identifier,
-            **kwargs
-        })
+        body = atrium.UserCreateRequestBody(user={&#34;identifier&#34;: identifier, **kwargs})
 
         res = self.client.users.create_user(body)
         return res.user
@@ -103,8 +101,7 @@ class User:
         &#34;&#34;&#34;
         self.client.users.delete_user(user_guid)
 
-    def list_users(self, page: int = 1,
-                   records_per_page: int = 25) -&gt; List[AtriumUser]:
+    def list_users(self, page: int = 1, records_per_page: int = 25) -&gt; List[AtriumUser]:
         &#34;&#34;&#34;List all the users.
 
         Args:
@@ -120,7 +117,8 @@ class User:
 
         while True:
             res = self.client.users.list_users(
-                page=page, records_per_page=records_per_page)
+                page=page, records_per_page=records_per_page
+            )
             users += res.users
 
             if res.pagination.current_page == res.pagination.total_pages:
@@ -130,11 +128,9 @@ class User:
 
         return users
 
-    def list_transactions_for_user(self,
-                                   user_guid,
-                                   page: int = 1,
-                                   records_per_page: int = 25,
-                                   **kwargs) -&gt; List[AtriumTransaction]:
+    def list_transactions_for_user(
+        self, user_guid, page: int = 1, records_per_page: int = 25, **kwargs
+    ) -&gt; List[AtriumTransaction]:
         &#34;&#34;&#34;
         List all of the transactions for a user.
 
@@ -154,10 +150,8 @@ class User:
 
         while True:
             res = self.client.transactions.list_user_transactions(
-                user_guid,
-                page=page,
-                records_per_page=records_per_page,
-                **kwargs)
+                user_guid, page=page, records_per_page=records_per_page, **kwargs
+            )
             transactions += res.transactions
 
             if res.pagination.current_page == res.pagination.total_pages:
@@ -190,6 +184,7 @@ class User:
 </summary>
 <pre><code class="python">class User:
     &#34;&#34;&#34;User class.&#34;&#34;&#34;
+
     def __init__(self, client: atrium.AtriumClient):
         &#34;&#34;&#34;Init for User.&#34;&#34;&#34;
         self.client = client
@@ -208,10 +203,7 @@ class User:
             An Atrium user.
 
         &#34;&#34;&#34;
-        body = atrium.UserCreateRequestBody(user={
-            &#39;identifier&#39;: identifier,
-            **kwargs
-        })
+        body = atrium.UserCreateRequestBody(user={&#34;identifier&#34;: identifier, **kwargs})
 
         res = self.client.users.create_user(body)
         return res.user
@@ -258,8 +250,7 @@ class User:
         &#34;&#34;&#34;
         self.client.users.delete_user(user_guid)
 
-    def list_users(self, page: int = 1,
-                   records_per_page: int = 25) -&gt; List[AtriumUser]:
+    def list_users(self, page: int = 1, records_per_page: int = 25) -&gt; List[AtriumUser]:
         &#34;&#34;&#34;List all the users.
 
         Args:
@@ -275,7 +266,8 @@ class User:
 
         while True:
             res = self.client.users.list_users(
-                page=page, records_per_page=records_per_page)
+                page=page, records_per_page=records_per_page
+            )
             users += res.users
 
             if res.pagination.current_page == res.pagination.total_pages:
@@ -285,11 +277,9 @@ class User:
 
         return users
 
-    def list_transactions_for_user(self,
-                                   user_guid,
-                                   page: int = 1,
-                                   records_per_page: int = 25,
-                                   **kwargs) -&gt; List[AtriumTransaction]:
+    def list_transactions_for_user(
+        self, user_guid, page: int = 1, records_per_page: int = 25, **kwargs
+    ) -&gt; List[AtriumTransaction]:
         &#34;&#34;&#34;
         List all of the transactions for a user.
 
@@ -309,10 +299,8 @@ class User:
 
         while True:
             res = self.client.transactions.list_user_transactions(
-                user_guid,
-                page=page,
-                records_per_page=records_per_page,
-                **kwargs)
+                user_guid, page=page, records_per_page=records_per_page, **kwargs
+            )
             transactions += res.transactions
 
             if res.pagination.current_page == res.pagination.total_pages:
@@ -364,10 +352,7 @@ you want the user disabled, false otherwise.</dd>
         An Atrium user.
 
     &#34;&#34;&#34;
-    body = atrium.UserCreateRequestBody(user={
-        &#39;identifier&#39;: identifier,
-        **kwargs
-    })
+    body = atrium.UserCreateRequestBody(user={&#34;identifier&#34;: identifier, **kwargs})
 
     res = self.client.users.create_user(body)
     return res.user</code></pre>
@@ -422,11 +407,9 @@ each request. Max is 1000.</dd>
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def list_transactions_for_user(self,
-                               user_guid,
-                               page: int = 1,
-                               records_per_page: int = 25,
-                               **kwargs) -&gt; List[AtriumTransaction]:
+<pre><code class="python">def list_transactions_for_user(
+    self, user_guid, page: int = 1, records_per_page: int = 25, **kwargs
+) -&gt; List[AtriumTransaction]:
     &#34;&#34;&#34;
     List all of the transactions for a user.
 
@@ -446,10 +429,8 @@ each request. Max is 1000.</dd>
 
     while True:
         res = self.client.transactions.list_user_transactions(
-            user_guid,
-            page=page,
-            records_per_page=records_per_page,
-            **kwargs)
+            user_guid, page=page, records_per_page=records_per_page, **kwargs
+        )
         transactions += res.transactions
 
         if res.pagination.current_page == res.pagination.total_pages:
@@ -479,8 +460,7 @@ each request. Max is 1000.</dd>
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def list_users(self, page: int = 1,
-               records_per_page: int = 25) -&gt; List[AtriumUser]:
+<pre><code class="python">def list_users(self, page: int = 1, records_per_page: int = 25) -&gt; List[AtriumUser]:
     &#34;&#34;&#34;List all the users.
 
     Args:
@@ -496,7 +476,8 @@ each request. Max is 1000.</dd>
 
     while True:
         res = self.client.users.list_users(
-            page=page, records_per_page=records_per_page)
+            page=page, records_per_page=records_per_page
+        )
         users += res.users
 
         if res.pagination.current_page == res.pagination.total_pages:
@@ -617,7 +598,7 @@ you want the user disabled, false otherwise.</dd>
 </nav>
 </main>
 <footer id="footer">
-<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.7.1</a>.</p>
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.7.4</a>.</p>
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad()</script>

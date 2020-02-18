@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-<meta name="generator" content="pdoc 0.7.1" />
+<meta name="generator" content="pdoc 0.7.4" />
 <title>django_atrium.account API documentation</title>
 <meta name="description" content="account file." />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
@@ -35,6 +35,7 @@ from atrium.models.transaction import Transaction as AtriumTransaction
 
 class Account:
     &#34;&#34;&#34;Account class.&#34;&#34;&#34;
+
     def __init__(self, client: atrium.AtriumClient):
         &#34;&#34;&#34;Init for Account.&#34;&#34;&#34;
         self.client = client
@@ -53,11 +54,9 @@ class Account:
         res = self.client.accounts.read_account(account_guid, user_guid)
         return res.account
 
-    def list_accounts_for_user(self,
-                               user_guid: str,
-                               page: int = 1,
-                               records_per_page: int = 25
-                               ) -&gt; List[AtriumAccount]:
+    def list_accounts_for_user(
+        self, user_guid: str, page: int = 1, records_per_page: int = 25
+    ) -&gt; List[AtriumAccount]:
         &#34;&#34;&#34;List all the accounts for a user.
 
         Args:
@@ -74,7 +73,8 @@ class Account:
 
         while True:
             res = self.client.accounts.list_user_accounts(
-                user_guid, page=page, records_per_page=records_per_page)
+                user_guid, page=page, records_per_page=records_per_page
+            )
             accounts += res.accounts
 
             if res.pagination.current_page == res.pagination.total_pages:
@@ -84,12 +84,14 @@ class Account:
 
         return accounts
 
-    def list_transactions_for_account(self,
-                                      account_guid: str,
-                                      user_guid: str,
-                                      page: int = 1,
-                                      records_per_page: int = 25,
-                                      **kwargs) -&gt; List[AtriumTransaction]:
+    def list_transactions_for_account(
+        self,
+        account_guid: str,
+        user_guid: str,
+        page: int = 1,
+        records_per_page: int = 25,
+        **kwargs
+    ) -&gt; List[AtriumTransaction]:
         &#34;&#34;&#34;List all the transactions for an account.
 
         Args:
@@ -113,7 +115,8 @@ class Account:
                 user_guid,
                 page=page,
                 records_per_page=records_per_page,
-                **kwargs)
+                **kwargs
+            )
             transactions += res.transactions
 
             if res.pagination.current_page == res.pagination.total_pages:
@@ -146,6 +149,7 @@ class Account:
 </summary>
 <pre><code class="python">class Account:
     &#34;&#34;&#34;Account class.&#34;&#34;&#34;
+
     def __init__(self, client: atrium.AtriumClient):
         &#34;&#34;&#34;Init for Account.&#34;&#34;&#34;
         self.client = client
@@ -164,11 +168,9 @@ class Account:
         res = self.client.accounts.read_account(account_guid, user_guid)
         return res.account
 
-    def list_accounts_for_user(self,
-                               user_guid: str,
-                               page: int = 1,
-                               records_per_page: int = 25
-                               ) -&gt; List[AtriumAccount]:
+    def list_accounts_for_user(
+        self, user_guid: str, page: int = 1, records_per_page: int = 25
+    ) -&gt; List[AtriumAccount]:
         &#34;&#34;&#34;List all the accounts for a user.
 
         Args:
@@ -185,7 +187,8 @@ class Account:
 
         while True:
             res = self.client.accounts.list_user_accounts(
-                user_guid, page=page, records_per_page=records_per_page)
+                user_guid, page=page, records_per_page=records_per_page
+            )
             accounts += res.accounts
 
             if res.pagination.current_page == res.pagination.total_pages:
@@ -195,12 +198,14 @@ class Account:
 
         return accounts
 
-    def list_transactions_for_account(self,
-                                      account_guid: str,
-                                      user_guid: str,
-                                      page: int = 1,
-                                      records_per_page: int = 25,
-                                      **kwargs) -&gt; List[AtriumTransaction]:
+    def list_transactions_for_account(
+        self,
+        account_guid: str,
+        user_guid: str,
+        page: int = 1,
+        records_per_page: int = 25,
+        **kwargs
+    ) -&gt; List[AtriumTransaction]:
         &#34;&#34;&#34;List all the transactions for an account.
 
         Args:
@@ -224,7 +229,8 @@ class Account:
                 user_guid,
                 page=page,
                 records_per_page=records_per_page,
-                **kwargs)
+                **kwargs
+            )
             transactions += res.transactions
 
             if res.pagination.current_page == res.pagination.total_pages:
@@ -261,11 +267,9 @@ each request. Max is 1000.</dd>
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def list_accounts_for_user(self,
-                           user_guid: str,
-                           page: int = 1,
-                           records_per_page: int = 25
-                           ) -&gt; List[AtriumAccount]:
+<pre><code class="python">def list_accounts_for_user(
+    self, user_guid: str, page: int = 1, records_per_page: int = 25
+) -&gt; List[AtriumAccount]:
     &#34;&#34;&#34;List all the accounts for a user.
 
     Args:
@@ -282,7 +286,8 @@ each request. Max is 1000.</dd>
 
     while True:
         res = self.client.accounts.list_user_accounts(
-            user_guid, page=page, records_per_page=records_per_page)
+            user_guid, page=page, records_per_page=records_per_page
+        )
         accounts += res.accounts
 
         if res.pagination.current_page == res.pagination.total_pages:
@@ -320,12 +325,14 @@ each request. Max is 1000.</dd>
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def list_transactions_for_account(self,
-                                  account_guid: str,
-                                  user_guid: str,
-                                  page: int = 1,
-                                  records_per_page: int = 25,
-                                  **kwargs) -&gt; List[AtriumTransaction]:
+<pre><code class="python">def list_transactions_for_account(
+    self,
+    account_guid: str,
+    user_guid: str,
+    page: int = 1,
+    records_per_page: int = 25,
+    **kwargs
+) -&gt; List[AtriumTransaction]:
     &#34;&#34;&#34;List all the transactions for an account.
 
     Args:
@@ -349,7 +356,8 @@ each request. Max is 1000.</dd>
             user_guid,
             page=page,
             records_per_page=records_per_page,
-            **kwargs)
+            **kwargs
+        )
         transactions += res.transactions
 
         if res.pagination.current_page == res.pagination.total_pages:
@@ -425,7 +433,7 @@ each request. Max is 1000.</dd>
 </nav>
 </main>
 <footer id="footer">
-<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.7.1</a>.</p>
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.7.4</a>.</p>
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad()</script>

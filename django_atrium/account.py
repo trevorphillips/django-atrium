@@ -8,6 +8,7 @@ from atrium.models.transaction import Transaction as AtriumTransaction
 
 class Account:
     """Account class."""
+
     def __init__(self, client: atrium.AtriumClient):
         """Init for Account."""
         self.client = client
@@ -26,11 +27,9 @@ class Account:
         res = self.client.accounts.read_account(account_guid, user_guid)
         return res.account
 
-    def list_accounts_for_user(self,
-                               user_guid: str,
-                               page: int = 1,
-                               records_per_page: int = 25
-                               ) -> List[AtriumAccount]:
+    def list_accounts_for_user(
+        self, user_guid: str, page: int = 1, records_per_page: int = 25
+    ) -> List[AtriumAccount]:
         """List all the accounts for a user.
 
         Args:
@@ -47,7 +46,8 @@ class Account:
 
         while True:
             res = self.client.accounts.list_user_accounts(
-                user_guid, page=page, records_per_page=records_per_page)
+                user_guid, page=page, records_per_page=records_per_page
+            )
             accounts += res.accounts
 
             if res.pagination.current_page == res.pagination.total_pages:
@@ -57,12 +57,14 @@ class Account:
 
         return accounts
 
-    def list_transactions_for_account(self,
-                                      account_guid: str,
-                                      user_guid: str,
-                                      page: int = 1,
-                                      records_per_page: int = 25,
-                                      **kwargs) -> List[AtriumTransaction]:
+    def list_transactions_for_account(
+        self,
+        account_guid: str,
+        user_guid: str,
+        page: int = 1,
+        records_per_page: int = 25,
+        **kwargs
+    ) -> List[AtriumTransaction]:
         """List all the transactions for an account.
 
         Args:
@@ -86,7 +88,8 @@ class Account:
                 user_guid,
                 page=page,
                 records_per_page=records_per_page,
-                **kwargs)
+                **kwargs
+            )
             transactions += res.transactions
 
             if res.pagination.current_page == res.pagination.total_pages:
