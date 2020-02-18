@@ -8,6 +8,7 @@ from atrium.models.user import User as AtriumUser
 
 class User:
     """User class."""
+
     def __init__(self, client: atrium.AtriumClient):
         """Init for User."""
         self.client = client
@@ -26,10 +27,7 @@ class User:
             An Atrium user.
 
         """
-        body = atrium.UserCreateRequestBody(user={
-            'identifier': identifier,
-            **kwargs
-        })
+        body = atrium.UserCreateRequestBody(user={"identifier": identifier, **kwargs})
 
         res = self.client.users.create_user(body)
         return res.user
@@ -76,8 +74,7 @@ class User:
         """
         self.client.users.delete_user(user_guid)
 
-    def list_users(self, page: int = 1,
-                   records_per_page: int = 25) -> List[AtriumUser]:
+    def list_users(self, page: int = 1, records_per_page: int = 25) -> List[AtriumUser]:
         """List all the users.
 
         Args:
@@ -93,7 +90,8 @@ class User:
 
         while True:
             res = self.client.users.list_users(
-                page=page, records_per_page=records_per_page)
+                page=page, records_per_page=records_per_page
+            )
             users += res.users
 
             if res.pagination.current_page == res.pagination.total_pages:
@@ -103,11 +101,9 @@ class User:
 
         return users
 
-    def list_transactions_for_user(self,
-                                   user_guid,
-                                   page: int = 1,
-                                   records_per_page: int = 25,
-                                   **kwargs) -> List[AtriumTransaction]:
+    def list_transactions_for_user(
+        self, user_guid, page: int = 1, records_per_page: int = 25, **kwargs
+    ) -> List[AtriumTransaction]:
         """
         List all of the transactions for a user.
 
@@ -127,10 +123,8 @@ class User:
 
         while True:
             res = self.client.transactions.list_user_transactions(
-                user_guid,
-                page=page,
-                records_per_page=records_per_page,
-                **kwargs)
+                user_guid, page=page, records_per_page=records_per_page, **kwargs
+            )
             transactions += res.transactions
 
             if res.pagination.current_page == res.pagination.total_pages:

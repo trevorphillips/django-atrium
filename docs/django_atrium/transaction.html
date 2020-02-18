@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-<meta name="generator" content="pdoc 0.7.1" />
-<title>django_atrium API documentation</title>
-<meta name="description" content="" />
+<meta name="generator" content="pdoc 0.7.4" />
+<title>django_atrium.transaction API documentation</title>
+<meta name="description" content="transaction file." />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
@@ -17,54 +17,134 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>django_atrium</code></h1>
+<h1 class="title">Module <code>django_atrium.transaction</code></h1>
 </header>
 <section id="section-intro">
+<p>transaction file.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">from .atrium import AtriumClient</code></pre>
+<pre><code class="python">&#34;&#34;&#34;transaction file.&#34;&#34;&#34;
+import atrium
+from atrium.models.transaction import Transaction as AtriumTransaction
+
+
+class Transaction:
+    &#34;&#34;&#34;Transaction class.&#34;&#34;&#34;
+
+    def __init__(self, client: atrium.AtriumClient):
+        &#34;&#34;&#34;Init for Transaction.&#34;&#34;&#34;
+        self.client = client
+
+    def read_transaction(
+        self, transaction_guid: str, user_guid: str
+    ) -&gt; AtriumTransaction:
+        &#34;&#34;&#34;Read a transaction.
+
+        Args:
+            transaction_guid: A unique identifier for the transaction. Defined
+                by MX.
+            user_guid: A unique identifier for the user. Defined by MX.
+
+        Returns:
+            An Atrium transaction.
+
+        &#34;&#34;&#34;
+        res = self.client.transactions.read_transaction(transaction_guid, user_guid)
+        return res.transaction</code></pre>
 </details>
 </section>
 <section>
-<h2 class="section-title" id="header-submodules">Sub-modules</h2>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
 <dl>
-<dt><code class="name"><a title="django_atrium.account" href="account.html">django_atrium.account</a></code></dt>
+<dt id="django_atrium.transaction.Transaction"><code class="flex name class">
+<span>class <span class="ident">Transaction</span></span>
+<span>(</span><span>client)</span>
+</code></dt>
 <dd>
-<section class="desc"><p>account file.</p></section>
-</dd>
-<dt><code class="name"><a title="django_atrium.atrium" href="atrium.html">django_atrium.atrium</a></code></dt>
+<section class="desc"><p>Transaction class.</p>
+<p>Init for Transaction.</p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Transaction:
+    &#34;&#34;&#34;Transaction class.&#34;&#34;&#34;
+
+    def __init__(self, client: atrium.AtriumClient):
+        &#34;&#34;&#34;Init for Transaction.&#34;&#34;&#34;
+        self.client = client
+
+    def read_transaction(
+        self, transaction_guid: str, user_guid: str
+    ) -&gt; AtriumTransaction:
+        &#34;&#34;&#34;Read a transaction.
+
+        Args:
+            transaction_guid: A unique identifier for the transaction. Defined
+                by MX.
+            user_guid: A unique identifier for the user. Defined by MX.
+
+        Returns:
+            An Atrium transaction.
+
+        &#34;&#34;&#34;
+        res = self.client.transactions.read_transaction(transaction_guid, user_guid)
+        return res.transaction</code></pre>
+</details>
+<h3>Subclasses</h3>
+<ul class="hlist">
+<li><a title="django_atrium.atrium.AtriumClient" href="atrium.html#django_atrium.atrium.AtriumClient">AtriumClient</a></li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="django_atrium.transaction.Transaction.read_transaction"><code class="name flex">
+<span>def <span class="ident">read_transaction</span></span>(<span>self, transaction_guid, user_guid)</span>
+</code></dt>
 <dd>
-<section class="desc"><p>atrium file.</p></section>
-</dd>
-<dt><code class="name"><a title="django_atrium.connect_widget" href="connect_widget.html">django_atrium.connect_widget</a></code></dt>
-<dd>
-<section class="desc"><p>connect widget file.</p></section>
-</dd>
-<dt><code class="name"><a title="django_atrium.institution" href="institution.html">django_atrium.institution</a></code></dt>
-<dd>
-<section class="desc"><p>institution file.</p></section>
-</dd>
-<dt><code class="name"><a title="django_atrium.member" href="member.html">django_atrium.member</a></code></dt>
-<dd>
-<section class="desc"><p>member file.</p></section>
-</dd>
-<dt><code class="name"><a title="django_atrium.transaction" href="transaction.html">django_atrium.transaction</a></code></dt>
-<dd>
-<section class="desc"><p>transaction file.</p></section>
-</dd>
-<dt><code class="name"><a title="django_atrium.user" href="user.html">django_atrium.user</a></code></dt>
-<dd>
-<section class="desc"><p>user file.</p></section>
+<section class="desc"><p>Read a transaction.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>transaction_guid</code></strong></dt>
+<dd>A unique identifier for the transaction. Defined
+by MX.</dd>
+<dt><strong><code>user_guid</code></strong></dt>
+<dd>A unique identifier for the user. Defined by MX.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>An Atrium transaction.</p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def read_transaction(
+    self, transaction_guid: str, user_guid: str
+) -&gt; AtriumTransaction:
+    &#34;&#34;&#34;Read a transaction.
+
+    Args:
+        transaction_guid: A unique identifier for the transaction. Defined
+            by MX.
+        user_guid: A unique identifier for the user. Defined by MX.
+
+    Returns:
+        An Atrium transaction.
+
+    &#34;&#34;&#34;
+    res = self.client.transactions.read_transaction(transaction_guid, user_guid)
+    return res.transaction</code></pre>
+</details>
 </dd>
 </dl>
-</section>
-<section>
-</section>
-<section>
-</section>
-<section>
+</dd>
+</dl>
 </section>
 </article>
 <nav id="sidebar">
@@ -73,22 +153,26 @@
 <ul></ul>
 </div>
 <ul id="index">
-<li><h3><a href="#header-submodules">Sub-modules</a></h3>
+<li><h3>Super-module</h3>
 <ul>
-<li><code><a title="django_atrium.account" href="account.html">django_atrium.account</a></code></li>
-<li><code><a title="django_atrium.atrium" href="atrium.html">django_atrium.atrium</a></code></li>
-<li><code><a title="django_atrium.connect_widget" href="connect_widget.html">django_atrium.connect_widget</a></code></li>
-<li><code><a title="django_atrium.institution" href="institution.html">django_atrium.institution</a></code></li>
-<li><code><a title="django_atrium.member" href="member.html">django_atrium.member</a></code></li>
-<li><code><a title="django_atrium.transaction" href="transaction.html">django_atrium.transaction</a></code></li>
-<li><code><a title="django_atrium.user" href="user.html">django_atrium.user</a></code></li>
+<li><code><a title="django_atrium" href="index.html">django_atrium</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="django_atrium.transaction.Transaction" href="#django_atrium.transaction.Transaction">Transaction</a></code></h4>
+<ul class="">
+<li><code><a title="django_atrium.transaction.Transaction.read_transaction" href="#django_atrium.transaction.Transaction.read_transaction">read_transaction</a></code></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 </nav>
 </main>
 <footer id="footer">
-<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.7.1</a>.</p>
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.7.4</a>.</p>
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad()</script>

@@ -5,12 +5,12 @@ from atrium.models.connect_widget import ConnectWidget as AtriumConnectWidget
 
 class ConnectWidget:
     """Connect Widget class."""
+
     def __init__(self, client: atrium.AtriumClient):
         """Init for ConnectWidget."""
         self.client = client
 
-    def get_connect_widget(self, user_guid: str,
-                           **kwargs) -> AtriumConnectWidget:
+    def get_connect_widget(self, user_guid: str, **kwargs) -> AtriumConnectWidget:
         """Get Atrium connect widget.
 
         Args:

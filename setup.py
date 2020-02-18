@@ -1,35 +1,33 @@
-from setuptools import setup
+from setuptools import find_packages, setup
 
 
-def readme():
-    with open('README.md') as f:
-        return f.read()
+def read(f):
+    return open(f, "r", encoding="utf-8").read()
 
 
 classifiers = [
-    "Natural Language :: English",
     "Development Status :: 5 - Production/Stable",
     "Environment :: Web Environment",
     "Framework :: Django",
     "Intended Audience :: Developers",
+    "Natural Language :: English",
     "Programming Language :: Python",
     "Topic :: Utilities",
 ]
 
-packages = ['django_atrium']
+requires = ["atrium==2.8.0", "django>=1.11"]
 
-requires = ['atrium==2.8.0', 'python-dotenv==0.10.3']
-
-setup(name='django-atrium',
-      version='1.2.2',
-      description='An MX Atrium wrapper to be used with Django.',
-      url='https://github.com/trevorphillips/django-atrium',
-      author='Trevor Phillips',
-      author_email='trevorcoreyphillips@gmail.com',
-      license='GNU',
-      classifiers=classifiers,
-      packages=packages,
-      install_requires=requires,
-      download_url=
-      'https://github.com/trevorphillips/django-atrium/archive/v1.2.2.tar.gz',
-      zip_safe=False)
+setup(
+    author="Trevor Phillips",
+    author_email="trevorcoreyphillips@gmail.com",
+    classifiers=classifiers,
+    description="An MX Atrium wrapper to be used with Django.",
+    install_requires=requires,
+    license="MIT",
+    long_description=read("README.md"),
+    name="django-atrium",
+    packages=find_packages(exclude=["tests*"]),
+    url="https://github.com/trevorphillips/django-atrium",
+    version="2.0",
+    zip_safe=False,
+)

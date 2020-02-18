@@ -31,15 +31,15 @@ class TestAccount(unittest.TestCase):
     #     self.assertIsInstance(account, AtriumAccount)
 
     def test_list_accounts_for_user(self):
-        user = self._client.create_user('test_identifier2')
-        institution_code = 'mxbank'
+        user = self._client.create_user("test_identifier2")
+        institution_code = "mxbank"
         institution_creds = self._client.read_credentials_for_institution(
-            institution_code)
-        member = self._client.create_member(user.guid, 'test_atrium',
-                                            'password', institution_creds,
-                                            institution_code)
-        accounts = self._client.list_accounts_for_member(
-            member.guid, user.guid)
+            institution_code
+        )
+        member = self._client.create_member(
+            user.guid, "test_atrium", "password", institution_creds, institution_code
+        )
+        accounts = self._client.list_accounts_for_member(member.guid, user.guid)
         self.assertIsInstance(accounts, list)
 
     # def test_list_transactions_for_account(self):

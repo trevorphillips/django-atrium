@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-<meta name="generator" content="pdoc 0.7.1" />
+<meta name="generator" content="pdoc 0.7.4" />
 <title>django_atrium.member API documentation</title>
 <meta name="description" content="member file." />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
@@ -31,23 +31,32 @@ from typing import List
 import atrium
 from atrium.models.account import Account as AtriumAccount
 from atrium.models.challenge import Challenge as AtriumChallenge
-from atrium.models.credential_response import \
-    CredentialResponse as AtriumCredentialResponse
+from atrium.models.credential_response import (
+    CredentialResponse as AtriumCredentialResponse,
+)
 from atrium.models.member import Member as AtriumMember
-from atrium.models.member_connection_status import \
-    MemberConnectionStatus as AtriumMemberConnectionStatus
+from atrium.models.member_connection_status import (
+    MemberConnectionStatus as AtriumMemberConnectionStatus,
+)
 from atrium.models.transaction import Transaction as AtriumTransaction
 
 
 class Member:
     &#34;&#34;&#34;Member class.&#34;&#34;&#34;
+
     def __init__(self, client: atrium.AtriumClient):
         &#34;&#34;&#34;Init for Member.&#34;&#34;&#34;
         self.client = client
 
-    def create_member(self, user_guid: str, username: str, password: str,
-                      institution_creds: List[AtriumCredentialResponse],
-                      institution_code: str, **kwargs) -&gt; AtriumMember:
+    def create_member(
+        self,
+        user_guid: str,
+        username: str,
+        password: str,
+        institution_creds: List[AtriumCredentialResponse],
+        institution_code: str,
+        **kwargs
+    ) -&gt; AtriumMember:
         &#34;&#34;&#34;Create a member.
 
         Args:
@@ -66,17 +75,14 @@ class Member:
         &#34;&#34;&#34;
         body = atrium.MemberCreateRequestBody(
             member={
-                &#39;credentials&#39;: [{
-                    &#34;guid&#34;: institution_creds[0].guid,
-                    &#34;value&#34;: username
-                }, {
-                    &#34;guid&#34;: institution_creds[1].guid,
-                    &#34;value&#34;: password
-                }],
-                &#39;institution_code&#39;:
-                institution_code,
-                **kwargs
-            })
+                &#34;credentials&#34;: [
+                    {&#34;guid&#34;: institution_creds[0].guid, &#34;value&#34;: username},
+                    {&#34;guid&#34;: institution_creds[1].guid, &#34;value&#34;: password},
+                ],
+                &#34;institution_code&#34;: institution_code,
+                **kwargs,
+            }
+        )
 
         res = self.client.members.create_member(user_guid, body)
         return res.member
@@ -95,8 +101,7 @@ class Member:
         res = self.client.members.read_member(member_guid, user_guid)
         return res.member
 
-    def update_member(self, member_guid: str, user_guid: str,
-                      **kwargs) -&gt; AtriumMember:
+    def update_member(self, member_guid: str, user_guid: str, **kwargs) -&gt; AtriumMember:
         &#34;&#34;&#34;Update a member.
 
         Args:
@@ -112,9 +117,7 @@ class Member:
         &#34;&#34;&#34;
         body = atrium.MemberUpdateRequestBody(member={**kwargs})
 
-        res = self.client.members.update_member(member_guid,
-                                                user_guid,
-                                                body=body)
+        res = self.client.members.update_member(member_guid, user_guid, body=body)
         return res.member
 
     def delete_member(self, member_guid: str, user_guid: str):
@@ -127,10 +130,9 @@ class Member:
         &#34;&#34;&#34;
         self.client.members.delete_member(member_guid, user_guid)
 
-    def list_members(self,
-                     user_guid: str,
-                     page: int = 1,
-                     records_per_page: int = 25) -&gt; List[AtriumMember]:
+    def list_members(
+        self, user_guid: str, page: int = 1, records_per_page: int = 25
+    ) -&gt; List[AtriumMember]:
         &#34;&#34;&#34;List all the members for a user.
 
         Args:
@@ -147,7 +149,8 @@ class Member:
 
         while True:
             res = self.client.members.list_members(
-                user_guid, page=page, records_per_page=records_per_page)
+                user_guid, page=page, records_per_page=records_per_page
+            )
             members += res.members
 
             if res.pagination.current_page == res.pagination.total_pages:
@@ -157,8 +160,7 @@ class Member:
 
         return members
 
-    def aggregate_member(self, member_guid: str,
-                         user_guid: str) -&gt; AtriumMember:
+    def aggregate_member(self, member_guid: str, user_guid: str) -&gt; AtriumMember:
         &#34;&#34;&#34;Aggregate a member.
 
         Args:
@@ -172,9 +174,9 @@ class Member:
         res = self.client.members.aggregate_member(member_guid, user_guid)
         return res.member
 
-    def read_connection_status_for_member(self, member_guid: str,
-                                          user_guid: str
-                                          ) -&gt; AtriumMemberConnectionStatus:
+    def read_connection_status_for_member(
+        self, member_guid: str, user_guid: str
+    ) -&gt; AtriumMemberConnectionStatus:
         &#34;&#34;&#34;Read a member&#39;s connection status.
 
         Args:
@@ -188,8 +190,9 @@ class Member:
         res = self.client.members.read_member_status(member_guid, user_guid)
         return res.member
 
-    def list_mfa_challenges_for_member(self, member_guid: str,
-                                       user_guid: str) -&gt; AtriumChallenge:
+    def list_mfa_challenges_for_member(
+        self, member_guid: str, user_guid: str
+    ) -&gt; AtriumChallenge:
         &#34;&#34;&#34;List all the MFA challenges for a member.
 
         Args:
@@ -200,12 +203,12 @@ class Member:
             An Atrium member&#39;s challenges.
 
         &#34;&#34;&#34;
-        res = self.client.members.list_member_mfa_challenges(
-            member_guid, user_guid)
+        res = self.client.members.list_member_mfa_challenges(member_guid, user_guid)
         return res.challenges
 
-    def list_credentials_for_member(self, member_guid: str, user_guid: str
-                                    ) -&gt; List[AtriumCredentialResponse]:
+    def list_credentials_for_member(
+        self, member_guid: str, user_guid: str
+    ) -&gt; List[AtriumCredentialResponse]:
         &#34;&#34;&#34;List the member&#39;s credentials.
 
         Args:
@@ -216,16 +219,16 @@ class Member:
             A list of an Atrium member&#39;s credentials.
 
         &#34;&#34;&#34;
-        res = self.client.members.list_member_credentials(
-            member_guid, user_guid)
+        res = self.client.members.list_member_credentials(member_guid, user_guid)
         return res.credentials
 
-    def list_accounts_for_member(self,
-                                 member_guid: str,
-                                 user_guid: str,
-                                 page: int = 1,
-                                 records_per_page: int = 25
-                                 ) -&gt; List[AtriumAccount]:
+    def list_accounts_for_member(
+        self,
+        member_guid: str,
+        user_guid: str,
+        page: int = 1,
+        records_per_page: int = 25,
+    ) -&gt; List[AtriumAccount]:
         &#34;&#34;&#34;List a member&#39;s accounts.
 
         Args:
@@ -243,10 +246,8 @@ class Member:
 
         while True:
             res = self.client.members.list_member_accounts(
-                member_guid,
-                user_guid,
-                page=page,
-                records_per_page=records_per_page)
+                member_guid, user_guid, page=page, records_per_page=records_per_page
+            )
             accounts += res.accounts
 
             if res.pagination.current_page == res.pagination.total_pages:
@@ -256,12 +257,14 @@ class Member:
 
         return accounts
 
-    def list_transactions_for_member(self,
-                                     member_guid: str,
-                                     user_guid: str,
-                                     page: int = 1,
-                                     records_per_page: int = 25,
-                                     **kwargs) -&gt; List[AtriumTransaction]:
+    def list_transactions_for_member(
+        self,
+        member_guid: str,
+        user_guid: str,
+        page: int = 1,
+        records_per_page: int = 25,
+        **kwargs
+    ) -&gt; List[AtriumTransaction]:
         &#34;&#34;&#34;List all of a member&#39;s transactions.
 
         Args:
@@ -285,7 +288,8 @@ class Member:
                 user_guid,
                 page=page,
                 records_per_page=records_per_page,
-                **kwargs)
+                **kwargs
+            )
             transactions += res.transactions
 
             if res.pagination.current_page == res.pagination.total_pages:
@@ -318,13 +322,20 @@ class Member:
 </summary>
 <pre><code class="python">class Member:
     &#34;&#34;&#34;Member class.&#34;&#34;&#34;
+
     def __init__(self, client: atrium.AtriumClient):
         &#34;&#34;&#34;Init for Member.&#34;&#34;&#34;
         self.client = client
 
-    def create_member(self, user_guid: str, username: str, password: str,
-                      institution_creds: List[AtriumCredentialResponse],
-                      institution_code: str, **kwargs) -&gt; AtriumMember:
+    def create_member(
+        self,
+        user_guid: str,
+        username: str,
+        password: str,
+        institution_creds: List[AtriumCredentialResponse],
+        institution_code: str,
+        **kwargs
+    ) -&gt; AtriumMember:
         &#34;&#34;&#34;Create a member.
 
         Args:
@@ -343,17 +354,14 @@ class Member:
         &#34;&#34;&#34;
         body = atrium.MemberCreateRequestBody(
             member={
-                &#39;credentials&#39;: [{
-                    &#34;guid&#34;: institution_creds[0].guid,
-                    &#34;value&#34;: username
-                }, {
-                    &#34;guid&#34;: institution_creds[1].guid,
-                    &#34;value&#34;: password
-                }],
-                &#39;institution_code&#39;:
-                institution_code,
-                **kwargs
-            })
+                &#34;credentials&#34;: [
+                    {&#34;guid&#34;: institution_creds[0].guid, &#34;value&#34;: username},
+                    {&#34;guid&#34;: institution_creds[1].guid, &#34;value&#34;: password},
+                ],
+                &#34;institution_code&#34;: institution_code,
+                **kwargs,
+            }
+        )
 
         res = self.client.members.create_member(user_guid, body)
         return res.member
@@ -372,8 +380,7 @@ class Member:
         res = self.client.members.read_member(member_guid, user_guid)
         return res.member
 
-    def update_member(self, member_guid: str, user_guid: str,
-                      **kwargs) -&gt; AtriumMember:
+    def update_member(self, member_guid: str, user_guid: str, **kwargs) -&gt; AtriumMember:
         &#34;&#34;&#34;Update a member.
 
         Args:
@@ -389,9 +396,7 @@ class Member:
         &#34;&#34;&#34;
         body = atrium.MemberUpdateRequestBody(member={**kwargs})
 
-        res = self.client.members.update_member(member_guid,
-                                                user_guid,
-                                                body=body)
+        res = self.client.members.update_member(member_guid, user_guid, body=body)
         return res.member
 
     def delete_member(self, member_guid: str, user_guid: str):
@@ -404,10 +409,9 @@ class Member:
         &#34;&#34;&#34;
         self.client.members.delete_member(member_guid, user_guid)
 
-    def list_members(self,
-                     user_guid: str,
-                     page: int = 1,
-                     records_per_page: int = 25) -&gt; List[AtriumMember]:
+    def list_members(
+        self, user_guid: str, page: int = 1, records_per_page: int = 25
+    ) -&gt; List[AtriumMember]:
         &#34;&#34;&#34;List all the members for a user.
 
         Args:
@@ -424,7 +428,8 @@ class Member:
 
         while True:
             res = self.client.members.list_members(
-                user_guid, page=page, records_per_page=records_per_page)
+                user_guid, page=page, records_per_page=records_per_page
+            )
             members += res.members
 
             if res.pagination.current_page == res.pagination.total_pages:
@@ -434,8 +439,7 @@ class Member:
 
         return members
 
-    def aggregate_member(self, member_guid: str,
-                         user_guid: str) -&gt; AtriumMember:
+    def aggregate_member(self, member_guid: str, user_guid: str) -&gt; AtriumMember:
         &#34;&#34;&#34;Aggregate a member.
 
         Args:
@@ -449,9 +453,9 @@ class Member:
         res = self.client.members.aggregate_member(member_guid, user_guid)
         return res.member
 
-    def read_connection_status_for_member(self, member_guid: str,
-                                          user_guid: str
-                                          ) -&gt; AtriumMemberConnectionStatus:
+    def read_connection_status_for_member(
+        self, member_guid: str, user_guid: str
+    ) -&gt; AtriumMemberConnectionStatus:
         &#34;&#34;&#34;Read a member&#39;s connection status.
 
         Args:
@@ -465,8 +469,9 @@ class Member:
         res = self.client.members.read_member_status(member_guid, user_guid)
         return res.member
 
-    def list_mfa_challenges_for_member(self, member_guid: str,
-                                       user_guid: str) -&gt; AtriumChallenge:
+    def list_mfa_challenges_for_member(
+        self, member_guid: str, user_guid: str
+    ) -&gt; AtriumChallenge:
         &#34;&#34;&#34;List all the MFA challenges for a member.
 
         Args:
@@ -477,12 +482,12 @@ class Member:
             An Atrium member&#39;s challenges.
 
         &#34;&#34;&#34;
-        res = self.client.members.list_member_mfa_challenges(
-            member_guid, user_guid)
+        res = self.client.members.list_member_mfa_challenges(member_guid, user_guid)
         return res.challenges
 
-    def list_credentials_for_member(self, member_guid: str, user_guid: str
-                                    ) -&gt; List[AtriumCredentialResponse]:
+    def list_credentials_for_member(
+        self, member_guid: str, user_guid: str
+    ) -&gt; List[AtriumCredentialResponse]:
         &#34;&#34;&#34;List the member&#39;s credentials.
 
         Args:
@@ -493,16 +498,16 @@ class Member:
             A list of an Atrium member&#39;s credentials.
 
         &#34;&#34;&#34;
-        res = self.client.members.list_member_credentials(
-            member_guid, user_guid)
+        res = self.client.members.list_member_credentials(member_guid, user_guid)
         return res.credentials
 
-    def list_accounts_for_member(self,
-                                 member_guid: str,
-                                 user_guid: str,
-                                 page: int = 1,
-                                 records_per_page: int = 25
-                                 ) -&gt; List[AtriumAccount]:
+    def list_accounts_for_member(
+        self,
+        member_guid: str,
+        user_guid: str,
+        page: int = 1,
+        records_per_page: int = 25,
+    ) -&gt; List[AtriumAccount]:
         &#34;&#34;&#34;List a member&#39;s accounts.
 
         Args:
@@ -520,10 +525,8 @@ class Member:
 
         while True:
             res = self.client.members.list_member_accounts(
-                member_guid,
-                user_guid,
-                page=page,
-                records_per_page=records_per_page)
+                member_guid, user_guid, page=page, records_per_page=records_per_page
+            )
             accounts += res.accounts
 
             if res.pagination.current_page == res.pagination.total_pages:
@@ -533,12 +536,14 @@ class Member:
 
         return accounts
 
-    def list_transactions_for_member(self,
-                                     member_guid: str,
-                                     user_guid: str,
-                                     page: int = 1,
-                                     records_per_page: int = 25,
-                                     **kwargs) -&gt; List[AtriumTransaction]:
+    def list_transactions_for_member(
+        self,
+        member_guid: str,
+        user_guid: str,
+        page: int = 1,
+        records_per_page: int = 25,
+        **kwargs
+    ) -&gt; List[AtriumTransaction]:
         &#34;&#34;&#34;List all of a member&#39;s transactions.
 
         Args:
@@ -562,7 +567,8 @@ class Member:
                 user_guid,
                 page=page,
                 records_per_page=records_per_page,
-                **kwargs)
+                **kwargs
+            )
             transactions += res.transactions
 
             if res.pagination.current_page == res.pagination.total_pages:
@@ -596,8 +602,7 @@ class Member:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def aggregate_member(self, member_guid: str,
-                     user_guid: str) -&gt; AtriumMember:
+<pre><code class="python">def aggregate_member(self, member_guid: str, user_guid: str) -&gt; AtriumMember:
     &#34;&#34;&#34;Aggregate a member.
 
     Args:
@@ -640,9 +645,15 @@ by you.</dd>
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def create_member(self, user_guid: str, username: str, password: str,
-                  institution_creds: List[AtriumCredentialResponse],
-                  institution_code: str, **kwargs) -&gt; AtriumMember:
+<pre><code class="python">def create_member(
+    self,
+    user_guid: str,
+    username: str,
+    password: str,
+    institution_creds: List[AtriumCredentialResponse],
+    institution_code: str,
+    **kwargs
+) -&gt; AtriumMember:
     &#34;&#34;&#34;Create a member.
 
     Args:
@@ -661,17 +672,14 @@ by you.</dd>
     &#34;&#34;&#34;
     body = atrium.MemberCreateRequestBody(
         member={
-            &#39;credentials&#39;: [{
-                &#34;guid&#34;: institution_creds[0].guid,
-                &#34;value&#34;: username
-            }, {
-                &#34;guid&#34;: institution_creds[1].guid,
-                &#34;value&#34;: password
-            }],
-            &#39;institution_code&#39;:
-            institution_code,
-            **kwargs
-        })
+            &#34;credentials&#34;: [
+                {&#34;guid&#34;: institution_creds[0].guid, &#34;value&#34;: username},
+                {&#34;guid&#34;: institution_creds[1].guid, &#34;value&#34;: password},
+            ],
+            &#34;institution_code&#34;: institution_code,
+            **kwargs,
+        }
+    )
 
     res = self.client.members.create_member(user_guid, body)
     return res.member</code></pre>
@@ -727,12 +735,13 @@ each request. Max is 1000.</dd>
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def list_accounts_for_member(self,
-                             member_guid: str,
-                             user_guid: str,
-                             page: int = 1,
-                             records_per_page: int = 25
-                             ) -&gt; List[AtriumAccount]:
+<pre><code class="python">def list_accounts_for_member(
+    self,
+    member_guid: str,
+    user_guid: str,
+    page: int = 1,
+    records_per_page: int = 25,
+) -&gt; List[AtriumAccount]:
     &#34;&#34;&#34;List a member&#39;s accounts.
 
     Args:
@@ -750,10 +759,8 @@ each request. Max is 1000.</dd>
 
     while True:
         res = self.client.members.list_member_accounts(
-            member_guid,
-            user_guid,
-            page=page,
-            records_per_page=records_per_page)
+            member_guid, user_guid, page=page, records_per_page=records_per_page
+        )
         accounts += res.accounts
 
         if res.pagination.current_page == res.pagination.total_pages:
@@ -782,8 +789,9 @@ each request. Max is 1000.</dd>
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def list_credentials_for_member(self, member_guid: str, user_guid: str
-                                ) -&gt; List[AtriumCredentialResponse]:
+<pre><code class="python">def list_credentials_for_member(
+    self, member_guid: str, user_guid: str
+) -&gt; List[AtriumCredentialResponse]:
     &#34;&#34;&#34;List the member&#39;s credentials.
 
     Args:
@@ -794,8 +802,7 @@ each request. Max is 1000.</dd>
         A list of an Atrium member&#39;s credentials.
 
     &#34;&#34;&#34;
-    res = self.client.members.list_member_credentials(
-        member_guid, user_guid)
+    res = self.client.members.list_member_credentials(member_guid, user_guid)
     return res.credentials</code></pre>
 </details>
 </dd>
@@ -820,10 +827,9 @@ each request. Max is 1000.</dd>
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def list_members(self,
-                 user_guid: str,
-                 page: int = 1,
-                 records_per_page: int = 25) -&gt; List[AtriumMember]:
+<pre><code class="python">def list_members(
+    self, user_guid: str, page: int = 1, records_per_page: int = 25
+) -&gt; List[AtriumMember]:
     &#34;&#34;&#34;List all the members for a user.
 
     Args:
@@ -840,7 +846,8 @@ each request. Max is 1000.</dd>
 
     while True:
         res = self.client.members.list_members(
-            user_guid, page=page, records_per_page=records_per_page)
+            user_guid, page=page, records_per_page=records_per_page
+        )
         members += res.members
 
         if res.pagination.current_page == res.pagination.total_pages:
@@ -869,8 +876,9 @@ each request. Max is 1000.</dd>
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def list_mfa_challenges_for_member(self, member_guid: str,
-                                   user_guid: str) -&gt; AtriumChallenge:
+<pre><code class="python">def list_mfa_challenges_for_member(
+    self, member_guid: str, user_guid: str
+) -&gt; AtriumChallenge:
     &#34;&#34;&#34;List all the MFA challenges for a member.
 
     Args:
@@ -881,8 +889,7 @@ each request. Max is 1000.</dd>
         An Atrium member&#39;s challenges.
 
     &#34;&#34;&#34;
-    res = self.client.members.list_member_mfa_challenges(
-        member_guid, user_guid)
+    res = self.client.members.list_member_mfa_challenges(member_guid, user_guid)
     return res.challenges</code></pre>
 </details>
 </dd>
@@ -913,12 +920,14 @@ each request. Max is 1000.</dd>
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def list_transactions_for_member(self,
-                                 member_guid: str,
-                                 user_guid: str,
-                                 page: int = 1,
-                                 records_per_page: int = 25,
-                                 **kwargs) -&gt; List[AtriumTransaction]:
+<pre><code class="python">def list_transactions_for_member(
+    self,
+    member_guid: str,
+    user_guid: str,
+    page: int = 1,
+    records_per_page: int = 25,
+    **kwargs
+) -&gt; List[AtriumTransaction]:
     &#34;&#34;&#34;List all of a member&#39;s transactions.
 
     Args:
@@ -942,7 +951,8 @@ each request. Max is 1000.</dd>
             user_guid,
             page=page,
             records_per_page=records_per_page,
-            **kwargs)
+            **kwargs
+        )
         transactions += res.transactions
 
         if res.pagination.current_page == res.pagination.total_pages:
@@ -971,9 +981,9 @@ each request. Max is 1000.</dd>
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def read_connection_status_for_member(self, member_guid: str,
-                                      user_guid: str
-                                      ) -&gt; AtriumMemberConnectionStatus:
+<pre><code class="python">def read_connection_status_for_member(
+    self, member_guid: str, user_guid: str
+) -&gt; AtriumMemberConnectionStatus:
     &#34;&#34;&#34;Read a member&#39;s connection status.
 
     Args:
@@ -1044,8 +1054,7 @@ by you.</dd>
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def update_member(self, member_guid: str, user_guid: str,
-                  **kwargs) -&gt; AtriumMember:
+<pre><code class="python">def update_member(self, member_guid: str, user_guid: str, **kwargs) -&gt; AtriumMember:
     &#34;&#34;&#34;Update a member.
 
     Args:
@@ -1061,9 +1070,7 @@ by you.</dd>
     &#34;&#34;&#34;
     body = atrium.MemberUpdateRequestBody(member={**kwargs})
 
-    res = self.client.members.update_member(member_guid,
-                                            user_guid,
-                                            body=body)
+    res = self.client.members.update_member(member_guid, user_guid, body=body)
     return res.member</code></pre>
 </details>
 </dd>
@@ -1107,7 +1114,7 @@ by you.</dd>
 </nav>
 </main>
 <footer id="footer">
-<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.7.1</a>.</p>
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.7.4</a>.</p>
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad()</script>
