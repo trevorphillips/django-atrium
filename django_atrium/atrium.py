@@ -9,8 +9,6 @@ from .member import Member
 from .transaction import Transaction
 from .user import User
 
-settings.configure()
-
 
 class AtriumClient(Account, ConnectWidget, Institution, Member, Transaction, User):
     """AtriumClient class."""
