@@ -43,7 +43,7 @@ class TestAccount(unittest.TestCase):
         self.assertIsInstance(accounts, list)
 
     def test_list_accounts_for_member(self):
-        user = self._client.create_user("test_identifier13")
+        user = self._client.create_user("test_identifier3")
         institution_code = "mxbank"
         institution_creds = self._client.read_credentials_for_institution(
             institution_code
