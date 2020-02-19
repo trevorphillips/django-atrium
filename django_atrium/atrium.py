@@ -16,6 +16,19 @@ if not settings.configured:
     ATRIUM_CLIENT_ID = os.environ.get("ATRIUM_CLIENT_ID")
     ATRIUM_URL = os.environ.get("ATRIUM_URL")
 
+    if ATRIUM_API_KEY is None:
+        raise Exception(
+            "ATRIUM_API_KEY was not set in Django settings or environment variables."
+        )
+    elif ATRIUM_CLIENT_ID is None:
+        raise Exception(
+            "ATRIUM_CLIENT_ID was not set in Django settings or environment variables."
+        )
+    elif ATRIUM_URL is None:
+        raise Exception(
+            "ATRIUM_URL was not set in Django settings or environment variables."
+        )
+
 else:
     ATRIUM_API_KEY = settings.ATRIUM_API_KEY
     ATRIUM_CLIENT_ID = settings.ATRIUM_CLIENT_ID
