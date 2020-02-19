@@ -14,3 +14,11 @@ Documentation can be found [here](https://trevorphillips.github.io/django-atrium
 
 2.  import using `from django_atrium import AtriumClient` from any file.
 3.  That's it!
+
+## Formatting
+
+`black .`
+
+## Documentation
+
+`pdoc ./django_atrium  --html -o docs/`

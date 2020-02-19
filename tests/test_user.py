@@ -73,8 +73,3 @@ class TestUser(unittest.TestCase):
 
         users = self._client.list_users()
         self.assertIsInstance(users, list)
-
-    def test_list_transactions_for_user(self):
-        user = self._client.create_user("test_identifier9")
-        transactions = self._client.list_transactions_for_user(user.guid)
-        self.assertIsInstance(transactions, list)

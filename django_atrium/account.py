@@ -3,7 +3,6 @@ from typing import List
 
 import atrium
 from atrium.models.account import Account as AtriumAccount
-from atrium.models.transaction import Transaction as AtriumTransaction
 
 
 class Account:
@@ -57,44 +56,37 @@ class Account:
 
         return accounts
 
-    def list_transactions_for_account(
+    def list_accounts_for_member(
         self,
-        account_guid: str,
+        member_guid: str,
         user_guid: str,
         page: int = 1,
         records_per_page: int = 25,
-        **kwargs
-    ) -> List[AtriumTransaction]:
-        """List all the transactions for an account.
+    ) -> List[AtriumAccount]:
+        """List a member's accounts.
 
         Args:
-            account_guid: A unique identifier for the account. Defined by MX.
+            member_guid: A unique identifier for the member. Defined by MX.
             user_guid: A unique identifier for the user. Defined by MX.
             page: The page number to start the search.
             records_per_page: The number of records to retrieve with
                 each request. Max is 1000.
-            **from_date: A date string that specifies the start date.
-            **to_date: A date string that specifies the end date.
 
         Returns:
-            A list of an Atrium accounts's transactions.
+            A list of an Atrium member's accounts.
 
         """
-        transactions = []
+        accounts = []
 
         while True:
-            res = self.client.accounts.list_account_transactions(
-                account_guid,
-                user_guid,
-                page=page,
-                records_per_page=records_per_page,
-                **kwargs
+            res = self.client.members.list_member_accounts(
+                member_guid, user_guid, page=page, records_per_page=records_per_page
             )
-            transactions += res.transactions
+            accounts += res.accounts
 
             if res.pagination.current_page == res.pagination.total_pages:
                 break
 
             page += 1
 
-        return transactions
+        return accounts

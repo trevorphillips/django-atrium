@@ -2,7 +2,6 @@
 from typing import List
 
 import atrium
-from atrium.models.account import Account as AtriumAccount
 from atrium.models.challenge import Challenge as AtriumChallenge
 from atrium.models.credential_response import (
     CredentialResponse as AtriumCredentialResponse,
@@ -11,7 +10,6 @@ from atrium.models.member import Member as AtriumMember
 from atrium.models.member_connection_status import (
     MemberConnectionStatus as AtriumMemberConnectionStatus,
 )
-from atrium.models.transaction import Transaction as AtriumTransaction
 
 
 class Member:
@@ -103,7 +101,7 @@ class Member:
         """
         self.client.members.delete_member(member_guid, user_guid)
 
-    def list_members(
+    def list_members_for_user(
         self, user_guid: str, page: int = 1, records_per_page: int = 25
     ) -> List[AtriumMember]:
         """List all the members for a user.
@@ -194,80 +192,3 @@ class Member:
         """
         res = self.client.members.list_member_credentials(member_guid, user_guid)
         return res.credentials
-
-    def list_accounts_for_member(
-        self,
-        member_guid: str,
-        user_guid: str,
-        page: int = 1,
-        records_per_page: int = 25,
-    ) -> List[AtriumAccount]:
-        """List a member's accounts.
-
-        Args:
-            member_guid: A unique identifier for the member. Defined by MX.
-            user_guid: A unique identifier for the user. Defined by MX.
-            page: The page number to start the search.
-            records_per_page: The number of records to retrieve with
-                each request. Max is 1000.
-
-        Returns:
-            A list of an Atrium member's accounts.
-
-        """
-        accounts = []
-
-        while True:
-            res = self.client.members.list_member_accounts(
-                member_guid, user_guid, page=page, records_per_page=records_per_page
-            )
-            accounts += res.accounts
-
-            if res.pagination.current_page == res.pagination.total_pages:
-                break
-
-            page += 1
-
-        return accounts
-
-    def list_transactions_for_member(
-        self,
-        member_guid: str,
-        user_guid: str,
-        page: int = 1,
-        records_per_page: int = 25,
-        **kwargs
-    ) -> List[AtriumTransaction]:
-        """List all of a member's transactions.
-
-        Args:
-            member_guid: A unique identifier for the member. Defined by MX.
-            user_guid: A unique identifier for the user. Defined by MX.
-            page: The page number to start the search.
-            records_per_page: The number of records to retrieve with
-                each request. Max is 1000.
-            **from_date: A date string that specifies the start date.
-            **to_date: A date string that specifies the end date.
-
-        Returns:
-            A list of an Atrium member's transaction.
-
-        """
-        transactions = []
-
-        while True:
-            res = self.client.members.list_member_transactions(
-                member_guid,
-                user_guid,
-                page=page,
-                records_per_page=records_per_page,
-                **kwargs
-            )
-            transactions += res.transactions
-
-            if res.pagination.current_page == res.pagination.total_pages:
-                break
-
-            page += 1
-
-        return transactions
