@@ -103,7 +103,7 @@ class Member:
         """
         self.client.members.delete_member(member_guid, user_guid)
 
-    def list_members(
+    def list_members_for_user(
         self, user_guid: str, page: int = 1, records_per_page: int = 25
     ) -> List[AtriumMember]:
         """List all the members for a user.
@@ -194,41 +194,6 @@ class Member:
         """
         res = self.client.members.list_member_credentials(member_guid, user_guid)
         return res.credentials
-
-    def list_accounts_for_member(
-        self,
-        member_guid: str,
-        user_guid: str,
-        page: int = 1,
-        records_per_page: int = 25,
-    ) -> List[AtriumAccount]:
-        """List a member's accounts.
-
-        Args:
-            member_guid: A unique identifier for the member. Defined by MX.
-            user_guid: A unique identifier for the user. Defined by MX.
-            page: The page number to start the search.
-            records_per_page: The number of records to retrieve with
-                each request. Max is 1000.
-
-        Returns:
-            A list of an Atrium member's accounts.
-
-        """
-        accounts = []
-
-        while True:
-            res = self.client.members.list_member_accounts(
-                member_guid, user_guid, page=page, records_per_page=records_per_page
-            )
-            accounts += res.accounts
-
-            if res.pagination.current_page == res.pagination.total_pages:
-                break
-
-            page += 1
-
-        return accounts
 
     def list_transactions_for_member(
         self,
