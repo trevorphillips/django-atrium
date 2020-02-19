@@ -49,3 +49,8 @@ class TestTransaction(unittest.TestCase):
         )
         transactions = self._client.list_transactions_for_member(member.guid, user.guid)
         self.assertIsInstance(transactions, list)
+
+    def test_list_transactions_for_user(self):
+        user = self._client.create_user("test_identifier9")
+        transactions = self._client.list_transactions_for_user(user.guid)
+        self.assertIsInstance(transactions, list)
