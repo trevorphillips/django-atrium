@@ -28,6 +28,6 @@ setup(
     name="django-atrium",
     packages=find_packages(exclude=["tests*"]),
     url="https://github.com/trevorphillips/django-atrium",
-    version="2.1.0",
+    version="2.1.1",
     zip_safe=False,
 )
