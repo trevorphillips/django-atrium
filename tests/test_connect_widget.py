@@ -11,26 +11,26 @@ class TestConnectWidget(unittest.TestCase):
         cls._client = AtriumClient()
 
     @classmethod
-    def tearDownClass(cls):
+    def tearDown(cls):
         users = cls._client.list_users()
 
         for user in users:
             cls._client.delete_user(user.guid)
 
     def test_connect_widget_with_defaults(self):
-        user = self._client.create_user("test_identifier1")
+        user = self._client.create_user("test_identifier")
         connect_widget = self._client.get_connect_widget(user.guid)
         self.assertIsInstance(connect_widget, AtriumConnectWidget)
 
     def test_connect_widget_with_institution(self):
-        user = self._client.create_user("test_identifier2")
+        user = self._client.create_user("test_identifier")
         connect_widget = self._client.get_connect_widget(
             user.guid, current_institution_code="mxbank"
         )
         self.assertIsInstance(connect_widget, AtriumConnectWidget)
 
     def test_connect_widget_with_member(self):
-        user = self._client.create_user("test_identifier3")
+        user = self._client.create_user("test_identifier")
         institution_code = "mxbank"
         institution_creds = self._client.read_credentials_for_institution(
             institution_code
@@ -44,7 +44,7 @@ class TestConnectWidget(unittest.TestCase):
         self.assertIsInstance(connect_widget, AtriumConnectWidget)
 
     def test_connect_widget_update_credentials(self):
-        user = self._client.create_user("test_identifier4")
+        user = self._client.create_user("test_identifier")
         institution_code = "mxbank"
         institution_creds = self._client.read_credentials_for_institution(
             institution_code
