@@ -25,10 +25,10 @@
         },
         "atrium": {
             "hashes": [
-                "sha256:52ea6021b0299667e75d610aca3662a181da5f4854134956575cc1c8987aab45",
-                "sha256:7783e41617044a275f8b19dd753d6c95c26c207052a211058ae216484d49db09"
+                "sha256:500c217c3a7d13773948b36074a03cdd4ca0a87f27c81606c5208a31b2c490b0",
+                "sha256:afde8b70300716b1e193b0581e6dc03ed1a99d519605b0129b79a2eadab2ecc4"
             ],
-            "version": "==2.8.0"
+            "version": "==2.9.5"
         },
         "certifi": {
             "hashes": [

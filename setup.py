@@ -15,7 +15,7 @@ classifiers = [
     "Topic :: Utilities",
 ]
 
-requires = ["atrium==2.8.0", "django>=1.11"]
+requires = ["atrium==2.9.5", "django>=1.11"]
 
 setup(
     author="Trevor Phillips",
