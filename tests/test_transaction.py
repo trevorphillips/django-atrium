@@ -49,7 +49,7 @@ class TestTransaction(unittest.TestCase):
         self.assertIsInstance(transactions, list)
 
     def test_list_transactions_for_member(self):
-        user = self._client.create_user("test_identifier3")
+        user = self._client.create_user("test_identifier")
         institution_code = "mxbank"
         institution_creds = self._client.read_credentials_for_institution(
             institution_code
@@ -61,6 +61,6 @@ class TestTransaction(unittest.TestCase):
         self.assertIsInstance(transactions, list)
 
     def test_list_transactions_for_user(self):
-        user = self._client.create_user("test_identifier4")
+        user = self._client.create_user("test_identifier")
         transactions = self._client.list_transactions_for_user(user.guid)
         self.assertIsInstance(transactions, list)

@@ -1,3 +1,4 @@
+import time
 import unittest
 
 from atrium.models.user import User as AtriumUser
@@ -11,40 +12,40 @@ class TestUser(unittest.TestCase):
         cls._client = AtriumClient()
 
     @classmethod
-    def tearDownClass(cls):
+    def tearDown(cls):
         users = cls._client.list_users()
 
         for user in users:
             cls._client.delete_user(user.guid)
 
     def test_create_user_with_defaults(self):
-        user = self._client.create_user("test_identifier1")
+        user = self._client.create_user("test_identifier")
         self.assertIsInstance(user, AtriumUser)
-        self.assertEqual(user.identifier, "test_identifier1")
+        self.assertEqual(user.identifier, "test_identifier")
         self.assertFalse(user.is_disabled)
         self.assertIsNone(user.metadata)
 
     def test_create_user_with_modified_defaults(self):
         user = self._client.create_user(
-            "test_identifier2", is_disabled=True, metadata="Hello I am metadata"
+            "test_identifier", is_disabled=True, metadata="Hello I am metadata"
         )
         self.assertIsInstance(user, AtriumUser)
-        self.assertEqual(user.identifier, "test_identifier2")
+        self.assertEqual(user.identifier, "test_identifier")
         self.assertTrue(user.is_disabled)
         self.assertEqual(user.metadata, "Hello I am metadata")
 
     def test_read_user(self):
-        created_user = self._client.create_user("test_identifier3")
+        created_user = self._client.create_user("test_identifier")
         user = self._client.read_user(created_user.guid)
         self.assertIsInstance(user, AtriumUser)
-        self.assertEqual(user.identifier, "test_identifier3")
+        self.assertEqual(user.identifier, "test_identifier")
         self.assertFalse(user.is_disabled)
         self.assertIsNone(user.metadata)
 
     def test_update_user(self):
-        created_user = self._client.create_user("test_identifier4")
+        created_user = self._client.create_user("test_identifier")
         self.assertIsInstance(created_user, AtriumUser)
-        self.assertEqual(created_user.identifier, "test_identifier4")
+        self.assertEqual(created_user.identifier, "test_identifier")
         self.assertFalse(created_user.is_disabled)
         self.assertIsNone(created_user.metadata)
 
@@ -52,14 +53,14 @@ class TestUser(unittest.TestCase):
             created_user.guid, is_disabled=True, metadata="Hello I am metadata"
         )
         self.assertIsInstance(user, AtriumUser)
-        self.assertEqual(user.identifier, "test_identifier4")
+        self.assertEqual(user.identifier, "test_identifier")
         self.assertTrue(user.is_disabled)
         self.assertEqual(user.metadata, "Hello I am metadata")
 
     def test_delete_user(self):
-        created_user = self._client.create_user("test_identifier5")
+        created_user = self._client.create_user("test_identifier")
         self.assertIsInstance(created_user, AtriumUser)
-        self.assertEqual(created_user.identifier, "test_identifier5")
+        self.assertEqual(created_user.identifier, "test_identifier")
         self.assertFalse(created_user.is_disabled)
         self.assertIsNone(created_user.metadata)
 
@@ -67,9 +68,7 @@ class TestUser(unittest.TestCase):
         self.assertIsNone(user)
 
     def test_list_users(self):
-        _ = self._client.create_user("test_identifier6")
-        _ = self._client.create_user("test_identifier7")
-        _ = self._client.create_user("test_identifier8")
+        _ = self._client.create_user("test_identifier")
 
         users = self._client.list_users()
         self.assertIsInstance(users, list)
