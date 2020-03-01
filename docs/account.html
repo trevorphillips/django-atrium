@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-<meta name="generator" content="pdoc 0.7.4" />
+<meta name="generator" content="pdoc 0.7.5" />
 <title>django_atrium.account API documentation</title>
 <meta name="description" content="account file." />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
@@ -30,7 +30,6 @@ from typing import List
 
 import atrium
 from atrium.models.account import Account as AtriumAccount
-from atrium.models.transaction import Transaction as AtriumTransaction
 
 
 class Account:
@@ -84,47 +83,40 @@ class Account:
 
         return accounts
 
-    def list_transactions_for_account(
+    def list_accounts_for_member(
         self,
-        account_guid: str,
+        member_guid: str,
         user_guid: str,
         page: int = 1,
         records_per_page: int = 25,
-        **kwargs
-    ) -&gt; List[AtriumTransaction]:
-        &#34;&#34;&#34;List all the transactions for an account.
+    ) -&gt; List[AtriumAccount]:
+        &#34;&#34;&#34;List a member&#39;s accounts.
 
         Args:
-            account_guid: A unique identifier for the account. Defined by MX.
+            member_guid: A unique identifier for the member. Defined by MX.
             user_guid: A unique identifier for the user. Defined by MX.
             page: The page number to start the search.
             records_per_page: The number of records to retrieve with
                 each request. Max is 1000.
-            **from_date: A date string that specifies the start date.
-            **to_date: A date string that specifies the end date.
 
         Returns:
-            A list of an Atrium accounts&#39;s transactions.
+            A list of an Atrium member&#39;s accounts.
 
         &#34;&#34;&#34;
-        transactions = []
+        accounts = []
 
         while True:
-            res = self.client.accounts.list_account_transactions(
-                account_guid,
-                user_guid,
-                page=page,
-                records_per_page=records_per_page,
-                **kwargs
+            res = self.client.members.list_member_accounts(
+                member_guid, user_guid, page=page, records_per_page=records_per_page
             )
-            transactions += res.transactions
+            accounts += res.accounts
 
             if res.pagination.current_page == res.pagination.total_pages:
                 break
 
             page += 1
 
-        return transactions</code></pre>
+        return accounts</code></pre>
 </details>
 </section>
 <section>
@@ -198,47 +190,40 @@ class Account:
 
         return accounts
 
-    def list_transactions_for_account(
+    def list_accounts_for_member(
         self,
-        account_guid: str,
+        member_guid: str,
         user_guid: str,
         page: int = 1,
         records_per_page: int = 25,
-        **kwargs
-    ) -&gt; List[AtriumTransaction]:
-        &#34;&#34;&#34;List all the transactions for an account.
+    ) -&gt; List[AtriumAccount]:
+        &#34;&#34;&#34;List a member&#39;s accounts.
 
         Args:
-            account_guid: A unique identifier for the account. Defined by MX.
+            member_guid: A unique identifier for the member. Defined by MX.
             user_guid: A unique identifier for the user. Defined by MX.
             page: The page number to start the search.
             records_per_page: The number of records to retrieve with
                 each request. Max is 1000.
-            **from_date: A date string that specifies the start date.
-            **to_date: A date string that specifies the end date.
 
         Returns:
-            A list of an Atrium accounts&#39;s transactions.
+            A list of an Atrium member&#39;s accounts.
 
         &#34;&#34;&#34;
-        transactions = []
+        accounts = []
 
         while True:
-            res = self.client.accounts.list_account_transactions(
-                account_guid,
-                user_guid,
-                page=page,
-                records_per_page=records_per_page,
-                **kwargs
+            res = self.client.members.list_member_accounts(
+                member_guid, user_guid, page=page, records_per_page=records_per_page
             )
-            transactions += res.transactions
+            accounts += res.accounts
 
             if res.pagination.current_page == res.pagination.total_pages:
                 break
 
             page += 1
 
-        return transactions</code></pre>
+        return accounts</code></pre>
 </details>
 <h3>Subclasses</h3>
 <ul class="hlist">
@@ -246,6 +231,65 @@ class Account:
 </ul>
 <h3>Methods</h3>
 <dl>
+<dt id="django_atrium.account.Account.list_accounts_for_member"><code class="name flex">
+<span>def <span class="ident">list_accounts_for_member</span></span>(<span>self, member_guid, user_guid, page=1, records_per_page=25)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>List a member's accounts.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>member_guid</code></strong></dt>
+<dd>A unique identifier for the member. Defined by MX.</dd>
+<dt><strong><code>user_guid</code></strong></dt>
+<dd>A unique identifier for the user. Defined by MX.</dd>
+<dt><strong><code>page</code></strong></dt>
+<dd>The page number to start the search.</dd>
+<dt><strong><code>records_per_page</code></strong></dt>
+<dd>The number of records to retrieve with
+each request. Max is 1000.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>A list of an Atrium member's accounts.</p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def list_accounts_for_member(
+    self,
+    member_guid: str,
+    user_guid: str,
+    page: int = 1,
+    records_per_page: int = 25,
+) -&gt; List[AtriumAccount]:
+    &#34;&#34;&#34;List a member&#39;s accounts.
+
+    Args:
+        member_guid: A unique identifier for the member. Defined by MX.
+        user_guid: A unique identifier for the user. Defined by MX.
+        page: The page number to start the search.
+        records_per_page: The number of records to retrieve with
+            each request. Max is 1000.
+
+    Returns:
+        A list of an Atrium member&#39;s accounts.
+
+    &#34;&#34;&#34;
+    accounts = []
+
+    while True:
+        res = self.client.members.list_member_accounts(
+            member_guid, user_guid, page=page, records_per_page=records_per_page
+        )
+        accounts += res.accounts
+
+        if res.pagination.current_page == res.pagination.total_pages:
+            break
+
+        page += 1
+
+    return accounts</code></pre>
+</details>
+</dd>
 <dt id="django_atrium.account.Account.list_accounts_for_user"><code class="name flex">
 <span>def <span class="ident">list_accounts_for_user</span></span>(<span>self, user_guid, page=1, records_per_page=25)</span>
 </code></dt>
@@ -296,76 +340,6 @@ each request. Max is 1000.</dd>
         page += 1
 
     return accounts</code></pre>
-</details>
-</dd>
-<dt id="django_atrium.account.Account.list_transactions_for_account"><code class="name flex">
-<span>def <span class="ident">list_transactions_for_account</span></span>(<span>self, account_guid, user_guid, page=1, records_per_page=25, **kwargs)</span>
-</code></dt>
-<dd>
-<section class="desc"><p>List all the transactions for an account.</p>
-<h2 id="args">Args</h2>
-<dl>
-<dt><strong><code>account_guid</code></strong></dt>
-<dd>A unique identifier for the account. Defined by MX.</dd>
-<dt><strong><code>user_guid</code></strong></dt>
-<dd>A unique identifier for the user. Defined by MX.</dd>
-<dt><strong><code>page</code></strong></dt>
-<dd>The page number to start the search.</dd>
-<dt><strong><code>records_per_page</code></strong></dt>
-<dd>The number of records to retrieve with
-each request. Max is 1000.</dd>
-<dt><strong><code>**from_date</code></strong></dt>
-<dd>A date string that specifies the start date.</dd>
-<dt><strong><code>**to_date</code></strong></dt>
-<dd>A date string that specifies the end date.</dd>
-</dl>
-<h2 id="returns">Returns</h2>
-<p>A list of an Atrium accounts's transactions.</p></section>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def list_transactions_for_account(
-    self,
-    account_guid: str,
-    user_guid: str,
-    page: int = 1,
-    records_per_page: int = 25,
-    **kwargs
-) -&gt; List[AtriumTransaction]:
-    &#34;&#34;&#34;List all the transactions for an account.
-
-    Args:
-        account_guid: A unique identifier for the account. Defined by MX.
-        user_guid: A unique identifier for the user. Defined by MX.
-        page: The page number to start the search.
-        records_per_page: The number of records to retrieve with
-            each request. Max is 1000.
-        **from_date: A date string that specifies the start date.
-        **to_date: A date string that specifies the end date.
-
-    Returns:
-        A list of an Atrium accounts&#39;s transactions.
-
-    &#34;&#34;&#34;
-    transactions = []
-
-    while True:
-        res = self.client.accounts.list_account_transactions(
-            account_guid,
-            user_guid,
-            page=page,
-            records_per_page=records_per_page,
-            **kwargs
-        )
-        transactions += res.transactions
-
-        if res.pagination.current_page == res.pagination.total_pages:
-            break
-
-        page += 1
-
-    return transactions</code></pre>
 </details>
 </dd>
 <dt id="django_atrium.account.Account.read_account"><code class="name flex">
@@ -422,8 +396,8 @@ each request. Max is 1000.</dd>
 <li>
 <h4><code><a title="django_atrium.account.Account" href="#django_atrium.account.Account">Account</a></code></h4>
 <ul class="">
+<li><code><a title="django_atrium.account.Account.list_accounts_for_member" href="#django_atrium.account.Account.list_accounts_for_member">list_accounts_for_member</a></code></li>
 <li><code><a title="django_atrium.account.Account.list_accounts_for_user" href="#django_atrium.account.Account.list_accounts_for_user">list_accounts_for_user</a></code></li>
-<li><code><a title="django_atrium.account.Account.list_transactions_for_account" href="#django_atrium.account.Account.list_transactions_for_account">list_transactions_for_account</a></code></li>
 <li><code><a title="django_atrium.account.Account.read_account" href="#django_atrium.account.Account.read_account">read_account</a></code></li>
 </ul>
 </li>
@@ -433,7 +407,7 @@ each request. Max is 1000.</dd>
 </nav>
 </main>
 <footer id="footer">
-<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.7.4</a>.</p>
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.7.5</a>.</p>
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad()</script>

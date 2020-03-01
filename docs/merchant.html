@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.7.5" />
-<title>django_atrium.connect_widget API documentation</title>
-<meta name="description" content="connect widget file." />
+<title>django_atrium.merchant API documentation</title>
+<meta name="description" content="merchant file." />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
@@ -17,51 +17,38 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>django_atrium.connect_widget</code></h1>
+<h1 class="title">Module <code>django_atrium.merchant</code></h1>
 </header>
 <section id="section-intro">
-<p>connect widget file.</p>
+<p>merchant file.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">&#34;&#34;&#34;connect widget file.&#34;&#34;&#34;
+<pre><code class="python">&#34;&#34;&#34;merchant file.&#34;&#34;&#34;
 import atrium
-from atrium.models.connect_widget import ConnectWidget as AtriumConnectWidget
+from atrium.models.merchant import Merchant as AtriumMerchant
 
 
-class ConnectWidget:
-    &#34;&#34;&#34;Connect Widget class.&#34;&#34;&#34;
+class Merchant:
+    &#34;&#34;&#34;Merchant class.&#34;&#34;&#34;
 
     def __init__(self, client: atrium.AtriumClient):
-        &#34;&#34;&#34;Init for ConnectWidget.&#34;&#34;&#34;
+        &#34;&#34;&#34;Init for Merchant.&#34;&#34;&#34;
         self.client = client
 
-    def get_connect_widget(self, user_guid: str, **kwargs) -&gt; AtriumConnectWidget:
-        &#34;&#34;&#34;Get Atrium connect widget.
+    def read_merchant(self, merchant_guid: str) -&gt; AtriumMerchant:
+        &#34;&#34;&#34;Read a merchant.
 
         Args:
-            user_guid: A unique identifier for the user. Defined by MX.
-            **is_mobile_webview: A boolean to indicate if you&#39;d like to
-                execute URL updates in place of the JavaScript event messages.
-            **current_institution_code: A string to load the widget with
-                desired institution credential view by the institutions code.
-            **current_member_guid: Load to a specific member that contains an
-                error or requires MFA from the most recent job. Members with
-                no errors will return to search. `current_member_guid` takes
-                precedence over `current_institution_code`.
-            **update_credentials: A boolean to be used in conjunction with
-                current_member_guid to load into a state to update the
-                provided members credentials.
+            merchant_guid: The unique identifier for the merchant. Defined by MX.
 
         Returns:
-            An Atrium user&#39;s connect widget.
+            An Atrium merchant.
 
         &#34;&#34;&#34;
-        body = atrium.ConnectWidgetRequestBody(**kwargs)
-
-        res = self.client.connect_widget.get_connect_widget(user_guid, body)
-        return res.user</code></pre>
+        res = self.client.merchants.read_merchant(merchant_guid)
+        return res.merchant</code></pre>
 </details>
 </section>
 <section>
@@ -73,49 +60,36 @@ class ConnectWidget:
 <section>
 <h2 class="section-title" id="header-classes">Classes</h2>
 <dl>
-<dt id="django_atrium.connect_widget.ConnectWidget"><code class="flex name class">
-<span>class <span class="ident">ConnectWidget</span></span>
+<dt id="django_atrium.merchant.Merchant"><code class="flex name class">
+<span>class <span class="ident">Merchant</span></span>
 <span>(</span><span>client)</span>
 </code></dt>
 <dd>
-<section class="desc"><p>Connect Widget class.</p>
-<p>Init for ConnectWidget.</p></section>
+<section class="desc"><p>Merchant class.</p>
+<p>Init for Merchant.</p></section>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">class ConnectWidget:
-    &#34;&#34;&#34;Connect Widget class.&#34;&#34;&#34;
+<pre><code class="python">class Merchant:
+    &#34;&#34;&#34;Merchant class.&#34;&#34;&#34;
 
     def __init__(self, client: atrium.AtriumClient):
-        &#34;&#34;&#34;Init for ConnectWidget.&#34;&#34;&#34;
+        &#34;&#34;&#34;Init for Merchant.&#34;&#34;&#34;
         self.client = client
 
-    def get_connect_widget(self, user_guid: str, **kwargs) -&gt; AtriumConnectWidget:
-        &#34;&#34;&#34;Get Atrium connect widget.
+    def read_merchant(self, merchant_guid: str) -&gt; AtriumMerchant:
+        &#34;&#34;&#34;Read a merchant.
 
         Args:
-            user_guid: A unique identifier for the user. Defined by MX.
-            **is_mobile_webview: A boolean to indicate if you&#39;d like to
-                execute URL updates in place of the JavaScript event messages.
-            **current_institution_code: A string to load the widget with
-                desired institution credential view by the institutions code.
-            **current_member_guid: Load to a specific member that contains an
-                error or requires MFA from the most recent job. Members with
-                no errors will return to search. `current_member_guid` takes
-                precedence over `current_institution_code`.
-            **update_credentials: A boolean to be used in conjunction with
-                current_member_guid to load into a state to update the
-                provided members credentials.
+            merchant_guid: The unique identifier for the merchant. Defined by MX.
 
         Returns:
-            An Atrium user&#39;s connect widget.
+            An Atrium merchant.
 
         &#34;&#34;&#34;
-        body = atrium.ConnectWidgetRequestBody(**kwargs)
-
-        res = self.client.connect_widget.get_connect_widget(user_guid, body)
-        return res.user</code></pre>
+        res = self.client.merchants.read_merchant(merchant_guid)
+        return res.merchant</code></pre>
 </details>
 <h3>Subclasses</h3>
 <ul class="hlist">
@@ -123,62 +97,34 @@ class ConnectWidget:
 </ul>
 <h3>Methods</h3>
 <dl>
-<dt id="django_atrium.connect_widget.ConnectWidget.get_connect_widget"><code class="name flex">
-<span>def <span class="ident">get_connect_widget</span></span>(<span>self, user_guid, **kwargs)</span>
+<dt id="django_atrium.merchant.Merchant.read_merchant"><code class="name flex">
+<span>def <span class="ident">read_merchant</span></span>(<span>self, merchant_guid)</span>
 </code></dt>
 <dd>
-<section class="desc"><p>Get Atrium connect widget.</p>
+<section class="desc"><p>Read a merchant.</p>
 <h2 id="args">Args</h2>
 <dl>
-<dt><strong><code>user_guid</code></strong></dt>
-<dd>A unique identifier for the user. Defined by MX.</dd>
-<dt><strong><code>**is_mobile_webview</code></strong></dt>
-<dd>A boolean to indicate if you'd like to
-execute URL updates in place of the JavaScript event messages.</dd>
-<dt><strong><code>**current_institution_code</code></strong></dt>
-<dd>A string to load the widget with
-desired institution credential view by the institutions code.</dd>
-<dt><strong><code>**current_member_guid</code></strong></dt>
-<dd>Load to a specific member that contains an
-error or requires MFA from the most recent job. Members with
-no errors will return to search. <code>current_member_guid</code> takes
-precedence over <code>current_institution_code</code>.</dd>
-<dt><strong><code>**update_credentials</code></strong></dt>
-<dd>A boolean to be used in conjunction with
-current_member_guid to load into a state to update the
-provided members credentials.</dd>
+<dt><strong><code>merchant_guid</code></strong></dt>
+<dd>The unique identifier for the merchant. Defined by MX.</dd>
 </dl>
 <h2 id="returns">Returns</h2>
-<p>An Atrium user's connect widget.</p></section>
+<p>An Atrium merchant.</p></section>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def get_connect_widget(self, user_guid: str, **kwargs) -&gt; AtriumConnectWidget:
-    &#34;&#34;&#34;Get Atrium connect widget.
+<pre><code class="python">def read_merchant(self, merchant_guid: str) -&gt; AtriumMerchant:
+    &#34;&#34;&#34;Read a merchant.
 
     Args:
-        user_guid: A unique identifier for the user. Defined by MX.
-        **is_mobile_webview: A boolean to indicate if you&#39;d like to
-            execute URL updates in place of the JavaScript event messages.
-        **current_institution_code: A string to load the widget with
-            desired institution credential view by the institutions code.
-        **current_member_guid: Load to a specific member that contains an
-            error or requires MFA from the most recent job. Members with
-            no errors will return to search. `current_member_guid` takes
-            precedence over `current_institution_code`.
-        **update_credentials: A boolean to be used in conjunction with
-            current_member_guid to load into a state to update the
-            provided members credentials.
+        merchant_guid: The unique identifier for the merchant. Defined by MX.
 
     Returns:
-        An Atrium user&#39;s connect widget.
+        An Atrium merchant.
 
     &#34;&#34;&#34;
-    body = atrium.ConnectWidgetRequestBody(**kwargs)
-
-    res = self.client.connect_widget.get_connect_widget(user_guid, body)
-    return res.user</code></pre>
+    res = self.client.merchants.read_merchant(merchant_guid)
+    return res.merchant</code></pre>
 </details>
 </dd>
 </dl>
@@ -200,9 +146,9 @@ provided members credentials.</dd>
 <li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
 <li>
-<h4><code><a title="django_atrium.connect_widget.ConnectWidget" href="#django_atrium.connect_widget.ConnectWidget">ConnectWidget</a></code></h4>
+<h4><code><a title="django_atrium.merchant.Merchant" href="#django_atrium.merchant.Merchant">Merchant</a></code></h4>
 <ul class="">
-<li><code><a title="django_atrium.connect_widget.ConnectWidget.get_connect_widget" href="#django_atrium.connect_widget.ConnectWidget.get_connect_widget">get_connect_widget</a></code></li>
+<li><code><a title="django_atrium.merchant.Merchant.read_merchant" href="#django_atrium.merchant.Merchant.read_merchant">read_merchant</a></code></li>
 </ul>
 </li>
 </ul>

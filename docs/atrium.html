@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-<meta name="generator" content="pdoc 0.7.4" />
+<meta name="generator" content="pdoc 0.7.5" />
 <title>django_atrium.atrium API documentation</title>
 <meta name="description" content="atrium file." />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
@@ -26,6 +26,8 @@
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">&#34;&#34;&#34;atrium file.&#34;&#34;&#34;
+import os
+
 import atrium
 from django.conf import settings
 
@@ -33,21 +35,41 @@ from .account import Account
 from .connect_widget import ConnectWidget
 from .institution import Institution
 from .member import Member
+from .merchant import Merchant
 from .transaction import Transaction
 from .user import User
 
 settings.configure()
 
+ATRIUM_API_KEY = os.environ.get(&#34;ATRIUM_API_KEY&#34;)
+ATRIUM_CLIENT_ID = os.environ.get(&#34;ATRIUM_CLIENT_ID&#34;)
+ATRIUM_URL = os.environ.get(&#34;ATRIUM_URL&#34;)
 
-class AtriumClient(Account, ConnectWidget, Institution, Member, Transaction, User):
+if ATRIUM_API_KEY is None and settings.configured:
+    ATRIUM_API_KEY = settings.ATRIUM_API_KEY
+
+if ATRIUM_CLIENT_ID is None and settings.configured:
+    ATRIUM_CLIENT_ID = settings.ATRIUM_CLIENT_ID
+
+if ATRIUM_URL is None and settings.configured:
+    ATRIUM_URL = settings.ATRIUM_URL
+
+if ATRIUM_API_KEY is None:
+    raise Exception(&#34;Unable to determine ATRIUM_API_KEY variable.&#34;)
+if ATRIUM_CLIENT_ID is None:
+    raise Exception(&#34;Unable to determine ATRIUM_CLIENT_ID variable.&#34;)
+if ATRIUM_URL is None:
+    raise Exception(&#34;Unable to determine ATRIUM_URL variable.&#34;)
+
+
+class AtriumClient(
+    Account, ConnectWidget, Institution, Member, Merchant, Transaction, User
+):
     &#34;&#34;&#34;AtriumClient class.&#34;&#34;&#34;
 
     def __init__(self):
         &#34;&#34;&#34;Init for AtriumClient.&#34;&#34;&#34;
-        self.client = atrium.AtriumClient(
-            settings.ATRIUM_API_KEY, settings.ATRIUM_CLIENT_ID, settings.ATRIUM_URL
-        )
-
+        self.client = atrium.AtriumClient(ATRIUM_API_KEY, ATRIUM_CLIENT_ID, ATRIUM_URL)
         super().__init__(self.client)</code></pre>
 </details>
 </section>
@@ -70,15 +92,14 @@ class AtriumClient(Account, ConnectWidget, Institution, Member, Transaction, Use
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">class AtriumClient(Account, ConnectWidget, Institution, Member, Transaction, User):
+<pre><code class="python">class AtriumClient(
+    Account, ConnectWidget, Institution, Member, Merchant, Transaction, User
+):
     &#34;&#34;&#34;AtriumClient class.&#34;&#34;&#34;
 
     def __init__(self):
         &#34;&#34;&#34;Init for AtriumClient.&#34;&#34;&#34;
-        self.client = atrium.AtriumClient(
-            settings.ATRIUM_API_KEY, settings.ATRIUM_CLIENT_ID, settings.ATRIUM_URL
-        )
-
+        self.client = atrium.AtriumClient(ATRIUM_API_KEY, ATRIUM_CLIENT_ID, ATRIUM_URL)
         super().__init__(self.client)</code></pre>
 </details>
 <h3>Ancestors</h3>
@@ -87,6 +108,7 @@ class AtriumClient(Account, ConnectWidget, Institution, Member, Transaction, Use
 <li><a title="django_atrium.connect_widget.ConnectWidget" href="connect_widget.html#django_atrium.connect_widget.ConnectWidget">ConnectWidget</a></li>
 <li><a title="django_atrium.institution.Institution" href="institution.html#django_atrium.institution.Institution">Institution</a></li>
 <li><a title="django_atrium.member.Member" href="member.html#django_atrium.member.Member">Member</a></li>
+<li><a title="django_atrium.merchant.Merchant" href="merchant.html#django_atrium.merchant.Merchant">Merchant</a></li>
 <li><a title="django_atrium.transaction.Transaction" href="transaction.html#django_atrium.transaction.Transaction">Transaction</a></li>
 <li><a title="django_atrium.user.User" href="user.html#django_atrium.user.User">User</a></li>
 </ul>
@@ -94,8 +116,8 @@ class AtriumClient(Account, ConnectWidget, Institution, Member, Transaction, Use
 <ul class="hlist">
 <li><code><b><a title="django_atrium.account.Account" href="account.html#django_atrium.account.Account">Account</a></b></code>:
 <ul class="hlist">
+<li><code><a title="django_atrium.account.Account.list_accounts_for_member" href="account.html#django_atrium.account.Account.list_accounts_for_member">list_accounts_for_member</a></code></li>
 <li><code><a title="django_atrium.account.Account.list_accounts_for_user" href="account.html#django_atrium.account.Account.list_accounts_for_user">list_accounts_for_user</a></code></li>
-<li><code><a title="django_atrium.account.Account.list_transactions_for_account" href="account.html#django_atrium.account.Account.list_transactions_for_account">list_transactions_for_account</a></code></li>
 <li><code><a title="django_atrium.account.Account.read_account" href="account.html#django_atrium.account.Account.read_account">read_account</a></code></li>
 </ul>
 </li>
@@ -116,18 +138,24 @@ class AtriumClient(Account, ConnectWidget, Institution, Member, Transaction, Use
 <li><code><a title="django_atrium.member.Member.aggregate_member" href="member.html#django_atrium.member.Member.aggregate_member">aggregate_member</a></code></li>
 <li><code><a title="django_atrium.member.Member.create_member" href="member.html#django_atrium.member.Member.create_member">create_member</a></code></li>
 <li><code><a title="django_atrium.member.Member.delete_member" href="member.html#django_atrium.member.Member.delete_member">delete_member</a></code></li>
-<li><code><a title="django_atrium.member.Member.list_accounts_for_member" href="member.html#django_atrium.member.Member.list_accounts_for_member">list_accounts_for_member</a></code></li>
 <li><code><a title="django_atrium.member.Member.list_credentials_for_member" href="member.html#django_atrium.member.Member.list_credentials_for_member">list_credentials_for_member</a></code></li>
-<li><code><a title="django_atrium.member.Member.list_members" href="member.html#django_atrium.member.Member.list_members">list_members</a></code></li>
+<li><code><a title="django_atrium.member.Member.list_members_for_user" href="member.html#django_atrium.member.Member.list_members_for_user">list_members_for_user</a></code></li>
 <li><code><a title="django_atrium.member.Member.list_mfa_challenges_for_member" href="member.html#django_atrium.member.Member.list_mfa_challenges_for_member">list_mfa_challenges_for_member</a></code></li>
-<li><code><a title="django_atrium.member.Member.list_transactions_for_member" href="member.html#django_atrium.member.Member.list_transactions_for_member">list_transactions_for_member</a></code></li>
 <li><code><a title="django_atrium.member.Member.read_connection_status_for_member" href="member.html#django_atrium.member.Member.read_connection_status_for_member">read_connection_status_for_member</a></code></li>
 <li><code><a title="django_atrium.member.Member.read_member" href="member.html#django_atrium.member.Member.read_member">read_member</a></code></li>
 <li><code><a title="django_atrium.member.Member.update_member" href="member.html#django_atrium.member.Member.update_member">update_member</a></code></li>
 </ul>
 </li>
+<li><code><b><a title="django_atrium.merchant.Merchant" href="merchant.html#django_atrium.merchant.Merchant">Merchant</a></b></code>:
+<ul class="hlist">
+<li><code><a title="django_atrium.merchant.Merchant.read_merchant" href="merchant.html#django_atrium.merchant.Merchant.read_merchant">read_merchant</a></code></li>
+</ul>
+</li>
 <li><code><b><a title="django_atrium.transaction.Transaction" href="transaction.html#django_atrium.transaction.Transaction">Transaction</a></b></code>:
 <ul class="hlist">
+<li><code><a title="django_atrium.transaction.Transaction.list_transactions_for_account" href="transaction.html#django_atrium.transaction.Transaction.list_transactions_for_account">list_transactions_for_account</a></code></li>
+<li><code><a title="django_atrium.transaction.Transaction.list_transactions_for_member" href="transaction.html#django_atrium.transaction.Transaction.list_transactions_for_member">list_transactions_for_member</a></code></li>
+<li><code><a title="django_atrium.transaction.Transaction.list_transactions_for_user" href="transaction.html#django_atrium.transaction.Transaction.list_transactions_for_user">list_transactions_for_user</a></code></li>
 <li><code><a title="django_atrium.transaction.Transaction.read_transaction" href="transaction.html#django_atrium.transaction.Transaction.read_transaction">read_transaction</a></code></li>
 </ul>
 </li>
@@ -135,7 +163,6 @@ class AtriumClient(Account, ConnectWidget, Institution, Member, Transaction, Use
 <ul class="hlist">
 <li><code><a title="django_atrium.user.User.create_user" href="user.html#django_atrium.user.User.create_user">create_user</a></code></li>
 <li><code><a title="django_atrium.user.User.delete_user" href="user.html#django_atrium.user.User.delete_user">delete_user</a></code></li>
-<li><code><a title="django_atrium.user.User.list_transactions_for_user" href="user.html#django_atrium.user.User.list_transactions_for_user">list_transactions_for_user</a></code></li>
 <li><code><a title="django_atrium.user.User.list_users" href="user.html#django_atrium.user.User.list_users">list_users</a></code></li>
 <li><code><a title="django_atrium.user.User.read_user" href="user.html#django_atrium.user.User.read_user">read_user</a></code></li>
 <li><code><a title="django_atrium.user.User.update_user" href="user.html#django_atrium.user.User.update_user">update_user</a></code></li>
@@ -168,7 +195,7 @@ class AtriumClient(Account, ConnectWidget, Institution, Member, Transaction, Use
 </nav>
 </main>
 <footer id="footer">
-<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.7.4</a>.</p>
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.7.5</a>.</p>
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad()</script>

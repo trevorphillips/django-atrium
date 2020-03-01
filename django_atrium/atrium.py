@@ -8,6 +8,7 @@ from .account import Account
 from .connect_widget import ConnectWidget
 from .institution import Institution
 from .member import Member
+from .merchant import Merchant
 from .transaction import Transaction
 from .user import User
 
@@ -32,7 +33,9 @@ if ATRIUM_URL is None:
     raise Exception("Unable to determine ATRIUM_URL variable.")
 
 
-class AtriumClient(Account, ConnectWidget, Institution, Member, Transaction, User):
+class AtriumClient(
+    Account, ConnectWidget, Institution, Member, Merchant, Transaction, User
+):
     """AtriumClient class."""
 
     def __init__(self):
