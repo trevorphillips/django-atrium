@@ -10,7 +10,7 @@ Documentation can be found [here](https://trevorphillips.github.io/django-atrium
 
 - **ATRIUM_API_KEY**
 - **ATRIUM_CLIENT_ID**
-- **ATRIUM_URL**.
+- **ATRIUM_URL**
 
 2. import using `from django_atrium import AtriumClient` from any file.
 3. That's it!
