@@ -28,5 +28,9 @@ jobs:
           ATRIUM_CLIENT_ID: ${{ secrets.ATRIUM_CLIENT_ID }}
           ATRIUM_URL: ${{ secrets.ATRIUM_URL }}
         run: |
-          pipenv install pytest
-          pipenv run pytest
+          pipenv install pytest pytest-cov
+          pipenv run pytest --cov=./
+      - name: Report with codecov
+        run: |
+          pipenv install codecov
+          pipenv run codecov -t ${{ secrets.CODECOV_TOKEN }}
