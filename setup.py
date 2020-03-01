@@ -15,7 +15,7 @@ classifiers = [
     "Topic :: Utilities",
 ]
 
-requires = ["atrium==2.8.0", "django>=1.11"]
+requires = ["atrium==2.9.5", "django>=1.11"]
 
 setup(
     author="Trevor Phillips",
@@ -28,6 +28,6 @@ setup(
     name="django-atrium",
     packages=find_packages(exclude=["tests*"]),
     url="https://github.com/trevorphillips/django-atrium",
-    version="2.1.0",
+    version="2.1.1",
     zip_safe=False,
 )

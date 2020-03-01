@@ -2,7 +2,6 @@
 from typing import List
 
 import atrium
-from atrium.models.transaction import Transaction as AtriumTransaction
 from atrium.models.user import User as AtriumUser
 
 

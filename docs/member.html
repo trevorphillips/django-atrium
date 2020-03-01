@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-<meta name="generator" content="pdoc 0.7.4" />
+<meta name="generator" content="pdoc 0.7.5" />
 <title>django_atrium.member API documentation</title>
 <meta name="description" content="member file." />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
@@ -29,7 +29,6 @@
 from typing import List
 
 import atrium
-from atrium.models.account import Account as AtriumAccount
 from atrium.models.challenge import Challenge as AtriumChallenge
 from atrium.models.credential_response import (
     CredentialResponse as AtriumCredentialResponse,
@@ -38,7 +37,6 @@ from atrium.models.member import Member as AtriumMember
 from atrium.models.member_connection_status import (
     MemberConnectionStatus as AtriumMemberConnectionStatus,
 )
-from atrium.models.transaction import Transaction as AtriumTransaction
 
 
 class Member:
@@ -63,6 +61,8 @@ class Member:
             user_guid: A unique identifier for the user. Defined by MX.
             username: The username/email of the bank.
             password: The password of the bank.
+            institution_creds: A list containing an institution&#39;s
+                credentials.
             institution_code: A unique identifier for each institution,
                 defined by MX.
             **identifier: A unique, enforced identifier for the user, defined
@@ -130,7 +130,7 @@ class Member:
         &#34;&#34;&#34;
         self.client.members.delete_member(member_guid, user_guid)
 
-    def list_members(
+    def list_members_for_user(
         self, user_guid: str, page: int = 1, records_per_page: int = 25
     ) -&gt; List[AtriumMember]:
         &#34;&#34;&#34;List all the members for a user.
@@ -220,84 +220,7 @@ class Member:
 
         &#34;&#34;&#34;
         res = self.client.members.list_member_credentials(member_guid, user_guid)
-        return res.credentials
-
-    def list_accounts_for_member(
-        self,
-        member_guid: str,
-        user_guid: str,
-        page: int = 1,
-        records_per_page: int = 25,
-    ) -&gt; List[AtriumAccount]:
-        &#34;&#34;&#34;List a member&#39;s accounts.
-
-        Args:
-            member_guid: A unique identifier for the member. Defined by MX.
-            user_guid: A unique identifier for the user. Defined by MX.
-            page: The page number to start the search.
-            records_per_page: The number of records to retrieve with
-                each request. Max is 1000.
-
-        Returns:
-            A list of an Atrium member&#39;s accounts.
-
-        &#34;&#34;&#34;
-        accounts = []
-
-        while True:
-            res = self.client.members.list_member_accounts(
-                member_guid, user_guid, page=page, records_per_page=records_per_page
-            )
-            accounts += res.accounts
-
-            if res.pagination.current_page == res.pagination.total_pages:
-                break
-
-            page += 1
-
-        return accounts
-
-    def list_transactions_for_member(
-        self,
-        member_guid: str,
-        user_guid: str,
-        page: int = 1,
-        records_per_page: int = 25,
-        **kwargs
-    ) -&gt; List[AtriumTransaction]:
-        &#34;&#34;&#34;List all of a member&#39;s transactions.
-
-        Args:
-            member_guid: A unique identifier for the member. Defined by MX.
-            user_guid: A unique identifier for the user. Defined by MX.
-            page: The page number to start the search.
-            records_per_page: The number of records to retrieve with
-                each request. Max is 1000.
-            **from_date: A date string that specifies the start date.
-            **to_date: A date string that specifies the end date.
-
-        Returns:
-            A list of an Atrium member&#39;s transaction.
-
-        &#34;&#34;&#34;
-        transactions = []
-
-        while True:
-            res = self.client.members.list_member_transactions(
-                member_guid,
-                user_guid,
-                page=page,
-                records_per_page=records_per_page,
-                **kwargs
-            )
-            transactions += res.transactions
-
-            if res.pagination.current_page == res.pagination.total_pages:
-                break
-
-            page += 1
-
-        return transactions</code></pre>
+        return res.credentials</code></pre>
 </details>
 </section>
 <section>
@@ -342,6 +265,8 @@ class Member:
             user_guid: A unique identifier for the user. Defined by MX.
             username: The username/email of the bank.
             password: The password of the bank.
+            institution_creds: A list containing an institution&#39;s
+                credentials.
             institution_code: A unique identifier for each institution,
                 defined by MX.
             **identifier: A unique, enforced identifier for the user, defined
@@ -409,7 +334,7 @@ class Member:
         &#34;&#34;&#34;
         self.client.members.delete_member(member_guid, user_guid)
 
-    def list_members(
+    def list_members_for_user(
         self, user_guid: str, page: int = 1, records_per_page: int = 25
     ) -&gt; List[AtriumMember]:
         &#34;&#34;&#34;List all the members for a user.
@@ -499,84 +424,7 @@ class Member:
 
         &#34;&#34;&#34;
         res = self.client.members.list_member_credentials(member_guid, user_guid)
-        return res.credentials
-
-    def list_accounts_for_member(
-        self,
-        member_guid: str,
-        user_guid: str,
-        page: int = 1,
-        records_per_page: int = 25,
-    ) -&gt; List[AtriumAccount]:
-        &#34;&#34;&#34;List a member&#39;s accounts.
-
-        Args:
-            member_guid: A unique identifier for the member. Defined by MX.
-            user_guid: A unique identifier for the user. Defined by MX.
-            page: The page number to start the search.
-            records_per_page: The number of records to retrieve with
-                each request. Max is 1000.
-
-        Returns:
-            A list of an Atrium member&#39;s accounts.
-
-        &#34;&#34;&#34;
-        accounts = []
-
-        while True:
-            res = self.client.members.list_member_accounts(
-                member_guid, user_guid, page=page, records_per_page=records_per_page
-            )
-            accounts += res.accounts
-
-            if res.pagination.current_page == res.pagination.total_pages:
-                break
-
-            page += 1
-
-        return accounts
-
-    def list_transactions_for_member(
-        self,
-        member_guid: str,
-        user_guid: str,
-        page: int = 1,
-        records_per_page: int = 25,
-        **kwargs
-    ) -&gt; List[AtriumTransaction]:
-        &#34;&#34;&#34;List all of a member&#39;s transactions.
-
-        Args:
-            member_guid: A unique identifier for the member. Defined by MX.
-            user_guid: A unique identifier for the user. Defined by MX.
-            page: The page number to start the search.
-            records_per_page: The number of records to retrieve with
-                each request. Max is 1000.
-            **from_date: A date string that specifies the start date.
-            **to_date: A date string that specifies the end date.
-
-        Returns:
-            A list of an Atrium member&#39;s transaction.
-
-        &#34;&#34;&#34;
-        transactions = []
-
-        while True:
-            res = self.client.members.list_member_transactions(
-                member_guid,
-                user_guid,
-                page=page,
-                records_per_page=records_per_page,
-                **kwargs
-            )
-            transactions += res.transactions
-
-            if res.pagination.current_page == res.pagination.total_pages:
-                break
-
-            page += 1
-
-        return transactions</code></pre>
+        return res.credentials</code></pre>
 </details>
 <h3>Subclasses</h3>
 <ul class="hlist">
@@ -630,6 +478,9 @@ class Member:
 <dd>The username/email of the bank.</dd>
 <dt><strong><code>password</code></strong></dt>
 <dd>The password of the bank.</dd>
+<dt><strong><code>institution_creds</code></strong></dt>
+<dd>A list containing an institution's
+credentials.</dd>
 <dt><strong><code>institution_code</code></strong></dt>
 <dd>A unique identifier for each institution,
 defined by MX.</dd>
@@ -660,6 +511,8 @@ by you.</dd>
         user_guid: A unique identifier for the user. Defined by MX.
         username: The username/email of the bank.
         password: The password of the bank.
+        institution_creds: A list containing an institution&#39;s
+            credentials.
         institution_code: A unique identifier for each institution,
             defined by MX.
         **identifier: A unique, enforced identifier for the user, defined
@@ -712,65 +565,6 @@ by you.</dd>
     self.client.members.delete_member(member_guid, user_guid)</code></pre>
 </details>
 </dd>
-<dt id="django_atrium.member.Member.list_accounts_for_member"><code class="name flex">
-<span>def <span class="ident">list_accounts_for_member</span></span>(<span>self, member_guid, user_guid, page=1, records_per_page=25)</span>
-</code></dt>
-<dd>
-<section class="desc"><p>List a member's accounts.</p>
-<h2 id="args">Args</h2>
-<dl>
-<dt><strong><code>member_guid</code></strong></dt>
-<dd>A unique identifier for the member. Defined by MX.</dd>
-<dt><strong><code>user_guid</code></strong></dt>
-<dd>A unique identifier for the user. Defined by MX.</dd>
-<dt><strong><code>page</code></strong></dt>
-<dd>The page number to start the search.</dd>
-<dt><strong><code>records_per_page</code></strong></dt>
-<dd>The number of records to retrieve with
-each request. Max is 1000.</dd>
-</dl>
-<h2 id="returns">Returns</h2>
-<p>A list of an Atrium member's accounts.</p></section>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def list_accounts_for_member(
-    self,
-    member_guid: str,
-    user_guid: str,
-    page: int = 1,
-    records_per_page: int = 25,
-) -&gt; List[AtriumAccount]:
-    &#34;&#34;&#34;List a member&#39;s accounts.
-
-    Args:
-        member_guid: A unique identifier for the member. Defined by MX.
-        user_guid: A unique identifier for the user. Defined by MX.
-        page: The page number to start the search.
-        records_per_page: The number of records to retrieve with
-            each request. Max is 1000.
-
-    Returns:
-        A list of an Atrium member&#39;s accounts.
-
-    &#34;&#34;&#34;
-    accounts = []
-
-    while True:
-        res = self.client.members.list_member_accounts(
-            member_guid, user_guid, page=page, records_per_page=records_per_page
-        )
-        accounts += res.accounts
-
-        if res.pagination.current_page == res.pagination.total_pages:
-            break
-
-        page += 1
-
-    return accounts</code></pre>
-</details>
-</dd>
 <dt id="django_atrium.member.Member.list_credentials_for_member"><code class="name flex">
 <span>def <span class="ident">list_credentials_for_member</span></span>(<span>self, member_guid, user_guid)</span>
 </code></dt>
@@ -806,8 +600,8 @@ each request. Max is 1000.</dd>
     return res.credentials</code></pre>
 </details>
 </dd>
-<dt id="django_atrium.member.Member.list_members"><code class="name flex">
-<span>def <span class="ident">list_members</span></span>(<span>self, user_guid, page=1, records_per_page=25)</span>
+<dt id="django_atrium.member.Member.list_members_for_user"><code class="name flex">
+<span>def <span class="ident">list_members_for_user</span></span>(<span>self, user_guid, page=1, records_per_page=25)</span>
 </code></dt>
 <dd>
 <section class="desc"><p>List all the members for a user.</p>
@@ -827,7 +621,7 @@ each request. Max is 1000.</dd>
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def list_members(
+<pre><code class="python">def list_members_for_user(
     self, user_guid: str, page: int = 1, records_per_page: int = 25
 ) -&gt; List[AtriumMember]:
     &#34;&#34;&#34;List all the members for a user.
@@ -891,76 +685,6 @@ each request. Max is 1000.</dd>
     &#34;&#34;&#34;
     res = self.client.members.list_member_mfa_challenges(member_guid, user_guid)
     return res.challenges</code></pre>
-</details>
-</dd>
-<dt id="django_atrium.member.Member.list_transactions_for_member"><code class="name flex">
-<span>def <span class="ident">list_transactions_for_member</span></span>(<span>self, member_guid, user_guid, page=1, records_per_page=25, **kwargs)</span>
-</code></dt>
-<dd>
-<section class="desc"><p>List all of a member's transactions.</p>
-<h2 id="args">Args</h2>
-<dl>
-<dt><strong><code>member_guid</code></strong></dt>
-<dd>A unique identifier for the member. Defined by MX.</dd>
-<dt><strong><code>user_guid</code></strong></dt>
-<dd>A unique identifier for the user. Defined by MX.</dd>
-<dt><strong><code>page</code></strong></dt>
-<dd>The page number to start the search.</dd>
-<dt><strong><code>records_per_page</code></strong></dt>
-<dd>The number of records to retrieve with
-each request. Max is 1000.</dd>
-<dt><strong><code>**from_date</code></strong></dt>
-<dd>A date string that specifies the start date.</dd>
-<dt><strong><code>**to_date</code></strong></dt>
-<dd>A date string that specifies the end date.</dd>
-</dl>
-<h2 id="returns">Returns</h2>
-<p>A list of an Atrium member's transaction.</p></section>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def list_transactions_for_member(
-    self,
-    member_guid: str,
-    user_guid: str,
-    page: int = 1,
-    records_per_page: int = 25,
-    **kwargs
-) -&gt; List[AtriumTransaction]:
-    &#34;&#34;&#34;List all of a member&#39;s transactions.
-
-    Args:
-        member_guid: A unique identifier for the member. Defined by MX.
-        user_guid: A unique identifier for the user. Defined by MX.
-        page: The page number to start the search.
-        records_per_page: The number of records to retrieve with
-            each request. Max is 1000.
-        **from_date: A date string that specifies the start date.
-        **to_date: A date string that specifies the end date.
-
-    Returns:
-        A list of an Atrium member&#39;s transaction.
-
-    &#34;&#34;&#34;
-    transactions = []
-
-    while True:
-        res = self.client.members.list_member_transactions(
-            member_guid,
-            user_guid,
-            page=page,
-            records_per_page=records_per_page,
-            **kwargs
-        )
-        transactions += res.transactions
-
-        if res.pagination.current_page == res.pagination.total_pages:
-            break
-
-        page += 1
-
-    return transactions</code></pre>
 </details>
 </dd>
 <dt id="django_atrium.member.Member.read_connection_status_for_member"><code class="name flex">
@@ -1098,11 +822,9 @@ by you.</dd>
 <li><code><a title="django_atrium.member.Member.aggregate_member" href="#django_atrium.member.Member.aggregate_member">aggregate_member</a></code></li>
 <li><code><a title="django_atrium.member.Member.create_member" href="#django_atrium.member.Member.create_member">create_member</a></code></li>
 <li><code><a title="django_atrium.member.Member.delete_member" href="#django_atrium.member.Member.delete_member">delete_member</a></code></li>
-<li><code><a title="django_atrium.member.Member.list_accounts_for_member" href="#django_atrium.member.Member.list_accounts_for_member">list_accounts_for_member</a></code></li>
 <li><code><a title="django_atrium.member.Member.list_credentials_for_member" href="#django_atrium.member.Member.list_credentials_for_member">list_credentials_for_member</a></code></li>
-<li><code><a title="django_atrium.member.Member.list_members" href="#django_atrium.member.Member.list_members">list_members</a></code></li>
+<li><code><a title="django_atrium.member.Member.list_members_for_user" href="#django_atrium.member.Member.list_members_for_user">list_members_for_user</a></code></li>
 <li><code><a title="django_atrium.member.Member.list_mfa_challenges_for_member" href="#django_atrium.member.Member.list_mfa_challenges_for_member">list_mfa_challenges_for_member</a></code></li>
-<li><code><a title="django_atrium.member.Member.list_transactions_for_member" href="#django_atrium.member.Member.list_transactions_for_member">list_transactions_for_member</a></code></li>
 <li><code><a title="django_atrium.member.Member.read_connection_status_for_member" href="#django_atrium.member.Member.read_connection_status_for_member">read_connection_status_for_member</a></code></li>
 <li><code><a title="django_atrium.member.Member.read_member" href="#django_atrium.member.Member.read_member">read_member</a></code></li>
 <li><code><a title="django_atrium.member.Member.update_member" href="#django_atrium.member.Member.update_member">update_member</a></code></li>
@@ -1114,7 +836,7 @@ by you.</dd>
 </nav>
 </main>
 <footer id="footer">
-<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.7.4</a>.</p>
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.7.5</a>.</p>
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad()</script>

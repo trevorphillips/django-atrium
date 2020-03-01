@@ -14,7 +14,7 @@ class TestInstitution(unittest.TestCase):
         cls._client = AtriumClient()
 
     @classmethod
-    def tearDownClass(cls):
+    def tearDown(cls):
         users = cls._client.list_users()
 
         for user in users:
