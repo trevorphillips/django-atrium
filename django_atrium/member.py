@@ -3,11 +3,13 @@ from typing import List
 
 import atrium
 from atrium.models.challenge import Challenge as AtriumChallenge
-from atrium.models.credential_response import \
-    CredentialResponse as AtriumCredentialResponse
+from atrium.models.credential_response import (
+    CredentialResponse as AtriumCredentialResponse,
+)
 from atrium.models.member import Member as AtriumMember
-from atrium.models.member_connection_status import \
-    MemberConnectionStatus as AtriumMemberConnectionStatus
+from atrium.models.member_connection_status import (
+    MemberConnectionStatus as AtriumMemberConnectionStatus,
+)
 
 
 class Member:
