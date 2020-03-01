@@ -1,4 +1,3 @@
-import time
 import unittest
 
 from atrium.models.user import User as AtriumUser

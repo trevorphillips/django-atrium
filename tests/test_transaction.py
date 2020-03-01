@@ -24,7 +24,7 @@ class TestTransaction(unittest.TestCase):
         institution_creds = self._client.read_credentials_for_institution(
             institution_code
         )
-        member = self._client.create_member(
+        _ = self._client.create_member(
             user.guid, "test_atrium", "password", institution_creds, institution_code
         )
         time.sleep(15)
