@@ -34,6 +34,8 @@ class Member:
             user_guid: A unique identifier for the user. Defined by MX.
             username: The username/email of the bank.
             password: The password of the bank.
+            institution_creds: A list containing an institution's
+                credentials.
             institution_code: A unique identifier for each institution,
                 defined by MX.
             **identifier: A unique, enforced identifier for the user, defined
