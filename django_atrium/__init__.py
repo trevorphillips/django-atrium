@@ -1,1 +1,1 @@
-from .atrium import AtriumClient
+from .atrium import AtriumClient  # noqa
