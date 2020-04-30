@@ -20,7 +20,7 @@ class Transaction:
         Args:
             transaction_guid: A unique identifier for the transaction. Defined
                 by MX.
-            user_guid: A unique identifier for the user. Defined by MX.
+            user_guid: A unique identifier for a user. Defined by MX.
 
         Returns:
             An Atrium transaction.
@@ -41,7 +41,7 @@ class Transaction:
 
         Args:
             account_guid: A unique identifier for an account. Defined by MX.
-            user_guid: A unique identifier for the user. Defined by MX.
+            user_guid: A unique identifier for a user. Defined by MX.
             page: The page number to start the search.
             records_per_page: The number of records to retrieve with
                 each request. Max is 1000.
@@ -83,7 +83,7 @@ class Transaction:
 
         Args:
             member_guid: A unique identifier for the member. Defined by MX.
-            user_guid: A unique identifier for the user. Defined by MX.
+            user_guid: A unique identifier for a user. Defined by MX.
             page: The page number to start the search.
             records_per_page: The number of records to retrieve with
                 each request. Max is 1000.
@@ -120,7 +120,7 @@ class Transaction:
         List all of the transactions for a user.
 
         Args:
-            user_guid: A unique identifier for the user. Defined by MX.
+            user_guid: A unique identifier for a user. Defined by MX.
             page: The page number to start the search.
             records_per_page: The number of records to retrieve with
                 each request. Max is 1000.

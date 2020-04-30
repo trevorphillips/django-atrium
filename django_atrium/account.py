@@ -17,7 +17,7 @@ class Account:
 
         Args:
             account_guid: A unique identifier for an account. Defined by MX.
-            user_guid: A unique identifier for the user. Defined by MX.
+            user_guid: A unique identifier for a user. Defined by MX.
 
         Returns:
             An atrium account.
@@ -32,7 +32,7 @@ class Account:
         """List all the accounts for a user.
 
         Args:
-            user_guid: A unique identifier for the user. Defined by MX.
+            user_guid: A unique identifier for a user. Defined by MX.
             page: The page number to start the search.
             records_per_page: The number of records to retrieve with
                 each request. Max is 1000.
@@ -67,7 +67,7 @@ class Account:
 
         Args:
             member_guid: A unique identifier for the member. Defined by MX.
-            user_guid: A unique identifier for the user. Defined by MX.
+            user_guid: A unique identifier for a user. Defined by MX.
             page: The page number to start the search.
             records_per_page: The number of records to retrieve with
                 each request. Max is 1000.

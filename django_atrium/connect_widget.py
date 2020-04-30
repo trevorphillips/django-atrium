@@ -14,7 +14,7 @@ class ConnectWidget:
         """Get Atrium connect widget.
 
         Args:
-            user_guid: A unique identifier for the user. Defined by MX.
+            user_guid: A unique identifier for a user. Defined by MX.
             **is_mobile_webview: A boolean to indicate if you'd like to
                 execute URL updates in place of the JavaScript event messages.
             **current_institution_code: A string to load the widget with

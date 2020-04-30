@@ -35,7 +35,7 @@ class User:
         """Read a user.
 
         Args:
-            user_guid: A unique identifier for the user. Defined by MX.
+            user_guid: A unique identifier for a user. Defined by MX.
 
         Returns:
             An Atrium user.
@@ -48,7 +48,7 @@ class User:
         """Update a user.
 
         Args:
-            user_guid: A unique identifier for the user. Defined by MX.
+            user_guid: A unique identifier for a user. Defined by MX.
             **identifier: A unique, enforced identifier for the user, defined
                 by you.
             **is_disabled: A boolean indicating if a user is active. True if
@@ -68,7 +68,7 @@ class User:
         """Delete a user.
 
         Args:
-            user_guid: A unique identifier for the user. Defined by MX.
+            user_guid: A unique identifier for a user. Defined by MX.
 
         """
         self.client.users.delete_user(user_guid)

@@ -58,7 +58,7 @@ class Member:
         &#34;&#34;&#34;Create a member.
 
         Args:
-            user_guid: A unique identifier for the user. Defined by MX.
+            user_guid: A unique identifier for a user. Defined by MX.
             username: The username/email of the bank.
             password: The password of the bank.
             institution_creds: A list containing an institution&#39;s
@@ -92,7 +92,7 @@ class Member:
 
         Args:
             member_guid: A unique identifier for the member. Defined by MX.
-            user_guid: A unique identifier for the user. Defined by MX.
+            user_guid: A unique identifier for a user. Defined by MX.
 
         Returns:
             An Atrium member.
@@ -106,7 +106,7 @@ class Member:
 
         Args:
             member_guid: A unique identifier for the member. Defined by MX.
-            user_guid: A unique identifier for the user. Defined by MX.
+            user_guid: A unique identifier for a user. Defined by MX.
             **identifier: A unique, enforced identifier for the user, defined
                 by you.
             **metadata: Additional information you can store about this user.
@@ -125,7 +125,7 @@ class Member:
 
         Args:
             member_guid: A unique identifier for the member. Defined by MX.
-            user_guid: A unique identifier for the user. Defined by MX.
+            user_guid: A unique identifier for a user. Defined by MX.
 
         &#34;&#34;&#34;
         self.client.members.delete_member(member_guid, user_guid)
@@ -136,7 +136,7 @@ class Member:
         &#34;&#34;&#34;List all the members for a user.
 
         Args:
-            user_guid: A unique identifier for the user. Defined by MX.
+            user_guid: A unique identifier for a user. Defined by MX.
             page: The page number to start the search.
             records_per_page: The number of records to retrieve with
                 each request. Max is 1000.
@@ -165,7 +165,7 @@ class Member:
 
         Args:
             member_guid: A unique identifier for the member. Defined by MX.
-            user_guid: A unique identifier for the user. Defined by MX.
+            user_guid: A unique identifier for a user. Defined by MX.
 
         Returns:
             An Atrium member.
@@ -181,7 +181,7 @@ class Member:
 
         Args:
             member_guid: A unique identifier for the member. Defined by MX.
-            user_guid: A unique identifier for the user. Defined by MX.
+            user_guid: A unique identifier for a user. Defined by MX.
 
         Returns:
             An Atrium member&#39;s connection status.
@@ -197,7 +197,7 @@ class Member:
 
         Args:
             member_guid: A unique identifier for the member. Defined by MX.
-            user_guid: A unique identifier for the user. Defined by MX.
+            user_guid: A unique identifier for a user. Defined by MX.
 
         Returns:
             An Atrium member&#39;s challenges.
@@ -213,7 +213,7 @@ class Member:
 
         Args:
             member_guid: A unique identifier for the member. Defined by MX.
-            user_guid: A unique identifier for the user. Defined by MX.
+            user_guid: A unique identifier for a user. Defined by MX.
 
         Returns:
             A list of an Atrium member&#39;s credentials.
@@ -262,7 +262,7 @@ class Member:
         &#34;&#34;&#34;Create a member.
 
         Args:
-            user_guid: A unique identifier for the user. Defined by MX.
+            user_guid: A unique identifier for a user. Defined by MX.
             username: The username/email of the bank.
             password: The password of the bank.
             institution_creds: A list containing an institution&#39;s
@@ -296,7 +296,7 @@ class Member:
 
         Args:
             member_guid: A unique identifier for the member. Defined by MX.
-            user_guid: A unique identifier for the user. Defined by MX.
+            user_guid: A unique identifier for a user. Defined by MX.
 
         Returns:
             An Atrium member.
@@ -310,7 +310,7 @@ class Member:
 
         Args:
             member_guid: A unique identifier for the member. Defined by MX.
-            user_guid: A unique identifier for the user. Defined by MX.
+            user_guid: A unique identifier for a user. Defined by MX.
             **identifier: A unique, enforced identifier for the user, defined
                 by you.
             **metadata: Additional information you can store about this user.
@@ -329,7 +329,7 @@ class Member:
 
         Args:
             member_guid: A unique identifier for the member. Defined by MX.
-            user_guid: A unique identifier for the user. Defined by MX.
+            user_guid: A unique identifier for a user. Defined by MX.
 
         &#34;&#34;&#34;
         self.client.members.delete_member(member_guid, user_guid)
@@ -340,7 +340,7 @@ class Member:
         &#34;&#34;&#34;List all the members for a user.
 
         Args:
-            user_guid: A unique identifier for the user. Defined by MX.
+            user_guid: A unique identifier for a user. Defined by MX.
             page: The page number to start the search.
             records_per_page: The number of records to retrieve with
                 each request. Max is 1000.
@@ -369,7 +369,7 @@ class Member:
 
         Args:
             member_guid: A unique identifier for the member. Defined by MX.
-            user_guid: A unique identifier for the user. Defined by MX.
+            user_guid: A unique identifier for a user. Defined by MX.
 
         Returns:
             An Atrium member.
@@ -385,7 +385,7 @@ class Member:
 
         Args:
             member_guid: A unique identifier for the member. Defined by MX.
-            user_guid: A unique identifier for the user. Defined by MX.
+            user_guid: A unique identifier for a user. Defined by MX.
 
         Returns:
             An Atrium member&#39;s connection status.
@@ -401,7 +401,7 @@ class Member:
 
         Args:
             member_guid: A unique identifier for the member. Defined by MX.
-            user_guid: A unique identifier for the user. Defined by MX.
+            user_guid: A unique identifier for a user. Defined by MX.
 
         Returns:
             An Atrium member&#39;s challenges.
@@ -417,7 +417,7 @@ class Member:
 
         Args:
             member_guid: A unique identifier for the member. Defined by MX.
-            user_guid: A unique identifier for the user. Defined by MX.
+            user_guid: A unique identifier for a user. Defined by MX.
 
         Returns:
             A list of an Atrium member&#39;s credentials.
@@ -442,7 +442,7 @@ class Member:
 <dt><strong><code>member_guid</code></strong></dt>
 <dd>A unique identifier for the member. Defined by MX.</dd>
 <dt><strong><code>user_guid</code></strong></dt>
-<dd>A unique identifier for the user. Defined by MX.</dd>
+<dd>A unique identifier for a user. Defined by MX.</dd>
 </dl>
 <h2 id="returns">Returns</h2>
 <p>An Atrium member.</p></section>
@@ -455,7 +455,7 @@ class Member:
 
     Args:
         member_guid: A unique identifier for the member. Defined by MX.
-        user_guid: A unique identifier for the user. Defined by MX.
+        user_guid: A unique identifier for a user. Defined by MX.
 
     Returns:
         An Atrium member.
@@ -473,7 +473,7 @@ class Member:
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>user_guid</code></strong></dt>
-<dd>A unique identifier for the user. Defined by MX.</dd>
+<dd>A unique identifier for a user. Defined by MX.</dd>
 <dt><strong><code>username</code></strong></dt>
 <dd>The username/email of the bank.</dd>
 <dt><strong><code>password</code></strong></dt>
@@ -508,7 +508,7 @@ by you.</dd>
     &#34;&#34;&#34;Create a member.
 
     Args:
-        user_guid: A unique identifier for the user. Defined by MX.
+        user_guid: A unique identifier for a user. Defined by MX.
         username: The username/email of the bank.
         password: The password of the bank.
         institution_creds: A list containing an institution&#39;s
@@ -548,7 +548,7 @@ by you.</dd>
 <dt><strong><code>member_guid</code></strong></dt>
 <dd>A unique identifier for the member. Defined by MX.</dd>
 <dt><strong><code>user_guid</code></strong></dt>
-<dd>A unique identifier for the user. Defined by MX.</dd>
+<dd>A unique identifier for a user. Defined by MX.</dd>
 </dl></section>
 <details class="source">
 <summary>
@@ -559,7 +559,7 @@ by you.</dd>
 
     Args:
         member_guid: A unique identifier for the member. Defined by MX.
-        user_guid: A unique identifier for the user. Defined by MX.
+        user_guid: A unique identifier for a user. Defined by MX.
 
     &#34;&#34;&#34;
     self.client.members.delete_member(member_guid, user_guid)</code></pre>
@@ -575,7 +575,7 @@ by you.</dd>
 <dt><strong><code>member_guid</code></strong></dt>
 <dd>A unique identifier for the member. Defined by MX.</dd>
 <dt><strong><code>user_guid</code></strong></dt>
-<dd>A unique identifier for the user. Defined by MX.</dd>
+<dd>A unique identifier for a user. Defined by MX.</dd>
 </dl>
 <h2 id="returns">Returns</h2>
 <p>A list of an Atrium member's credentials.</p></section>
@@ -590,7 +590,7 @@ by you.</dd>
 
     Args:
         member_guid: A unique identifier for the member. Defined by MX.
-        user_guid: A unique identifier for the user. Defined by MX.
+        user_guid: A unique identifier for a user. Defined by MX.
 
     Returns:
         A list of an Atrium member&#39;s credentials.
@@ -608,7 +608,7 @@ by you.</dd>
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>user_guid</code></strong></dt>
-<dd>A unique identifier for the user. Defined by MX.</dd>
+<dd>A unique identifier for a user. Defined by MX.</dd>
 <dt><strong><code>page</code></strong></dt>
 <dd>The page number to start the search.</dd>
 <dt><strong><code>records_per_page</code></strong></dt>
@@ -627,7 +627,7 @@ each request. Max is 1000.</dd>
     &#34;&#34;&#34;List all the members for a user.
 
     Args:
-        user_guid: A unique identifier for the user. Defined by MX.
+        user_guid: A unique identifier for a user. Defined by MX.
         page: The page number to start the search.
         records_per_page: The number of records to retrieve with
             each request. Max is 1000.
@@ -662,7 +662,7 @@ each request. Max is 1000.</dd>
 <dt><strong><code>member_guid</code></strong></dt>
 <dd>A unique identifier for the member. Defined by MX.</dd>
 <dt><strong><code>user_guid</code></strong></dt>
-<dd>A unique identifier for the user. Defined by MX.</dd>
+<dd>A unique identifier for a user. Defined by MX.</dd>
 </dl>
 <h2 id="returns">Returns</h2>
 <p>An Atrium member's challenges.</p></section>
@@ -677,7 +677,7 @@ each request. Max is 1000.</dd>
 
     Args:
         member_guid: A unique identifier for the member. Defined by MX.
-        user_guid: A unique identifier for the user. Defined by MX.
+        user_guid: A unique identifier for a user. Defined by MX.
 
     Returns:
         An Atrium member&#39;s challenges.
@@ -697,7 +697,7 @@ each request. Max is 1000.</dd>
 <dt><strong><code>member_guid</code></strong></dt>
 <dd>A unique identifier for the member. Defined by MX.</dd>
 <dt><strong><code>user_guid</code></strong></dt>
-<dd>A unique identifier for the user. Defined by MX.</dd>
+<dd>A unique identifier for a user. Defined by MX.</dd>
 </dl>
 <h2 id="returns">Returns</h2>
 <p>An Atrium member's connection status.</p></section>
@@ -712,7 +712,7 @@ each request. Max is 1000.</dd>
 
     Args:
         member_guid: A unique identifier for the member. Defined by MX.
-        user_guid: A unique identifier for the user. Defined by MX.
+        user_guid: A unique identifier for a user. Defined by MX.
 
     Returns:
         An Atrium member&#39;s connection status.
@@ -732,7 +732,7 @@ each request. Max is 1000.</dd>
 <dt><strong><code>member_guid</code></strong></dt>
 <dd>A unique identifier for the member. Defined by MX.</dd>
 <dt><strong><code>user_guid</code></strong></dt>
-<dd>A unique identifier for the user. Defined by MX.</dd>
+<dd>A unique identifier for a user. Defined by MX.</dd>
 </dl>
 <h2 id="returns">Returns</h2>
 <p>An Atrium member.</p></section>
@@ -745,7 +745,7 @@ each request. Max is 1000.</dd>
 
     Args:
         member_guid: A unique identifier for the member. Defined by MX.
-        user_guid: A unique identifier for the user. Defined by MX.
+        user_guid: A unique identifier for a user. Defined by MX.
 
     Returns:
         An Atrium member.
@@ -765,7 +765,7 @@ each request. Max is 1000.</dd>
 <dt><strong><code>member_guid</code></strong></dt>
 <dd>A unique identifier for the member. Defined by MX.</dd>
 <dt><strong><code>user_guid</code></strong></dt>
-<dd>A unique identifier for the user. Defined by MX.</dd>
+<dd>A unique identifier for a user. Defined by MX.</dd>
 <dt><strong><code>**identifier</code></strong></dt>
 <dd>A unique, enforced identifier for the user, defined
 by you.</dd>
@@ -783,7 +783,7 @@ by you.</dd>
 
     Args:
         member_guid: A unique identifier for the member. Defined by MX.
-        user_guid: A unique identifier for the user. Defined by MX.
+        user_guid: A unique identifier for a user. Defined by MX.
         **identifier: A unique, enforced identifier for the user, defined
             by you.
         **metadata: Additional information you can store about this user.
