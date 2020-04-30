@@ -16,7 +16,7 @@ class Account:
         """Read an account.
 
         Args:
-            account_guid: A unique identifier for the account. Defined by MX.
+            account_guid: A unique identifier for an account. Defined by MX.
             user_guid: A unique identifier for the user. Defined by MX.
 
         Returns:

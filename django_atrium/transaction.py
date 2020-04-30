@@ -40,7 +40,7 @@ class Transaction:
         """List all the transactions for an account.
 
         Args:
-            account_guid: A unique identifier for the account. Defined by MX.
+            account_guid: A unique identifier for an account. Defined by MX.
             user_guid: A unique identifier for the user. Defined by MX.
             page: The page number to start the search.
             records_per_page: The number of records to retrieve with
