@@ -39,9 +39,9 @@ class Institution:
                 institutions which support identity will be returned.
             **supports_account_statement: A boolean to only show institutions
                 which offer access to account statements will be returned.
-            supports_account_verification: A boolean to only show institutions
+            **supports_account_verification: A boolean to only show institutions
                 which support account verification will be returned.
-            supports_transaction_history: A boolean to only show institutions
+            **supports_transaction_history: A boolean to only show institutions
                 which offer an extended transaction history will be returned.
 
         Returns:
