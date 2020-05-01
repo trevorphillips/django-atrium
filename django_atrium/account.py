@@ -29,7 +29,7 @@ class Account:
     def list_accounts_for_user(
         self, user_guid: str, page: int = 1, records_per_page: int = 25
     ) -> List[AtriumAccount]:
-        """List all the accounts for a user.
+        """List a user's accounts.
 
         Args:
             user_guid: A unique identifier for a user. Defined by MX.
@@ -66,7 +66,7 @@ class Account:
         """List a member's accounts.
 
         Args:
-            member_guid: A unique identifier for the member. Defined by MX.
+            member_guid: A unique identifier for a member. Defined by MX.
             user_guid: A unique identifier for a user. Defined by MX.
             page: The page number to start the search.
             records_per_page: The number of records to retrieve with

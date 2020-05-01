@@ -82,7 +82,7 @@ class Transaction:
         """List all of a member's transactions.
 
         Args:
-            member_guid: A unique identifier for the member. Defined by MX.
+            member_guid: A unique identifier for a member. Defined by MX.
             user_guid: A unique identifier for a user. Defined by MX.
             page: The page number to start the search.
             records_per_page: The number of records to retrieve with

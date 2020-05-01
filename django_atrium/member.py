@@ -64,7 +64,7 @@ class Member:
         """Read a member.
 
         Args:
-            member_guid: A unique identifier for the member. Defined by MX.
+            member_guid: A unique identifier for a member. Defined by MX.
             user_guid: A unique identifier for a user. Defined by MX.
 
         Returns:
@@ -78,7 +78,7 @@ class Member:
         """Update a member.
 
         Args:
-            member_guid: A unique identifier for the member. Defined by MX.
+            member_guid: A unique identifier for a member. Defined by MX.
             user_guid: A unique identifier for a user. Defined by MX.
             **identifier: A unique, enforced identifier for the user, defined
                 by you.
@@ -97,7 +97,7 @@ class Member:
         """Delete a member.
 
         Args:
-            member_guid: A unique identifier for the member. Defined by MX.
+            member_guid: A unique identifier for a member. Defined by MX.
             user_guid: A unique identifier for a user. Defined by MX.
 
         """
@@ -137,7 +137,7 @@ class Member:
         """Aggregate a member.
 
         Args:
-            member_guid: A unique identifier for the member. Defined by MX.
+            member_guid: A unique identifier for a member. Defined by MX.
             user_guid: A unique identifier for a user. Defined by MX.
 
         Returns:
@@ -153,7 +153,7 @@ class Member:
         """Read a member's connection status.
 
         Args:
-            member_guid: A unique identifier for the member. Defined by MX.
+            member_guid: A unique identifier for a member. Defined by MX.
             user_guid: A unique identifier for a user. Defined by MX.
 
         Returns:
@@ -169,7 +169,7 @@ class Member:
         """List all the MFA challenges for a member.
 
         Args:
-            member_guid: A unique identifier for the member. Defined by MX.
+            member_guid: A unique identifier for a member. Defined by MX.
             user_guid: A unique identifier for a user. Defined by MX.
 
         Returns:
@@ -185,7 +185,7 @@ class Member:
         """List the member's credentials.
 
         Args:
-            member_guid: A unique identifier for the member. Defined by MX.
+            member_guid: A unique identifier for a member. Defined by MX.
             user_guid: A unique identifier for a user. Defined by MX.
 
         Returns:
