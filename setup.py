@@ -1,7 +1,9 @@
+"""setup file."""
 from setuptools import find_packages, setup
 
 
 def read(f):
+    """Read file function."""
     return open(f, "r", encoding="utf-8").read()
 
 
