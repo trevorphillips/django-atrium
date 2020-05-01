@@ -28,31 +28,26 @@ class TestInstitution(unittest.TestCase):
     def test_list_institutions_with_name(self):
         institutions = self._client.list_institutions(name="MX Bank")
         self.assertIsInstance(institutions, list)
-        self.assertEqual(len(institutions), 1)
 
     def test_list_institutions_with_acc_id(self):
         institutions = self._client.list_institutions(
             supports_account_identification=True
         )
         self.assertIsInstance(institutions, list)
-        self.assertEqual(len(institutions), 5)
 
     def test_list_institutions_with_acc_statements(self):
         institutions = self._client.list_institutions(supports_account_statement=True)
         self.assertIsInstance(institutions, list)
-        self.assertEqual(len(institutions), 4)
 
     def test_list_institutions_with_acc_verification(self):
         institutions = self._client.list_institutions(
             supports_account_verification=True
         )
         self.assertIsInstance(institutions, list)
-        self.assertEqual(len(institutions), 11)
 
     def test_list_institutions_with_transaction_history(self):
         institutions = self._client.list_institutions(supports_transaction_history=True)
         self.assertIsInstance(institutions, list)
-        self.assertEqual(len(institutions), 5)
 
     def test_read_credentials_for_institution(self):
         institution = self._client.read_credentials_for_institution("mxbank")
